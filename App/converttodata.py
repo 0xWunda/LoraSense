@@ -75,7 +75,7 @@ def Decoder(payload_bytes):
 # Beispiel: Payload dekodieren
 # ===============================
 
-payload_b64 = "ZymAAm84SAAAAP8="  # Beispiel aus deinem JSON
+payload_b64 = "XyxAArEz8AAAAP8="  # Beispiel aus deinem JSON
 payload_bytes = base64.b64decode(payload_b64)
 
 result = Decoder(payload_bytes)
