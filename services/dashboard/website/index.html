@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoRaSense | Admin Dashboard</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-body: #0f172a;
+            --bg-card: #1e293b;
+            --sidebar: #111827;
+            --accent: #3b82f6;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-body);
+            color: var(--text-main);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        aside {
+            width: 260px;
+            background: var(--sidebar);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 1.5rem;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 3rem;
+        }
+
+        .brand h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: 0.2s;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+        }
+
+        .nav-link.active {
+            background: var(--accent);
+            color: white;
+        }
+
+        .nav-link:hover:not(.active) {
+            background: var(--bg-card);
+            color: white;
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 2rem 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 2.5rem;
+        }
+
+        .welcome h2 {
+            font-size: 1.875rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .welcome p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Status Widget */
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .dot-active {
+            background: var(--success);
+            box-shadow: 0 0 12px var(--success);
+        }
+
+        .dot-inactive {
+            background: var(--danger);
+        }
+
+        /* Grid Layout */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card .label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .stat-card .value {
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+
+        .stat-card i {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+            color: var(--accent);
+            opacity: 0.8;
+        }
+
+        .main-pane {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .chart-pane,
+        .table-pane {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+
+        .pane-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .pane-header h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+        }
+
+        th {
+            text-align: left;
+            padding: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            border-bottom: 1px solid var(--border);
+        }
+
+        td {
+            padding: 1rem 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .time-cell {
+            font-family: monospace;
+            color: var(--accent);
+        }
+
+        @media (max-width: 1024px) {
+            .main-pane {
+                grid-template-columns: 1fr;
+            }
+
+            aside {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <aside>
+        <div class="brand">
+            <i data-lucide="radio" color="#3b82f6"></i>
+            <h1>LoRaSense</h1>
+        </div>
+        <nav>
+            <div onclick="showView('overview')" id="nav-overview" class="nav-link active">
+                <i data-lucide="layout-dashboard" size="20"></i>
+                Overview
+            </div>
+            <div onclick="showView('history')" id="nav-history" class="nav-link">
+                <i data-lucide="history" size="20"></i>
+                History
+            </div>
+            <div onclick="showView('settings')" id="nav-settings" class="nav-link">
+                <i data-lucide="settings" size="20"></i>
+                Station Config
+            </div>
+        </nav>
+    </aside>
+
+    <main>
+        <!-- View: Overview -->
+        <div id="view-overview" class="view">
+            <header>
+                <div class="welcome">
+                    <h2>Station Overview</h2>
+                    <p id="last-seen">Scanning for heartbeats...</p>
+                </div>
+                <div class="status-badge">
+                    <div id="status-dot" class="status-dot dot-inactive"></div>
+                    <span id="status-text">Disconnected</span>
+                </div>
+            </header>
+
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <i data-lucide="thermometer"></i>
+                    <span class="label">Temperature</span>
+                    <div class="value"><span id="temp">--</span><span
+                            style="font-size: 1rem; color: var(--text-muted)">°C</span></div>
+                </div>
+                <div class="stat-card">
+                    <i data-lucide="droplets"></i>
+                    <span class="label">Humidity</span>
+                    <div class="value"><span id="humidity">--</span><span
+                            style="font-size: 1rem; color: var(--text-muted)">%</span></div>
+                </div>
+                <div class="stat-card">
+                    <i data-lucide="gauge"></i>
+                    <span class="label">Pressure</span>
+                    <div class="value"><span id="pressure">--</span><span
+                            style="font-size: 1rem; color: var(--text-muted); margin-left: 4px;">hPa</span></div>
+                </div>
+                <div class="stat-card">
+                    <i data-lucide="battery-full" id="battery-icon"></i>
+                    <span class="label">Battery Voltage</span>
+                    <div class="value"><span id="battery">--</span><span
+                            style="font-size: 1rem; color: var(--text-muted); margin-left: 4px;">V</span></div>
+                </div>
+            </div>
+
+            <div class="main-pane">
+                <div class="chart-pane">
+                    <div class="pane-header">
+                        <h3>Environment Trends</h3>
+                        <p style="font-size: 0.8rem; color: var(--text-muted)">Real-time telemetry</p>
+                    </div>
+                    <canvas id="mainChart" height="250"></canvas>
+                </div>
+                <div class="table-pane">
+                    <div class="pane-header">
+                        <h3>Recent Logs</h3>
+                        <div style="display: flex; gap: 0.5rem; align-items: center;">
+                            <a href="/api/export" class="nav-link"
+                                style="margin-bottom: 0; padding: 0.4rem; border: 1px solid var(--border);"
+                                title="Export CSV">
+                                <i data-lucide="download" size="16"></i>
+                            </a>
+                            <i data-lucide="list-filter" size="18" color="#94a3b8"></i>
+                        </div>
+                    </div>
+                    <table id="history-table">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Temp</th>
+                                <th>Bat</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Rows via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- View: History -->
+        <div id="view-history" class="view" style="display: none;">
+            <header>
+                <div class="welcome">
+                    <h2>Extended Data History</h2>
+                    <p>Full database records for Station Alpha-1</p>
+                </div>
+                <a href="/api/export" class="nav-link active" style="margin-bottom: 0;">
+                    <i data-lucide="download" size="20"></i>
+                    Export All Data
+                </a>
+            </header>
+            <div class="table-pane" style="width: 100%;">
+                <table id="extended-history-table">
+                    <thead>
+                        <tr>
+                            <th>Exact Local Time</th>
+                            <th>Battery</th>
+                            <th>Temp</th>
+                            <th>Hum</th>
+                            <th>Press</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Rows via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- View: Settings -->
+        <div id="view-settings" class="view" style="display: none;">
+            <header>
+                <div class="welcome">
+                    <h2>Station Configuration</h2>
+                    <p>Manage your LoRa nodes and integration endpoints</p>
+                </div>
+            </header>
+            <div class="stat-card" style="max-width: 600px;">
+                <h4 style="margin-bottom: 1rem;">Primary Gateway Integration</h4>
+                <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem;">
+                    Point your Things Network (TTN) or Chirpstack uplink to this URL:
+                </p>
+                <code
+                    style="display: block; background: var(--sidebar); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem; color: var(--accent); border: 1px solid var(--border);">
+                    http://[your-pi-ip]:5000/uplink
+                </code>
+                <div style="padding: 1rem; border: 1px dashed var(--border); border-radius: 0.5rem;">
+                    <span
+                        style="color: var(--warning); display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem;">
+                        <i data-lucide="alert-triangle" size="16"></i>
+                        Advanced node provisioning (OTAA/ABP) tools coming soon.
+                    </span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        function showView(viewId) {
+            document.querySelectorAll('.view').forEach(v => v.style.display = 'none');
+            document.getElementById('view-' + viewId).style.display = 'block';
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            document.getElementById('nav-' + viewId).classList.add('active');
+        }
+
+        const ctx = document.getElementById('mainChart').getContext('2d');
+        let mainChart;
+
+        async function updateDashboard() {
+            try {
+                const response = await fetch('/api/data');
+                const data = await response.json();
+
+                if (!data || data.length === 0) return;
+
+                const latest = data[0];
+                const d = latest.decoded;
+
+                // Update Stats
+                document.getElementById('temp').innerText = d.Temperature || '--';
+                document.getElementById('humidity').innerText = d.Humidity || '--';
+                document.getElementById('pressure').innerText = d.Pressure || '--';
+                document.getElementById('battery').innerText = d.Battery || '--';
+
+                // Status Logic
+                const lastDate = new Date(latest.timestamp);
+                const diffMins = (new Date() - lastDate) / (1000 * 60);
+
+                const statusDot = document.getElementById('status-dot');
+                const statusText = document.getElementById('status-text');
+                const lastSeenText = document.getElementById('last-seen');
+
+                if (diffMins < 15) {
+                    statusDot.className = 'status-dot dot-active';
+                    statusText.innerText = 'Connected';
+                    lastSeenText.innerText = 'Receiving real-time data';
+                } else {
+                    statusDot.className = 'status-dot dot-inactive';
+                    statusText.innerText = 'Offline';
+                    lastSeenText.innerText = `Last seen ${Math.round(diffMins)} minutes ago`;
+                }
+
+                // Table Update (Overview)
+                const tbody = document.querySelector('#history-table tbody');
+                tbody.innerHTML = '';
+                data.slice(0, 10).forEach(item => {
+                    const row = document.createElement('tr');
+                    const time = new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                    row.innerHTML = `
+                        <td class="time-cell">${time}</td>
+                        <td>${item.decoded.Temperature}°</td>
+                        <td>${item.decoded.Battery}V</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+
+                // Extended Table (History View)
+                const exTbody = document.querySelector('#extended-history-table tbody');
+                exTbody.innerHTML = '';
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+                    const time = new Date(item.timestamp).toLocaleString();
+                    row.innerHTML = `
+                        <td class="time-cell">${time}</td>
+                        <td>${item.decoded.Battery}V</td>
+                        <td>${item.decoded.Temperature}°C</td>
+                        <td>${item.decoded.Humidity}%</td>
+                        <td>${item.decoded.Pressure}hPa</td>
+                    `;
+                    exTbody.appendChild(row);
+                });
+
+                // Chart Update
+                const chartData = [...data].reverse();
+                const labels = chartData.map(item => new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+                const temps = chartData.map(item => item.decoded.Temperature);
+                const hums = chartData.map(item => item.decoded.Humidity);
+
+                if (mainChart) mainChart.destroy();
+                mainChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Temp',
+                            data: temps,
+                            borderColor: '#3b82f6',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        }, {
+                            label: 'Humidity',
+                            data: hums,
+                            borderColor: '#10b981',
+                            borderDash: [5, 5],
+                            fill: false,
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            x: { grid: { display: false }, ticks: { color: '#94a3b8' } },
+                            y: { grid: { color: '#334155' }, ticks: { color: '#94a3b8' } }
+                        }
+                    }
+                });
+
+            } catch (error) {
+                console.error('Update failed:', error);
+            }
+        }
+
+        updateDashboard();
+        setInterval(updateDashboard, 60000);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  db:
+    image: mariadb:10.6
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_pass
+      MYSQL_DATABASE: lorasense_db
+      MYSQL_USER: lora_user
+      MYSQL_PASSWORD: lora_pass
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "lora_user", "-plora_pass" ]
+      timeout: 20s
+      retries: 10
+
+  uplink:
+    build:
+      context: .
+      dockerfile: services/uplink/Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_USER=lora_user
+      - MYSQL_PASSWORD=lora_pass
+      - MYSQL_DATABASE=lorasense_db
+    ports:
+      - "5000:5000"
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: services/dashboard/Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_USER=lora_user
+      - MYSQL_PASSWORD=lora_pass
+      - MYSQL_DATABASE=lorasense_db
+    ports:
+      - "8080:8080"
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - PMA_HOST=db
+      - PMA_USER=lora_user
+      - PMA_PASSWORD=lora_pass
+    ports:
+      - "8081:80"
+
+volumes:
+  db_data:
