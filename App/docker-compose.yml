@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: lorasense_db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: lorasense
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./init_db.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - lorasense_net
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  uplink:
+    build: .
+    container_name: lorasense_uplink
+    command: python3 Service/uplink_server.py
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      - DB_HOST=db
+      - DB_USER=user
+      - DB_PASSWORD=password
+      - DB_NAME=lorasense
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - lorasense_net
+
+  dashboard:
+    build: .
+    container_name: lorasense_dashboard
+    command: python3 Service/dashboard_server.py
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_HOST=db
+      - DB_USER=user
+      - DB_PASSWORD=password
+      - DB_NAME=lorasense
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - lorasense_net
+
+volumes:
+  db_data:
+
+networks:
+  lorasense_net:
+    driver: bridge

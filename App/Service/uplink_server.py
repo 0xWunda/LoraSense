@@ -3,6 +3,7 @@ import os
 import json
 import base64
 from datetime import datetime
+import mysql.connector
 
 # ===============================
 # Flask-App
@@ -10,12 +11,19 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-BASE_DIR = "/home/wunder/Lorasense"
-RAW_DIR = os.path.join(BASE_DIR, "json")   # rohe Serverdaten
-DECODED_DIR = os.path.join(BASE_DIR, "data")  # entschlüsselte Daten
+# Database Config
+DB_HOST = os.environ.get("DB_HOST", "db")
+DB_USER = os.environ.get("DB_USER", "user")
+DB_PASSWORD = os.environ.get("DB_PASSWORD", "password")
+DB_NAME = os.environ.get("DB_NAME", "lorasense")
 
-os.makedirs(RAW_DIR, exist_ok=True)
-os.makedirs(DECODED_DIR, exist_ok=True)
+def get_db_connection():
+    return mysql.connector.connect(
+        host=DB_HOST,
+        user=DB_USER,
+        password=DB_PASSWORD,
+        database=DB_NAME
+    )
 
 # ===============================
 # Hilfsfunktionen vom Decoder
@@ -93,15 +101,7 @@ def uplink():
         # rohen JSON-Body vom Server holen
         data = request.get_json(force=True)
 
-        timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-
-        # 1) rohe Daten in /home/wunder/json speichern
-        raw_filename = os.path.join(RAW_DIR, f"uplink_{timestamp}.json")
-        with open(raw_filename, "w", encoding="utf-8") as f:
-            json.dump(data, f, indent=4, ensure_ascii=False)
-
         # 2) verschlüsseltes Feld "data" aus dem JSON holen
-        #    -> angenommen: {"data": "XyxAArEz8AAAAP8="}
         payload_b64 = data.get("data")
         if not payload_b64:
             raise ValueError("Feld 'data' fehlt im JSON oder ist leer.")
@@ -110,27 +110,39 @@ def uplink():
         payload_bytes = base64.b64decode(payload_b64)
 
         # Dekodieren mit eurem Decoder
-        decoded = Decoder(payload_bytes)
+        d = Decoder(payload_bytes)
 
-        # 3) entschlüsselte Daten in /home/wunder/data speichern
-        decoded_obj = {
-            "timestamp": datetime.now().isoformat(),
-            "raw_data": payload_b64,
-            "decoded": decoded
-        }
+        # In Datenbank speichern
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        
+        sql = """
+            INSERT INTO measurements (
+                timestamp, type, battery, temperature, t_min, t_max, 
+                humidity, pressure, irradiation, irr_max, rain, 
+                rain_min_time, raw_data
+            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """
+        
+        val = (
+            datetime.now(),
+            d["Type"], d["Battery"], d["Temperature"], d["T_min"], d["T_max"],
+            d["Humidity"], d["Pressure"], d["Irradiation"], d["Irr_max"], d["Rain"],
+            d["Rain_min_time"], payload_b64
+        )
+        
+        cursor.execute(sql, val)
+        conn.commit()
+        
+        cursor.close()
+        conn.close()
 
-        decoded_filename = os.path.join(DECODED_DIR, f"data_{timestamp}.json")
-        with open(decoded_filename, "w", encoding="utf-8") as f:
-            json.dump(decoded_obj, f, indent=4, ensure_ascii=False)
-
-        print(f"✅ Rohe Daten gespeichert:     {raw_filename}")
-        print(f"✅ Entschlüsselte Daten nach:  {decoded_filename}")
+        print(f"✅ Daten in DB gespeichert: {d}")
 
         return jsonify({
             "status": "ok",
-            "raw_file": raw_filename,
-            "decoded_file": decoded_filename,
-            "decoded": decoded
+            "message": "Data saved to database",
+            "decoded": d
         }), 200
 
     except Exception as e:
