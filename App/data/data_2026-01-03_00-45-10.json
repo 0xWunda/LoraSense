@@ -1,0 +1,18 @@
+{
+    "timestamp": "2026-01-03T00:45:10.876799",
+    "device_id": "Station_Alpha",
+    "raw_data": "VxMvAXdE6uxDAFY=",
+    "decoded": {
+        "Type": 1,
+        "Battery": 3.55,
+        "Temperature": 10.0,
+        "T_min": 5.3,
+        "T_max": 10.0,
+        "Humidity": 37.4,
+        "Pressure": 1019.85,
+        "Irradiation": 748,
+        "Irr_max": 882,
+        "Rain": 0.0,
+        "Rain_min_time": 86.0
+    }
+}

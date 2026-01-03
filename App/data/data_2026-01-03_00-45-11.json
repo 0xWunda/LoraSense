@@ -1,0 +1,18 @@
+{
+    "timestamp": "2026-01-03T00:45:11.950996",
+    "device_id": "Station_Beta",
+    "raw_data": "Ww+SVaMyMOIMCrA=",
+    "decoded": {
+        "Type": 1,
+        "Battery": 3.65,
+        "Temperature": 8.6,
+        "T_min": 6.8,
+        "T_max": 10.7,
+        "Humidity": 41.8,
+        "Pressure": 989.9,
+        "Irradiation": 226,
+        "Irr_max": 250,
+        "Rain": 10.0,
+        "Rain_min_time": 176.0
+    }
+}

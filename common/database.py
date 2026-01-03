@@ -12,6 +12,7 @@ def get_db_connection():
     db_user = os.getenv("MYSQL_USER", "lora_user")
     db_pass = os.getenv("MYSQL_PASSWORD", "lora_pass")
     db_name = os.getenv("MYSQL_DATABASE", "lorasense_db")
+    db_port = int(os.getenv("MYSQL_PORT", 3306))
 
     while max_retries > 0:
         try:
@@ -19,7 +20,8 @@ def get_db_connection():
                 host=db_host,
                 user=db_user,
                 password=db_pass,
-                database=db_name
+                database=db_name,
+                port=db_port
             )
             return conn
         except mysql.connector.Error as err:
@@ -40,9 +42,13 @@ def init_db():
         cursor.execute(f"CREATE DATABASE IF NOT EXISTS {os.getenv('MYSQL_DATABASE', 'lorasense_db')}")
         cursor.execute("USE " + os.getenv('MYSQL_DATABASE', 'lorasense_db'))
         
+        # DROP AND RECREATE TABLE TO ENSURE SCHEMA UPDATE (DEV ONLY)
+        cursor.execute("DROP TABLE IF EXISTS sensor_data")
+        
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS sensor_data (
                 id INT AUTO_INCREMENT PRIMARY KEY,
+                device_id VARCHAR(50),
                 timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
                 raw_payload TEXT,
                 type INT,
@@ -65,7 +71,7 @@ def init_db():
         cursor.close()
         conn.close()
 
-def save_sensor_data(raw_payload, decoded):
+def save_sensor_data(device_id, raw_payload, decoded):
     conn = get_db_connection()
     if not conn:
         return False
@@ -74,10 +80,12 @@ def save_sensor_data(raw_payload, decoded):
         cursor = conn.cursor()
         sql = """
             INSERT INTO sensor_data 
-            (raw_payload, type, battery, temperature, t_min, t_max, humidity, pressure, irradiation, irr_max, rain, rain_min_time)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            (device_id, raw_payload, type, battery, temperature, t_min, t_max, humidity, pressure, irradiation, irr_max, rain, rain_min_time)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         """
         values = (
+            device_id,
+
             raw_payload,
             decoded.get("Type"),
             decoded.get("Battery"),
@@ -101,19 +109,38 @@ def save_sensor_data(raw_payload, decoded):
         cursor.close()
         conn.close()
 
-def get_latest_data(limit=20):
+def get_devices():
+    """Returns list of unique device_ids with last seen timestamp."""
+    conn = get_db_connection()
+    if not conn:
+        return []
+    try:
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("SELECT device_id, MAX(timestamp) as last_seen FROM sensor_data GROUP BY device_id")
+        return cursor.fetchall()
+    finally:
+        if conn:
+            cursor.close()
+            conn.close()
+
+def get_latest_data(device_id=None, limit=20):
     conn = get_db_connection()
     if not conn:
         return []
     
     try:
         cursor = conn.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM sensor_data ORDER BY timestamp DESC LIMIT %s", (limit,))
+        if device_id:
+            cursor.execute("SELECT * FROM sensor_data WHERE device_id = %s ORDER BY timestamp DESC LIMIT %s", (device_id, limit))
+        else:
+            cursor.execute("SELECT * FROM sensor_data ORDER BY timestamp DESC LIMIT %s", (limit,))
+            
         rows = cursor.fetchall()
         
         history = []
         for row in rows:
             history.append({
+                "device_id": row.get("device_id", "unknown"),
                 "timestamp": row["timestamp"].isoformat() if isinstance(row["timestamp"], datetime) else str(row["timestamp"]),
                 "decoded": {
                     "Type": row["type"],

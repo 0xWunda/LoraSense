@@ -1,0 +1,17 @@
+{
+    "timestamp": "2026-01-03T00:33:54.699173",
+    "raw_data": "XyxAArEz8AAAAP8=",
+    "decoded": {
+        "Type": 1,
+        "Battery": 3.75,
+        "Temperature": 20.1,
+        "T_min": 20.1,
+        "T_max": 20.1,
+        "Humidity": 68.8,
+        "Pressure": 992.7,
+        "Irradiation": 0,
+        "Irr_max": 0,
+        "Rain": 0.0,
+        "Rain_min_time": 255.0
+    }
+}

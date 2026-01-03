@@ -1,0 +1,18 @@
+{
+    "timestamp": "2026-01-03T00:45:13.041856",
+    "device_id": "Station_Gamma",
+    "raw_data": "YRYkUdc1OBYhFr8=",
+    "decoded": {
+        "Type": 1,
+        "Battery": 3.8,
+        "Temperature": 11.2,
+        "T_min": 7.6,
+        "T_max": 13.2,
+        "Humidity": 47.0,
+        "Pressure": 994.75,
+        "Irradiation": 22,
+        "Irr_max": 88,
+        "Rain": 22.0,
+        "Rain_min_time": 191.0
+    }
+}

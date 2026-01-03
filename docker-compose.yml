@@ -12,7 +12,7 @@ services:
     volumes:
       - db_data:/var/lib/mysql
     ports:
-      - "3306:3306"
+      - "3307:3306"
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "lora_user", "-plora_pass" ]
       timeout: 20s
@@ -21,7 +21,7 @@ services:
   uplink:
     build:
       context: .
-      dockerfile: services/uplink/Dockerfile
+      dockerfile: App/Dockerfile.uplink
     depends_on:
       db:
         condition: service_healthy
@@ -30,13 +30,14 @@ services:
       - MYSQL_USER=lora_user
       - MYSQL_PASSWORD=lora_pass
       - MYSQL_DATABASE=lorasense_db
+      - MYSQL_PORT=3306 # Internal Docker port
     ports:
-      - "5000:5000"
+      - "5001:5001"
 
   dashboard:
     build:
       context: .
-      dockerfile: services/dashboard/Dockerfile
+      dockerfile: App/Dockerfile.dashboard
     depends_on:
       db:
         condition: service_healthy
@@ -45,6 +46,7 @@ services:
       - MYSQL_USER=lora_user
       - MYSQL_PASSWORD=lora_pass
       - MYSQL_DATABASE=lorasense_db
+      - MYSQL_PORT=3306 # Internal Docker port
     ports:
       - "8080:8080"
 

@@ -2,6 +2,21 @@ from flask import Flask, request, jsonify
 import os
 import json
 import base64
+import sys
+
+# Add parent directory to path to import common
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from common import database
+
+# Configure DB for local testing if not set
+if not os.getenv("MYSQL_HOST"):
+    os.environ["MYSQL_HOST"] = "127.0.0.1"
+    os.environ["MYSQL_USER"] = "lora_user"
+    os.environ["MYSQL_PASSWORD"] = "lora_pass"
+    os.environ["MYSQL_DATABASE"] = "lorasense_db"
+    os.environ["MYSQL_PORT"] = "3307"
+
 from datetime import datetime
 
 # ===============================
@@ -10,7 +25,7 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-BASE_DIR = "/home/wunder/Lorasense"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 RAW_DIR = os.path.join(BASE_DIR, "json")   # rohe Serverdaten
 DECODED_DIR = os.path.join(BASE_DIR, "data")  # entschlüsselte Daten
 
@@ -101,8 +116,9 @@ def uplink():
             json.dump(data, f, indent=4, ensure_ascii=False)
 
         # 2) verschlüsseltes Feld "data" aus dem JSON holen
-        #    -> angenommen: {"data": "XyxAArEz8AAAAP8="}
         payload_b64 = data.get("data")
+        device_id = data.get("device_id", "unknown_device")
+
         if not payload_b64:
             raise ValueError("Feld 'data' fehlt im JSON oder ist leer.")
 
@@ -115,6 +131,7 @@ def uplink():
         # 3) entschlüsselte Daten in /home/wunder/data speichern
         decoded_obj = {
             "timestamp": datetime.now().isoformat(),
+            "device_id": device_id,
             "raw_data": payload_b64,
             "decoded": decoded
         }
@@ -126,8 +143,15 @@ def uplink():
         print(f"✅ Rohe Daten gespeichert:     {raw_filename}")
         print(f"✅ Entschlüsselte Daten nach:  {decoded_filename}")
 
+        # 4) Save to Database
+        if database.save_sensor_data(device_id, payload_b64, decoded):
+            print(f"✅ Data saved to Database (Device: {device_id})")
+        else:
+            print("❌ Failed to save data to Database")
+
         return jsonify({
             "status": "ok",
+            "device_id": device_id,
             "raw_file": raw_filename,
             "decoded_file": decoded_filename,
             "decoded": decoded
@@ -142,4 +166,7 @@ def uplink():
 # ===============================
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    print("Initializing Database...")
+    database.init_db()
+
+    app.run(host="0.0.0.0", port=5001)

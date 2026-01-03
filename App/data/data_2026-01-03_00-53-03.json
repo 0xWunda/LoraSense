@@ -1,0 +1,18 @@
+{
+    "timestamp": "2026-01-03T00:53:03.418669",
+    "device_id": "My_Station",
+    "raw_data": "SOMRsUUxmrg1ABA=",
+    "decoded": {
+        "Type": 1,
+        "Battery": 3.2,
+        "Temperature": -9.2,
+        "T_min": -10.9,
+        "T_max": -4.8,
+        "Humidity": 32.4,
+        "Pressure": 988.95,
+        "Irradiation": 696,
+        "Irr_max": 802,
+        "Rain": 0.0,
+        "Rain_min_time": 16.0
+    }
+}

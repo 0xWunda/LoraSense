@@ -1,0 +1,20 @@
+FROM python:3.9-slim
+
+WORKDIR /app
+
+# Install dependencies
+RUN pip install flask flask-cors mysql-connector-python
+
+# Copy source code
+COPY App/dashboard_server.py /app/App/dashboard_server.py
+COPY App/website/ /app/App/website/
+COPY common/ /app/common/
+
+# Environment variables
+ENV PYTHONPATH=/app
+ENV MYSQL_HOST=db
+ENV MYSQL_PORT=3306
+
+EXPOSE 8080
+
+CMD ["python", "App/dashboard_server.py"]
