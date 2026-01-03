@@ -40,6 +40,10 @@ services:
     depends_on:
       db:
         condition: service_started
+    volumes:
+      - ./services/dashboard/src:/app
+      - ./services/dashboard/website:/app/website
+      - ./common/database.py:/app/database.py
     environment:
       - MYSQL_HOST=db
       - MYSQL_USER=lora_user

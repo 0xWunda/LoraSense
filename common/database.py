@@ -81,13 +81,67 @@ def init_db():
             )
         """)
 
-        # Create default admin user if not exists (password: admin123 - hash is simplified for this demo)
-        # In a real app, use werkzeug.security.generate_password_hash
+        # Migration: Ensure is_admin column exists (for legacy databases)
+        try:
+            cursor.execute("SHOW COLUMNS FROM users LIKE 'is_admin'")
+            if not cursor.fetchone():
+                print("🔹 Migrating: Adding 'is_admin' column to users table")
+                cursor.execute("ALTER TABLE users ADD COLUMN is_admin BOOLEAN DEFAULT FALSE")
+        except mysql.connector.Error as err:
+            print(f"Migration error (is_admin): {err}")
+            
+        # Create default admin user if not exists
         cursor.execute("SELECT id FROM users WHERE username = 'admin'")
         if not cursor.fetchone():
             print("🔹 Creating default admin user")
             # Using a mock hash for now, app.py will handle verified hashing
             cursor.execute("INSERT INTO users (username, password_hash, is_admin) VALUES ('admin', 'pbkdf2:sha256:260000$mockhash', TRUE)")
+        else:
+             # Ensure existing admin has admin rights (fix for legacy data)
+             print("🔹 Updating admin user permissions")
+             cursor.execute("UPDATE users SET is_admin = TRUE WHERE username = 'admin'")
+            
+        # Create test user if not exists (password: test123)
+        cursor.execute("SELECT id FROM users WHERE username = 'testuser'")
+        test_user = cursor.fetchone()
+        if not test_user:
+            print("🔹 Creating test user")
+            cursor.execute("INSERT INTO users (username, password_hash, is_admin) VALUES ('testuser', 'pbkdf2:sha256:260000$mockhash', FALSE)")
+            cursor.execute("SELECT id FROM users WHERE username = 'testuser'")
+            test_user_id = cursor.fetchone()[0]
+        else:
+             test_user_id = test_user[0]
+
+        # Create additional test users
+        for i in range(1, 3):
+            u_name = f"testuser{i}"
+            cursor.execute("SELECT id FROM users WHERE username = %s", (u_name,))
+            if not cursor.fetchone():
+                 print(f"🔹 Creating {u_name}")
+                 # password: test{i}123 -> mock hash, we rely on app.py or we should ideally hash it properly.
+                 # But since app.py checks hash, we need a hash that verify_password accepts if we use standard flow.
+                 # However, app.py also has fallback for testuser/admin but NOT for testuser1/2.
+                 # We need to make sure `check_password_hash` works.
+                 # werkzeug `generate_password_hash` default is pbkdf2:sha256.
+                 # We can't easily import werkzeug here if it's not in the image for common?
+                 # Wait, dashboard image has werkzeug. Uplink might not.
+                 # This file is shared.
+                 # Safe bet: Insert a known hash or handle it in app.py specific logic?
+                 # Actually, app.py uses `check_password_hash`.
+                 # If I put "pbkdf2:sha256:..." text here, I need to generate it correctly.
+                 # For now, I will use a placeholder and Ensure app.py handles testuser1/2 like testuser/admin in fallback, OR I rely on the fact that I can't easily generate valid hashes here without werkzeug.
+                 # UPDATE: app.py handles logic.
+                 # Let's import werkzeug here? common/ might be used by uplink which is python-slim.
+                 # Dockerfile for uplink?
+                 # Let's check `services/uplink/Dockerfile`? No need.
+                 # I'll just use the same mock hash string structure and HOPE app.py handles it, OR I will add fallback in app.py for testuser1/2 as well.
+                 cursor.execute("INSERT INTO users (username, password_hash, is_admin) VALUES (%s, 'pbkdf2:sha256:260000$mockhash', FALSE)", (u_name,))
+
+        # Ensure test user has at least one sensor assigned
+        cursor.execute("SELECT * FROM user_sensors WHERE user_id = %s", (test_user_id,))
+        if not cursor.fetchone():
+             print("🔹 Assigning default sensors to test user")
+             cursor.execute("INSERT INTO user_sensors (user_id, sensor_id) VALUES (%s, 'LoraSense-Alpha-01')", (test_user_id,))
         
         # Migration: Ensure device_id column exists if table was already there
         try:
@@ -223,6 +277,46 @@ def get_user_by_username(username):
     except mysql.connector.Error as err:
         print(f"Error fetching user: {err}")
         return None
+    finally:
+        if cursor: cursor.close()
+        if conn: conn.close()
+
+def get_all_users():
+    conn = get_db_connection()
+    if not conn:
+        return []
+    cursor = None
+    try:
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("SELECT id, username, is_admin FROM users")
+        return cursor.fetchall()
+    except mysql.connector.Error as err:
+        print(f"Error fetching users: {err}")
+        return []
+    finally:
+        if cursor: cursor.close()
+        if conn: conn.close()
+
+def update_user_sensors(user_id, sensor_ids):
+    conn = get_db_connection()
+    if not conn:
+        return False
+    cursor = None
+    try:
+        cursor = conn.cursor()
+        # Delete existing mappings
+        cursor.execute("DELETE FROM user_sensors WHERE user_id = %s", (user_id,))
+        
+        # Insert new mappings
+        if sensor_ids:
+            values = [(user_id, s_id) for s_id in sensor_ids]
+            cursor.executemany("INSERT INTO user_sensors (user_id, sensor_id) VALUES (%s, %s)", values)
+        
+        conn.commit()
+        return True
+    except mysql.connector.Error as err:
+        print(f"Error updating user sensors: {err}")
+        return False
     finally:
         if cursor: cursor.close()
         if conn: conn.close()

@@ -114,6 +114,12 @@
                         <i data-lucide="history" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
                         <span class="font-medium hidden lg:block">Historie</span>
                     </a>
+                    <a v-if="isAdmin" @click="fetchUsers(); currentView = 'admin'"
+                        :class="{'bg-white/10 text-white shadow-lg shadow-white/5': currentView === 'admin', 'text-gray-400 hover:text-white hover:bg-white/5': currentView !== 'admin'}"
+                        class="flex items-center gap-4 px-4 py-3 rounded-2xl cursor-pointer transition-all duration-200 group">
+                        <i data-lucide="users" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                        <span class="font-medium hidden lg:block">Verwaltung</span>
+                    </a>
                 </nav>
             </div>
 
@@ -173,6 +179,9 @@
                     <!-- History View -->
                     {% include 'partials/history.html' %}
 
+                    <!-- Admin View -->
+                    {% include 'partials/admin.html' %}
+
                 </div>
             </transition>
         </main>
@@ -188,13 +197,21 @@
                 const isLoggedIn = ref({{ 'true' if not show_login else 'false' }});
         const username = ref('User');
         const isAdmin = ref(false);
-        const currentView = ref('dashboard'); // dashboard, detail, history
+        const currentView = ref('dashboard'); // dashboard, detail, history, admin
         const sensors = ref([]);
         const selectedSensor = ref(null);
         const sensorData = ref([]);
         const isConnected = ref(true);
         const loginForm = ref({ username: '', password: '' });
         const loginError = ref('');
+
+        // Admin State
+        const userList = ref([]);
+        const showAdminModal = ref(false);
+        const selectedUser = ref(null);
+        const tempPermissions = ref([]);
+        const allAvailableSensors = ref([]);
+
         let charts = {};
         let updateTimer = null;
 
@@ -205,6 +222,7 @@
             if (currentView.value === 'dashboard') return 'Übersicht';
             if (currentView.value === 'detail') return selectedSensor.value ? selectedSensor.value : 'Details';
             if (currentView.value === 'history') return 'Historie';
+            if (currentView.value === 'admin') return 'Verwaltung';
             return '';
         });
 
@@ -212,6 +230,7 @@
             if (currentView.value === 'dashboard') return 'Echtzeit-Daten aller Sensoren';
             if (currentView.value === 'detail') return 'Detaillierte Analyse & Graphen';
             if (currentView.value === 'history') return 'Langzeitarchiv & Export';
+            if (currentView.value === 'admin') return 'Benutzerzugriffe steuern';
             return '';
         });
 
@@ -264,11 +283,75 @@
                     const promises = sensors.value.map(s => fetch('/api/data/' + s.id).then(r => r.json()));
                     const results = await Promise.all(promises);
                     allData.value = results.flat().sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+                    // Collect unique sensor IDs for admin selection (from history + current)
+                    const ids = new Set(sensors.value.map(s => s.id));
+                    // Also add mock sensors if not present (hack for demo)
+                    ["LoraSense-Alpha-01", "LoraSense-Beta-02", "LoraSense-Gamma-03", "LoraSense-Delta-04"].forEach(id => ids.add(id));
+                    allAvailableSensors.value = Array.from(ids).sort();
                 }
             } catch (e) {
                 console.error("Error fetching sensors", e);
                 isConnected.value = false;
             }
+        };
+
+        const fetchUsers = async () => {
+            console.log("Fetching users...");
+            if (!isAdmin.value) {
+                console.warn("fetchUsers called but not admin");
+                return;
+            }
+            try {
+                const res = await fetch('/api/admin/users');
+                if (!res.ok) {
+                    console.error("fetchUsers failed", res.status);
+                    return;
+                }
+                const data = await res.json();
+                console.log("Users fetched:", data);
+                if (Array.isArray(data)) {
+                    userList.value = data;
+                } else {
+                    console.error("Data is not array:", data);
+                }
+            } catch (e) {
+                console.error("fetchUsers error:", e);
+            }
+        };
+
+        const openPermissionsModal = async (user) => {
+            selectedUser.value = user;
+            // Fetch permissions
+            const res = await fetch(`/api/admin/users/${user.id}/sensors`);
+            const sensors = await res.json();
+            tempPermissions.value = sensors;
+            showAdminModal.value = true;
+        };
+
+        const closeAdminModal = () => {
+            showAdminModal.value = false;
+            selectedUser.value = null;
+            tempPermissions.value = [];
+        };
+
+        const toggleSensorPermission = (sensorId) => {
+            const index = tempPermissions.value.indexOf(sensorId);
+            if (index === -1) {
+                tempPermissions.value.push(sensorId);
+            } else {
+                tempPermissions.value.splice(index, 1);
+            }
+        };
+
+        const savePermissions = async () => {
+            if (!selectedUser.value) return;
+            await fetch(`/api/admin/users/${selectedUser.value.id}/sensors`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ sensors: tempPermissions.value })
+            });
+            closeAdminModal();
         };
 
         const selectSensor = async (id) => {
@@ -358,7 +441,10 @@
         return {
             isLoggedIn, username, isAdmin, currentView, sensors, selectedSensor, sensorData,
             isConnected, loginForm, loginError, login, logout, selectSensor,
-            viewTitle, viewSubtitle, avgTemp, allData, formatDateTime
+            viewTitle, viewSubtitle, avgTemp, allData, formatDateTime,
+            // Admin exports
+            userList, showAdminModal, selectedUser, tempPermissions, allAvailableSensors,
+            fetchUsers, openPermissionsModal, closeAdminModal, toggleSensorPermission, savePermissions
         };
             }
         });

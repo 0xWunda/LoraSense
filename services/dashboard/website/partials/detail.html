@@ -1,4 +1,4 @@
-<div v-else-if="currentView === 'detail'" key="detail">
+<div v-if="currentView === 'detail'" key="detail">
     <div class="mb-8 flex items-center gap-4">
         <button @click="currentView = 'dashboard'; selectedSensor = null"
             class="bg-white/5 hover:bg-white/10 p-3 rounded-xl transition-all border border-white/5">
