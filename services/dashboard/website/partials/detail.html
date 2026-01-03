@@ -1,0 +1,74 @@
+<div v-else-if="currentView === 'detail'" key="detail">
+    <div class="mb-8 flex items-center gap-4">
+        <button @click="currentView = 'dashboard'; selectedSensor = null"
+            class="bg-white/5 hover:bg-white/10 p-3 rounded-xl transition-all border border-white/5">
+            <i data-lucide="arrow-left" class="w-5 h-5"></i>
+        </button>
+        <div>
+            <h1 class="text-3xl font-bold">[[ selectedSensor ]]</h1>
+            <p class="text-gray-400 text-sm">Echtzeit-Analyse</p>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Temp Chart -->
+        <div class="glass p-6 rounded-[2rem] border border-white/5">
+            <h3 class="font-bold mb-6 flex items-center gap-2">
+                <i data-lucide="thermometer" class="w-4 h-4 text-indigo-400"></i> Temperatur
+            </h3>
+            <div class="h-64">
+                <canvas id="tempChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Humidity Chart -->
+        <div class="glass p-6 rounded-[2rem] border border-white/5">
+            <h3 class="font-bold mb-6 flex items-center gap-2">
+                <i data-lucide="droplets" class="w-4 h-4 text-blue-400"></i> Luftfeuchtigkeit
+            </h3>
+            <div class="h-64">
+                <canvas id="humChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Pressure Chart -->
+        <div class="glass p-6 rounded-[2rem] border border-white/5">
+            <h3 class="font-bold mb-6 flex items-center gap-2">
+                <i data-lucide="gauge" class="w-4 h-4 text-emerald-400"></i> Luftdruck
+            </h3>
+            <div class="h-64">
+                <canvas id="pressureChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Solar Chart -->
+        <div class="glass p-6 rounded-[2rem] border border-white/5">
+            <h3 class="font-bold mb-6 flex items-center gap-2">
+                <i data-lucide="sun" class="w-4 h-4 text-indigo-300"></i> Einstrahlung
+            </h3>
+            <div class="h-64">
+                <canvas id="solarChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Rain Chart -->
+        <div class="glass p-6 rounded-[2rem] border border-white/5">
+            <h3 class="font-bold mb-6 flex items-center gap-2">
+                <i data-lucide="cloud-rain" class="w-4 h-4 text-cyan-400"></i> Regen
+            </h3>
+            <div class="h-64">
+                <canvas id="rainChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Battery Chart -->
+        <div class="glass p-6 rounded-[2rem] border border-white/5">
+            <h3 class="font-bold mb-6 flex items-center gap-2">
+                <i data-lucide="battery" class="w-4 h-4 text-yellow-400"></i> Batterie
+            </h3>
+            <div class="h-64">
+                <canvas id="batteryChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>

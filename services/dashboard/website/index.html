@@ -1,97 +1,70 @@
-{% raw %}
 <!DOCTYPE html>
 <html lang="de">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LoraSense | Premium Dashboard</title>
-    <!-- Tailwind CSS -->
+    <title>LoraSense Pro Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Outfit & Inter -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;600;700&display=swap"
-        rel="stylesheet">
-    <!-- Chart.js -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Vue.js -->
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --accent-primary: #6366f1;
-            --accent-secondary: #06b6d4;
-        }
-
         body {
-            font-family: 'Inter', sans-serif;
-            background: radial-gradient(circle at 0% 0%, #1e1b4b 0%, #0f172a 50%, #020617 100%);
-            color: #f8fafc;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        h1,
-        h2,
-        h3,
-        .font-outfit {
             font-family: 'Outfit', sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
         }
 
         .glass {
-            background: var(--glass-bg);
+            background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--glass-border);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .glass-card {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
         }
 
-        .glass-card:hover {
-            background: rgba(255, 255, 255, 0.05);
+        .glass-sidebar {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(99, 102, 241, 0.15);
             border-color: rgba(99, 102, 241, 0.3);
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
         }
 
-        .sidebar-link {
-            transition: all 0.2s ease;
-            position: relative;
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 50;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .sidebar-link.active {
-            background: rgba(99, 102, 241, 0.1);
-            color: #818cf8;
-            border-right: 3px solid #6366f1;
+        [v-cloak] {
+            display: none;
         }
 
-        .sidebar-link.active i {
-            color: #818cf8;
-        }
-
-        .fade-enter-active,
-        .fade-leave-active {
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-
-        .fade-enter-from,
-        .fade-leave-to {
-            opacity: 0;
-            transform: translateY(10px);
-        }
-
-        /* Custom Scrollbar */
+        /* Scrollbar */
         ::-webkit-scrollbar {
-            width: 6px;
+            width: 8px;
+            height: 8px;
         }
 
         ::-webkit-scrollbar-track {
@@ -100,500 +73,297 @@
 
         ::-webkit-scrollbar-thumb {
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
+            border-radius: 4px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
             background: rgba(255, 255, 255, 0.2);
         }
-
-        .text-gradient {
-            background: linear-gradient(to right, #818cf8, #22d3ee);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .login-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #020617 100%);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
     </style>
 </head>
 
-<body class="flex">
+<body class="overflow-hidden">
+    <div id="app" v-cloak class="flex h-screen selection:bg-indigo-500/30">
 
-    <div id="app" class="flex w-full min-h-screen">
-        <!-- Login Overlay -->
-        <div v-if="!isLoggedIn" class="login-overlay p-6">
-            <div class="glass-card p-10 rounded-[2.5rem] w-full max-w-md border-white/10 shadow-2xl">
-                <div class="flex flex-col items-center mb-10">
+        <!-- LOGIN OVERLAY -->
+        {% include 'partials/login.html' %}
+
+        <!-- SIDEBAR -->
+        <aside v-if="isLoggedIn"
+            class="w-20 lg:w-64 glass-sidebar flex flex-col justify-between py-8 transition-all duration-300 z-20">
+            <div class="px-4 lg:px-8">
+                <div class="flex items-center gap-4 mb-12">
                     <div
-                        class="w-16 h-16 bg-indigo-600 rounded-3xl flex items-center justify-center mb-6 shadow-xl shadow-indigo-500/20">
-                        <i data-lucide="radio" class="text-white w-10 h-10"></i>
+                        class="w-10 h-10 bg-gradient-to-tr from-indigo-500 to-purple-500 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/20 shrink-0">
+                        <i data-lucide="activity" class="text-white w-6 h-6"></i>
                     </div>
-                    <h1 class="text-3xl font-bold font-outfit mb-2">LoraSense <span class="text-indigo-400">Pro</span>
-                    </h1>
-                    <p class="text-gray-400 text-sm">Bitte melden Sie sich an</p>
-                </div>
-
-                <form @submit.prevent="login" class="space-y-6">
-                    <div>
-                        <label
-                            class="block text-xs font-semibold text-gray-500 uppercase tracking-widest mb-2 ml-1">Benutzername</label>
-                        <input v-model="loginForm.username" type="text"
-                            class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 focus:border-indigo-500 transition-all outline-none"
-                            placeholder="admin">
-                    </div>
-                    <div>
-                        <label
-                            class="block text-xs font-semibold text-gray-500 uppercase tracking-widest mb-2 ml-1">Passwort</label>
-                        <input v-model="loginForm.password" type="password"
-                            class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 focus:border-indigo-500 transition-all outline-none"
-                            placeholder="••••••••">
-                    </div>
-                    <p v-if="loginError" class="text-red-400 text-sm italic">{{ loginError }}</p>
-                    <button type="submit"
-                        class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 rounded-2xl transition-all shadow-lg shadow-indigo-500/25 active:scale-[0.98]">
-                        Anmelden
-                    </button>
-                </form>
-            </div>
-        </div>
-
-        <!-- Sidebar -->
-        <aside v-if="isLoggedIn" class="w-72 glass border-r border-white/5 flex flex-col fixed h-full z-50">
-            <div class="p-8">
-                <div class="flex items-center gap-3 mb-10">
-                    <div
-                        class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/20">
-                        <i data-lucide="radio" class="text-white w-6 h-6"></i>
-                    </div>
-                    <span class="text-2xl font-bold font-outfit tracking-tight">LoraSense <span
-                            class="text-indigo-400">Pro</span></span>
+                    <span class="text-xl font-bold tracking-tight hidden lg:block">Lora<span
+                            class="text-indigo-400">Sense</span></span>
                 </div>
 
                 <nav class="space-y-2">
-                    <a @click="currentView = 'overview'; selectedSensor = null" href="#"
-                        :class="['sidebar-link flex items-center gap-4 px-4 py-3 rounded-lg hover:bg-white/5 text-gray-400 hover:text-white', currentView === 'overview' ? 'active text-white bg-white/5' : '']">
-                        <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
-                        <span class="font-medium">Dashboard</span>
+                    <a @click="currentView = 'dashboard'"
+                        :class="{'bg-white/10 text-white shadow-lg shadow-white/5': currentView === 'dashboard', 'text-gray-400 hover:text-white hover:bg-white/5': currentView !== 'dashboard'}"
+                        class="flex items-center gap-4 px-4 py-3 rounded-2xl cursor-pointer transition-all duration-200 group">
+                        <i data-lucide="layout-grid" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                        <span class="font-medium hidden lg:block">Dashboard</span>
                     </a>
-                    <a @click="currentView = 'history'" href="#"
-                        :class="['sidebar-link flex items-center gap-4 px-4 py-3 rounded-lg hover:bg-white/5 text-gray-400 hover:text-white', currentView === 'history' ? 'active text-white bg-white/5' : '']">
-                        <i data-lucide="database" class="w-5 h-5"></i>
-                        <span class="font-medium">Historie</span>
-                    </a>
-                    <a @click="logout" href="#"
-                        class="sidebar-link flex items-center gap-4 px-4 py-3 rounded-lg hover:bg-white/5 text-gray-400 hover:text-white">
-                        <i data-lucide="log-out" class="w-5 h-5"></i>
-                        <span class="font-medium">Abmelden</span>
+                    <a @click="currentView = 'history'"
+                        :class="{'bg-white/10 text-white shadow-lg shadow-white/5': currentView === 'history', 'text-gray-400 hover:text-white hover:bg-white/5': currentView !== 'history'}"
+                        class="flex items-center gap-4 px-4 py-3 rounded-2xl cursor-pointer transition-all duration-200 group">
+                        <i data-lucide="history" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                        <span class="font-medium hidden lg:block">Historie</span>
                     </a>
                 </nav>
             </div>
 
-            <div class="mt-auto p-8 border-t border-white/5">
-                <div class="glass-card p-4 rounded-xl flex items-center gap-3">
-                    <div
-                        class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-cyan-500 overflow-hidden border-2 border-white/10">
-                        <img :src="`https://api.dicebear.com/7.x/avataaars/svg?seed=${username}`" alt="User">
+            <div class="px-4 lg:px-8">
+                <div class="p-4 glass rounded-2xl mb-4 hidden lg:block">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="w-2 h-2 rounded-full animate-pulse"
+                            :class="isConnected ? 'bg-emerald-400' : 'bg-red-400'"></div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-gray-400">System Status</span>
                     </div>
-                    <div>
-                        <p class="text-sm font-semibold">{{ username }}</p>
-                        <p class="text-xs text-gray-500">{{ isAdmin ? 'Administrator' : 'Premium Plan' }}</p>
-                    </div>
+                    <div class="text-sm font-medium text-gray-200">[[ isConnected ? 'Online' : 'Offline' ]]</div>
+                    <div class="text-xs text-gray-500 mt-1">Updates live</div>
                 </div>
+                <button @click="logout"
+                    class="flex items-center gap-4 px-4 py-3 text-gray-400 hover:text-red-400 hover:bg-red-400/10 rounded-2xl transition-all w-full">
+                    <i data-lucide="log-out" class="w-5 h-5"></i>
+                    <span class="font-medium hidden lg:block">Abmelden</span>
+                </button>
             </div>
         </aside>
 
-        <!-- Main Content -->
-        <main v-if="isLoggedIn" class="flex-1 ml-72 p-10">
+        <!-- MAIN CONTENT -->
+        <main v-if="isLoggedIn" class="flex-1 overflow-y-auto relative z-10 p-4 lg:p-10">
             <!-- Header -->
-            <header class="flex justify-between items-center mb-12">
+            <header class="flex justify-between items-center mb-10">
                 <div>
-                    <h1 v-if="currentView === 'overview'" class="text-4xl font-bold font-outfit mb-2">System <span
-                            class="text-gradient">Übersicht</span></h1>
-                    <h1 v-else-if="currentView === 'detail'" class="text-4xl font-bold font-outfit mb-2">Sensor <span
-                            class="text-gradient">{{
-                            selectedSensor.id }}</span></h1>
-                    <h1 v-else class="text-4xl font-bold font-outfit mb-2">Daten <span
-                            class="text-gradient">Historie</span></h1>
-
-                    <p class="text-gray-400">{{
-                        currentView === 'overview' ? 'Live-Status Ihrer LoRa-Infrastruktur' :
-                        currentView === 'detail' ? 'Detaillierte Analyse und Diagramme' :
-                        'Kompletter Log aller empfangenen Sensordaten'
-                        }}</p>
+                    <h2
+                        class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
+                        [[ viewTitle ]]</h2>
+                    <p class="text-gray-400 mt-1">[[ viewSubtitle ]]</p>
                 </div>
                 <div class="flex items-center gap-4">
                     <a v-if="currentView === 'history'" href="/api/export"
                         class="glass px-6 py-2 rounded-xl text-sm font-bold flex items-center gap-2 hover:bg-indigo-600 transition-all active:scale-95 shadow-lg shadow-indigo-600/10">
-                        <i data-lucide="download" class="w-4 h-4"></i>
-                        CSV Export
+                        <i data-lucide="download" class="w-4 h-4"></i> Export CSV
                     </a>
-                    <div class="glass px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2">
-                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                        Live
+                    <div class="glass px-4 py-2 rounded-xl flex items-center gap-3">
+                        <div
+                            class="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-xs font-bold">
+                            [[ username.charAt(0).toUpperCase() ]]
+                        </div>
+                        <span class="text-sm font-medium hidden sm:block">[[ username ]]</span>
                     </div>
-                    <button @click="refreshData"
-                        class="w-10 h-10 glass rounded-full flex items-center justify-center hover:bg-white/10 transition-colors">
-                        <i data-lucide="refresh-cw" class="w-5 h-5"></i>
-                    </button>
                 </div>
             </header>
 
-            <!-- Vue Transition for View Swapping -->
-            <transition name="fade" mode="out-in" @after-enter="onTransitionEnd">
-                <!-- OVERVIEW -->
-                <div v-if="currentView === 'overview'" key="overview">
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
-                        <div class="glass-card p-6 rounded-2xl">
-                            <p class="text-gray-400 text-sm mb-1 uppercase tracking-wider font-semibold">Aktive Sensoren
-                            </p>
-                            <p class="text-3xl font-bold font-outfit">{{ sensors.length }}</p>
-                        </div>
-                        <div class="glass-card p-6 rounded-2xl">
-                            <p class="text-gray-400 text-sm mb-1 uppercase tracking-wider font-semibold">Durchschn. Temp
-                            </p>
-                            <p class="text-3xl font-bold font-outfit text-orange-400">{{ avgTemp }}°C</p>
-                        </div>
-                        <div class="glass-card p-6 rounded-2xl">
-                            <p class="text-gray-400 text-sm mb-1 uppercase tracking-wider font-semibold">Status</p>
-                            <p class="text-lg font-bold font-outfit text-green-400 flex items-center gap-2">
-                                <i data-lucide="check-circle" class="w-5 h-5"></i> {{ sensors.length > 0 ? 'Optimal' :
-                                'Warten...' }}
-                            </p>
-                        </div>
-                    </div>
+            <!-- VIEWS -->
+            <transition name="fade" mode="out-in">
+                <div key="content">
 
-                    <h2 class="text-2xl font-bold font-outfit mb-6">Sensoren</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-base">
-                        <div v-for="sensor in sensors" :key="sensor.id" @click="selectSensor(sensor)"
-                            class="glass-card p-6 rounded-3xl cursor-pointer group">
-                            <div class="flex justify-between items-start mb-6">
-                                <div
-                                    class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center group-hover:bg-indigo-500/20 transition-colors">
-                                    <i data-lucide="thermometer" class="w-6 h-6 text-indigo-400"></i>
-                                </div>
-                                <span
-                                    class="text-[10px] bg-white/5 px-2 py-1 rounded-full text-gray-400 uppercase tracking-tighter">{{
-                                    formatTime(sensor.last_seen) }}</span>
-                            </div>
-                            <h3
-                                class="text-xl font-bold font-outfit mb-4 group-hover:text-indigo-400 transition-colors">
-                                {{ sensor.id }}</h3>
+                    <!-- Dashboard Grid -->
+                    {% include 'partials/dashboard.html' %}
 
-                            <div class="grid grid-cols-2 gap-4">
-                                <div class="flex flex-col">
-                                    <span class="text-[10px] text-gray-500 uppercase">Temperatur</span>
-                                    <span class="text-lg font-semibold">{{ sensor.latest_values.Temperature }}°C</span>
-                                </div>
-                                <div class="flex flex-col text-right">
-                                    <span class="text-[10px] text-gray-500 uppercase">Feuchte</span>
-                                    <span class="text-lg font-semibold">{{ sensor.latest_values.Humidity }}%</span>
-                                </div>
-                                <div class="flex flex-col">
-                                    <span class="text-[10px] text-gray-500 uppercase">Batterie</span>
-                                    <span class="text-lg font-semibold text-emerald-400">{{ sensor.latest_values.Battery
-                                        }}V</span>
-                                </div>
-                                <div class="flex flex-col text-right">
-                                    <span class="text-[10px] text-gray-500 uppercase">Regen</span>
-                                    <span class="text-lg font-semibold">{{ sensor.latest_values.Rain }} <small
-                                            class="text-[10px]">mm</small></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <!-- Detail View -->
+                    {% include 'partials/detail.html' %}
 
-                <!-- DETAIL -->
-                <div v-else-if="currentView === 'detail'" key="detail">
-                    <button @click="currentView = 'overview'; selectedSensor = null"
-                        class="mb-8 flex items-center gap-2 px-4 py-2 glass rounded-xl hover:bg-white/10 transition-colors text-sm font-medium">
-                        <i data-lucide="arrow-left" class="w-4 h-4"></i> Zurück zur Übersicht
-                    </button>
+                    <!-- History View -->
+                    {% include 'partials/history.html' %}
 
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 h-auto">
-                        <div class="glass-card p-8 rounded-[2rem] min-h-[350px]">
-                            <h3 class="text-lg font-bold font-outfit mb-6">Temperaturverlauf</h3>
-                            <div class="relative h-[250px]"><canvas id="tempChart"></canvas></div>
-                        </div>
-
-                        <div class="glass-card p-8 rounded-[2rem] min-h-[350px]">
-                            <h3 class="text-lg font-bold font-outfit mb-6">Luftfeuchtigkeit</h3>
-                            <div class="relative h-[250px]"><canvas id="humidityChart"></canvas></div>
-                        </div>
-
-                        <div class="glass-card p-8 rounded-[2rem] min-h-[350px]">
-                            <h3 class="text-lg font-bold font-outfit mb-6">Einstrahlung (Solar)</h3>
-                            <div class="relative h-[250px]"><canvas id="solarChart"></canvas></div>
-                        </div>
-
-                        <div class="glass-card p-8 rounded-[2rem] min-h-[350px]">
-                            <h3 class="text-lg font-bold font-outfit mb-6">Batterie & Regen</h3>
-                            <div class="relative h-[250px]"><canvas id="batteryRainChart"></canvas></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- HISTORY -->
-                <div v-else-if="currentView === 'history'" key="history">
-                    <div class="glass-card rounded-[2rem] overflow-hidden border-white/5">
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left">
-                                <thead
-                                    class="bg-white/5 border-b border-white/10 text-xs font-bold uppercase tracking-widest text-gray-400">
-                                    <tr>
-                                        <th class="px-8 py-5">Zeitpunkt</th>
-                                        <th class="px-8 py-5">Sensor</th>
-                                        <th class="px-8 py-5">Temp (°C)</th>
-                                        <th class="px-8 py-5">Feuchte (%)</th>
-                                        <th class="px-8 py-5">Druck (hPa)</th>
-                                        <th class="px-8 py-5">Batterie (V)</th>
-                                        <th class="px-8 py-5">Regen (mm)</th>
-                                        <th class="px-8 py-5">Solar (W/m2)</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-white/5">
-                                    <tr v-for="entry in allData" :key="entry.timestamp + entry.sensor_id"
-                                        class="hover:bg-white/5 transition-colors">
-                                        <td class="px-8 py-5 text-sm font-medium text-gray-300">{{
-                                            formatDateTime(entry.timestamp) }}</td>
-                                        <td class="px-8 py-5"><span
-                                                class="px-3 py-1 bg-indigo-500/10 text-indigo-400 rounded-lg text-xs font-bold">{{
-                                                entry.sensor_id }}</span></td>
-                                        <td class="px-8 py-5 font-bold">{{ entry.decoded.Temperature }}</td>
-                                        <td class="px-8 py-5">{{ entry.decoded.Humidity }}</td>
-                                        <td class="px-8 py-5 text-xs text-gray-500">{{ entry.decoded.Pressure }}</td>
-                                        <td class="px-8 py-5">{{ entry.decoded.Battery }}</td>
-                                        <td class="px-8 py-5">{{ entry.decoded.Rain }}</td>
-                                        <td class="px-8 py-5 text-indigo-300">{{ entry.decoded.Irradiation }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
                 </div>
             </transition>
         </main>
     </div>
 
+    <!-- VUE APP LOGIC -->
     <script>
         const { createApp, ref, onMounted, computed, watch, nextTick } = Vue;
-
-        createApp({
+        const app = createApp({
+            delimiters: ['[[', ']]'],
             setup() {
-                const isLoggedIn = ref(false);
-                const username = ref('');
-                const isAdmin = ref(false);
-                const loginForm = ref({ username: '', password: '' });
-                const loginError = ref('');
+                // STATE
+                const isLoggedIn = ref({{ 'true' if not show_login else 'false' }});
+        const username = ref('User');
+        const isAdmin = ref(false);
+        const currentView = ref('dashboard'); // dashboard, detail, history
+        const sensors = ref([]);
+        const selectedSensor = ref(null);
+        const sensorData = ref([]);
+        const isConnected = ref(true);
+        const loginForm = ref({ username: '', password: '' });
+        const loginError = ref('');
+        let charts = {};
+        let updateTimer = null;
 
-                const sensors = ref([]);
-                const selectedSensor = ref(null);
-                const sensorData = ref([]);
-                const allData = ref([]);
-                const currentView = ref('overview');
-                const charts = {};
+        // COMPUTED
+        const allData = ref([]); // For history view
 
-                const avgTemp = computed(() => {
-                    const validSensors = sensors.value.filter(s => s.latest_values.Temperature !== undefined);
-                    if (validSensors.length === 0) return 0;
-                    const sum = validSensors.reduce((acc, s) => acc + (s.latest_values.Temperature || 0), 0);
-                    return (sum / validSensors.length).toFixed(1);
+        const viewTitle = computed(() => {
+            if (currentView.value === 'dashboard') return 'Übersicht';
+            if (currentView.value === 'detail') return selectedSensor.value ? selectedSensor.value : 'Details';
+            if (currentView.value === 'history') return 'Historie';
+            return '';
+        });
+
+        const viewSubtitle = computed(() => {
+            if (currentView.value === 'dashboard') return 'Echtzeit-Daten aller Sensoren';
+            if (currentView.value === 'detail') return 'Detaillierte Analyse & Graphen';
+            if (currentView.value === 'history') return 'Langzeitarchiv & Export';
+            return '';
+        });
+
+        // METHODS
+        const login = async () => {
+            try {
+                const res = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(loginForm.value)
                 });
-
-                const checkAuth = async () => {
-                    try {
-                        const res = await fetch('/api/status');
-                        const data = await res.json();
-                        isLoggedIn.value = data.logged_in;
-                        if (isLoggedIn.value) {
-                            username.value = data.username;
-                            isAdmin.value = data.is_admin;
-                            refreshData();
-                        }
-                    } catch (e) { }
-                };
-
-                const login = async () => {
-                    loginError.value = '';
-                    try {
-                        const res = await fetch('/api/login', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(loginForm.value)
-                        });
-                        const data = await res.json();
-                        if (data.success) {
-                            await checkAuth();
-                        } else {
-                            loginError.value = data.message || 'Login fehlgeschlagen';
-                        }
-                    } catch (e) { loginError.value = 'Serverfehler'; }
-                };
-
-                const logout = async () => {
-                    await fetch('/api/logout');
-                    isLoggedIn.value = false;
-                    currentView.value = 'overview';
-                };
-
-                const refreshData = async () => {
-                    if (!isLoggedIn.value) return;
-                    try {
-                        const res = await fetch('/api/sensors');
-                        sensors.value = await res.json();
-
-                        if (selectedSensor.value) {
-                            await loadSensorDetails(selectedSensor.value.id);
-                        }
-
-                        if (currentView.value === 'history') {
-                            await loadAllHistory();
-                        }
-
-                        nextTick(() => lucide.createIcons());
-                    } catch (e) { console.error("Fetch error:", e); }
-                };
-
-                const loadAllHistory = async () => {
-                    // Fetch history for all sensors
-                    let combined = [];
-                    for (const s of sensors.value) {
-                        try {
-                            const res = await fetch(`/api/data/${s.id}`);
-                            const data = await res.json();
-                            combined = [...combined, ...data];
-                        } catch (e) { }
-                    }
-                    allData.value = combined.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)).slice(0, 100);
-                };
-
-                const selectSensor = async (sensor) => {
-                    selectedSensor.value = sensor;
-                    currentView.value = 'detail';
-                    await loadSensorDetails(sensor.id);
-                };
-
-                const loadSensorDetails = async (id) => {
-                    try {
-                        const res = await fetch(`/api/data/${id}`);
-                        sensorData.value = await res.json();
-                        nextTick(() => renderCharts());
-                    } catch (e) { console.error("Data error:", e); }
-                };
-
-                const renderCharts = () => {
-                    if (!sensorData.value.length) return;
-                    const labels = sensorData.value.map(d => formatTime(d.timestamp));
-
-                    createLineChart('tempChart', labels, 'Temperatur', sensorData.value.map(d => d.decoded.Temperature), '#fb923c');
-                    createLineChart('humidityChart', labels, 'Feuchtigkeit', sensorData.value.map(d => d.decoded.Humidity), '#22d3ee');
-                    createLineChart('solarChart', labels, 'Einstrahlung', sensorData.value.map(d => d.decoded.Irradiation), '#818cf8');
-                    createMixedChart('batteryRainChart', labels, sensorData.value.map(d => d.decoded.Battery), sensorData.value.map(d => d.decoded.Rain));
-                };
-
-                const createLineChart = (id, labels, label, data, color) => {
-                    if (charts[id]) charts[id].destroy();
-                    const el = document.getElementById(id);
-                    if (!el) return;
-                    const ctx = el.getContext('2d');
-                    charts[id] = new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                label: label,
-                                data: data,
-                                borderColor: color,
-                                backgroundColor: color + '15',
-                                fill: true,
-                                tension: 0.4,
-                                pointRadius: 0,
-                                pointHoverRadius: 6,
-                            }]
-                        },
-                        options: chartOptions(color)
-                    });
-                };
-
-                const createMixedChart = (id, labels, batt, rain) => {
-                    if (charts[id]) charts[id].destroy();
-                    const el = document.getElementById(id);
-                    if (!el) return;
-                    const ctx = el.getContext('2d');
-                    charts[id] = new Chart(ctx, {
-                        data: {
-                            labels: labels,
-                            datasets: [
-                                { type: 'line', label: 'Batterie (V)', data: batt, borderColor: '#10b981', tension: 0.4, yAxisID: 'y' },
-                                { type: 'bar', label: 'Regen (mm)', data: rain, backgroundColor: '#60a5fa33', borderRadius: 4, yAxisID: 'y1' }
-                            ]
-                        },
-                        options: {
-                            ...chartOptions('#10b981'),
-                            scales: {
-                                y: { display: true, position: 'left', grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8', font: { size: 10 } } },
-                                y1: { display: true, position: 'right', grid: { display: false }, ticks: { color: '#60a5fa', font: { size: 10 } } },
-                                x: { display: true, grid: { display: false }, ticks: { color: '#64748b', font: { size: 9 }, maxRotation: 0 } }
-                            }
-                        }
-                    });
-                };
-
-                const chartOptions = (color) => ({
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: {
-                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
-                            padding: 12,
-                            cornerRadius: 12,
-                            displayColors: false,
-                        }
-                    },
-                    scales: {
-                        x: { grid: { display: false }, ticks: { color: '#64748b', font: { size: 9 }, maxRotation: 0 } },
-                        y: { grid: { color: 'rgba(255,255,255,0.05)', drawBorder: false }, ticks: { color: '#94a3b8', font: { size: 10 } } }
-                    }
-                });
-
-                const formatTime = (ts) => ts && ts.includes('T') ? ts.split('T')[1].slice(0, 5) : ts;
-                const formatDateTime = (ts) => ts && ts.includes('T') ? ts.replace('T', ' ').slice(0, 16) : ts;
-
-                const onTransitionEnd = () => {
-                    lucide.createIcons();
-                    if (currentView.value === 'detail') renderCharts();
-                    if (currentView.value === 'history') loadAllHistory();
-                };
-
-                onMounted(() => {
-                    checkAuth();
-                    setInterval(() => { if (isLoggedIn.value) refreshData(); }, 30000);
-                    lucide.createIcons();
-                });
-
-                return {
-                    isLoggedIn, username, isAdmin, loginForm, loginError,
-                    sensors, selectedSensor, sensorData, allData, currentView,
-                    avgTemp, selectSensor, refreshData, formatTime, formatDateTime, onTransitionEnd, login, logout
-                };
+                const data = await res.json();
+                if (data.success) {
+                    checkStatus();
+                    // Force refresh sensors
+                    fetchSensors();
+                } else {
+                    loginError.value = data.message || 'Login fehlgeschlagen';
+                }
+            } catch (e) {
+                loginError.value = 'Serverfehler';
             }
-        }).mount('#app');
-    </script>
+        };
 
+        const logout = async () => {
+            await fetch('/api/logout');
+            isLoggedIn.value = false;
+            currentView.value = 'dashboard';
+            selectedSensor.value = null;
+        };
+
+        const checkStatus = async () => {
+            const res = await fetch('/api/status');
+            const data = await res.json();
+            isLoggedIn.value = data.logged_in;
+            if (data.logged_in) {
+                username.value = data.username;
+                isAdmin.value = data.is_admin;
+                fetchSensors();
+            }
+        };
+
+        const fetchSensors = async () => {
+            if (!isLoggedIn.value) return;
+            try {
+                const res = await fetch('/api/sensors');
+                if (res.ok) {
+                    sensors.value = await res.json();
+                    // Fetch history for all sensors for the table
+                    const promises = sensors.value.map(s => fetch('/api/data/' + s.id).then(r => r.json()));
+                    const results = await Promise.all(promises);
+                    allData.value = results.flat().sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+                }
+            } catch (e) {
+                console.error("Error fetching sensors", e);
+                isConnected.value = false;
+            }
+        };
+
+        const selectSensor = async (id) => {
+            selectedSensor.value = id;
+            currentView.value = 'detail';
+            await fetchSensorData(id);
+            nextTick(() => {
+                renderCharts();
+                lucide.createIcons();
+            });
+        };
+
+        const fetchSensorData = async (id) => {
+            const res = await fetch(`/api/data/${id}`);
+            sensorData.value = await res.json();
+        };
+
+        const renderCharts = () => {
+            if (currentView.value !== 'detail') return;
+
+            const ctxIds = ['tempChart', 'humChart', 'pressureChart', 'batteryChart', 'rainChart', 'solarChart'];
+            const labels = sensorData.value.map(d => new Date(d.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })).reverse();
+            const dataPoints = sensorData.value.slice().reverse(); // Show oldest to newest left to right? usually chart shows time axis ->
+
+            const createLineChart = (id, label, data, color) => {
+                const ctx = document.getElementById(id);
+                if (!ctx) return;
+                if (charts[id]) charts[id].destroy();
+
+                charts[id] = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: label,
+                            data: data,
+                            borderColor: color,
+                            backgroundColor: color + '20',
+                            borderWidth: 2,
+                            tension: 0.4,
+                            fill: true,
+                            pointRadius: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } }, // Minimal look
+                        scales: {
+                            x: { grid: { display: false }, ticks: { color: '#94a3b8' } },
+                            y: { grid: { color: '#ffffff10' }, ticks: { color: '#94a3b8' } }
+                        }
+                    }
+                });
+            };
+
+            createLineChart('tempChart', 'Temperatur (°C)', dataPoints.map(d => d.decoded.Temperature), '#6366f1');
+            createLineChart('humChart', 'Luftfeuchtigkeit (%)', dataPoints.map(d => d.decoded.Humidity), '#3b82f6');
+            createLineChart('pressureChart', 'Luftdruck (hPa)', dataPoints.map(d => d.decoded.Pressure), '#10b981');
+            createLineChart('batteryChart', 'Batterie (V)', dataPoints.map(d => d.decoded.Battery), '#f59e0b');
+            createLineChart('rainChart', 'Regen (mm)', dataPoints.map(d => d.decoded.Rain), '#06b6d4');
+            createLineChart('solarChart', 'Einstrahlung (W/m²)', dataPoints.map(d => d.decoded.Irradiation), '#818cf8');
+        };
+
+        const formatDateTime = (iso) => {
+            return new Date(iso).toLocaleString();
+        };
+
+        const avgTemp = computed(() => {
+            const valid = sensors.value.filter(s => s.latest_values.Temperature !== undefined);
+            if (valid.length === 0) return 0;
+            const sum = valid.reduce((acc, s) => acc + s.latest_values.Temperature, 0);
+            return (sum / valid.length).toFixed(1);
+        });
+
+        // LIFECYCLE
+        onMounted(() => {
+            lucide.createIcons();
+            checkStatus();
+            updateTimer = setInterval(fetchSensors, 5000);
+        });
+
+        watch(currentView, () => {
+            nextTick(() => lucide.createIcons());
+        });
+
+        return {
+            isLoggedIn, username, isAdmin, currentView, sensors, selectedSensor, sensorData,
+            isConnected, loginForm, loginError, login, logout, selectSensor,
+            viewTitle, viewSubtitle, avgTemp, allData, formatDateTime
+        };
+            }
+        });
+        app.mount('#app');
+    </script>
 </body>
 
 </html>
-{% endraw %}

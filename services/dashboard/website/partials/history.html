@@ -1,0 +1,41 @@
+<div v-else-if="currentView === 'history'" key="history">
+    <div class="glass-card rounded-[2rem] overflow-hidden border-white/5">
+        <!-- Scaling Fix: Wrapper for horizontal scrolling -->
+        <div class="overflow-x-auto">
+            <table class="w-full text-left whitespace-nowrap">
+                <thead
+                    class="bg-white/5 border-b border-white/10 text-xs font-bold uppercase tracking-widest text-gray-400">
+                    <tr>
+                        <th class="px-6 py-4">Zeitpunkt</th>
+                        <th class="px-6 py-4">Sensor</th>
+                        <th class="px-6 py-4">Temp (°C)</th>
+                        <th class="px-6 py-4">Feuchte (%)</th>
+                        <th class="px-6 py-4">Druck (hPa)</th>
+                        <th class="px-6 py-4">Batterie (V)</th>
+                        <th class="px-6 py-4">Regen (mm)</th>
+                        <th class="px-6 py-4">Solar (W/m²)</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-white/5">
+                    <tr v-for="entry in allData" :key="entry.timestamp + entry.sensor_id"
+                        class="hover:bg-white/5 transition-colors">
+                        <td class="px-6 py-4 text-sm font-medium text-gray-300">[[ formatDateTime(entry.timestamp) ]]
+                        </td>
+                        <td class="px-6 py-4"><span
+                                class="px-3 py-1 bg-indigo-500/10 text-indigo-400 rounded-lg text-xs font-bold">[[
+                                entry.sensor_id ]]</span></td>
+                        <td class="px-6 py-4 font-bold text-sm">[[ entry.decoded.Temperature ]]</td>
+                        <td class="px-6 py-4 text-sm">[[ entry.decoded.Humidity ]]</td>
+                        <td class="px-6 py-4 text-xs text-gray-500">[[ entry.decoded.Pressure ]]</td>
+                        <td class="px-6 py-4 text-sm">[[ entry.decoded.Battery ]]</td>
+                        <td class="px-6 py-4 text-sm">[[ entry.decoded.Rain ]]</td>
+                        <td class="px-6 py-4 text-sm text-indigo-300">[[ entry.decoded.Irradiation ]]</td>
+                    </tr>
+                    <tr v-if="allData.length === 0">
+                        <td colspan="8" class="px-6 py-10 text-center text-gray-500 italic">Keine Daten verfügbar</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
