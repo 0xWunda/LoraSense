@@ -24,7 +24,7 @@ services:
       dockerfile: services/uplink/Dockerfile
     depends_on:
       db:
-        condition: service_healthy
+        condition: service_started
     environment:
       - MYSQL_HOST=db
       - MYSQL_USER=lora_user
@@ -39,7 +39,7 @@ services:
       dockerfile: services/dashboard/Dockerfile
     depends_on:
       db:
-        condition: service_healthy
+        condition: service_started
     environment:
       - MYSQL_HOST=db
       - MYSQL_USER=lora_user

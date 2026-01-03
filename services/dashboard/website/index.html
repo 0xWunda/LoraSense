@@ -1,527 +1,599 @@
+{% raw %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LoRaSense | Admin Dashboard</title>
-    <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <title>LoraSense | Premium Dashboard</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Outfit & Inter -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Vue.js -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
         :root {
-            --bg-body: #0f172a;
-            --bg-card: #1e293b;
-            --sidebar: #111827;
-            --accent: #3b82f6;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border: #334155;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --accent-primary: #6366f1;
+            --accent-secondary: #06b6d4;
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--bg-body);
-            color: var(--text-main);
-            display: flex;
+            background: radial-gradient(circle at 0% 0%, #1e1b4b 0%, #0f172a 50%, #020617 100%);
+            color: #f8fafc;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* Sidebar */
-        aside {
-            width: 260px;
-            background: var(--sidebar);
-            border-right: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            padding: 2rem 1.5rem;
+        h1,
+        h2,
+        h3,
+        .font-outfit {
+            font-family: 'Outfit', sans-serif;
         }
 
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 3rem;
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
         }
 
-        .brand h1 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            letter-spacing: -0.025em;
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .nav-link {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem 1rem;
-            border-radius: 0.5rem;
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: 0.2s;
-            margin-bottom: 0.5rem;
-            cursor: pointer;
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(99, 102, 241, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
         }
 
-        .nav-link.active {
-            background: var(--accent);
-            color: white;
-        }
-
-        .nav-link:hover:not(.active) {
-            background: var(--bg-card);
-            color: white;
-        }
-
-        /* Main Content */
-        main {
-            flex: 1;
-            padding: 2rem 3rem;
-            max-width: 1400px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 2.5rem;
-        }
-
-        .welcome h2 {
-            font-size: 1.875rem;
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .welcome p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        /* Status Widget */
-        .status-badge {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 9999px;
-            font-size: 0.875rem;
-            font-weight: 500;
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-        }
-
-        .dot-active {
-            background: var(--success);
-            box-shadow: 0 0 12px var(--success);
-        }
-
-        .dot-inactive {
-            background: var(--danger);
-        }
-
-        /* Grid Layout */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            padding: 1.5rem;
-            border-radius: 1rem;
+        .sidebar-link {
+            transition: all 0.2s ease;
             position: relative;
-            overflow: hidden;
         }
 
-        .stat-card .label {
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            display: block;
-            margin-bottom: 1rem;
+        .sidebar-link.active {
+            background: rgba(99, 102, 241, 0.1);
+            color: #818cf8;
+            border-right: 3px solid #6366f1;
         }
 
-        .stat-card .value {
-            font-size: 1.75rem;
-            font-weight: 700;
+        .sidebar-link.active i {
+            color: #818cf8;
         }
 
-        .stat-card i {
-            position: absolute;
-            top: 1.25rem;
-            right: 1.25rem;
-            color: var(--accent);
-            opacity: 0.8;
+        .fade-enter-active,
+        .fade-leave-active {
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
-        .main-pane {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 1.5rem;
+        .fade-enter-from,
+        .fade-leave-to {
+            opacity: 0;
+            transform: translateY(10px);
         }
 
-        .chart-pane,
-        .table-pane {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 1rem;
-            padding: 1.5rem;
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
         }
 
-        .pane-header {
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #818cf8, #22d3ee);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #020617 100%);
+            z-index: 1000;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .pane-header h3 {
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-
-        /* Table Styling */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.875rem;
-        }
-
-        th {
-            text-align: left;
-            padding: 0.75rem;
-            color: var(--text-muted);
-            font-weight: 500;
-            border-bottom: 1px solid var(--border);
-        }
-
-        td {
-            padding: 1rem 0.75rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        tr:last-child td {
-            border-bottom: none;
-        }
-
-        .time-cell {
-            font-family: monospace;
-            color: var(--accent);
-        }
-
-        @media (max-width: 1024px) {
-            .main-pane {
-                grid-template-columns: 1fr;
-            }
-
-            aside {
-                display: none;
-            }
+            justify-content: center;
         }
     </style>
 </head>
 
-<body>
-    <aside>
-        <div class="brand">
-            <i data-lucide="radio" color="#3b82f6"></i>
-            <h1>LoRaSense</h1>
-        </div>
-        <nav>
-            <div onclick="showView('overview')" id="nav-overview" class="nav-link active">
-                <i data-lucide="layout-dashboard" size="20"></i>
-                Overview
-            </div>
-            <div onclick="showView('history')" id="nav-history" class="nav-link">
-                <i data-lucide="history" size="20"></i>
-                History
-            </div>
-            <div onclick="showView('settings')" id="nav-settings" class="nav-link">
-                <i data-lucide="settings" size="20"></i>
-                Station Config
-            </div>
-        </nav>
-    </aside>
+<body class="flex">
 
-    <main>
-        <!-- View: Overview -->
-        <div id="view-overview" class="view">
-            <header>
-                <div class="welcome">
-                    <h2>Station Overview</h2>
-                    <p id="last-seen">Scanning for heartbeats...</p>
+    <div id="app" class="flex w-full min-h-screen">
+        <!-- Login Overlay -->
+        <div v-if="!isLoggedIn" class="login-overlay p-6">
+            <div class="glass-card p-10 rounded-[2.5rem] w-full max-w-md border-white/10 shadow-2xl">
+                <div class="flex flex-col items-center mb-10">
+                    <div
+                        class="w-16 h-16 bg-indigo-600 rounded-3xl flex items-center justify-center mb-6 shadow-xl shadow-indigo-500/20">
+                        <i data-lucide="radio" class="text-white w-10 h-10"></i>
+                    </div>
+                    <h1 class="text-3xl font-bold font-outfit mb-2">LoraSense <span class="text-indigo-400">Pro</span>
+                    </h1>
+                    <p class="text-gray-400 text-sm">Bitte melden Sie sich an</p>
                 </div>
-                <div class="status-badge">
-                    <div id="status-dot" class="status-dot dot-inactive"></div>
-                    <span id="status-text">Disconnected</span>
+
+                <form @submit.prevent="login" class="space-y-6">
+                    <div>
+                        <label
+                            class="block text-xs font-semibold text-gray-500 uppercase tracking-widest mb-2 ml-1">Benutzername</label>
+                        <input v-model="loginForm.username" type="text"
+                            class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 focus:border-indigo-500 transition-all outline-none"
+                            placeholder="admin">
+                    </div>
+                    <div>
+                        <label
+                            class="block text-xs font-semibold text-gray-500 uppercase tracking-widest mb-2 ml-1">Passwort</label>
+                        <input v-model="loginForm.password" type="password"
+                            class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 focus:border-indigo-500 transition-all outline-none"
+                            placeholder="••••••••">
+                    </div>
+                    <p v-if="loginError" class="text-red-400 text-sm italic">{{ loginError }}</p>
+                    <button type="submit"
+                        class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 rounded-2xl transition-all shadow-lg shadow-indigo-500/25 active:scale-[0.98]">
+                        Anmelden
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside v-if="isLoggedIn" class="w-72 glass border-r border-white/5 flex flex-col fixed h-full z-50">
+            <div class="p-8">
+                <div class="flex items-center gap-3 mb-10">
+                    <div
+                        class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/20">
+                        <i data-lucide="radio" class="text-white w-6 h-6"></i>
+                    </div>
+                    <span class="text-2xl font-bold font-outfit tracking-tight">LoraSense <span
+                            class="text-indigo-400">Pro</span></span>
+                </div>
+
+                <nav class="space-y-2">
+                    <a @click="currentView = 'overview'; selectedSensor = null" href="#"
+                        :class="['sidebar-link flex items-center gap-4 px-4 py-3 rounded-lg hover:bg-white/5 text-gray-400 hover:text-white', currentView === 'overview' ? 'active text-white bg-white/5' : '']">
+                        <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+                        <span class="font-medium">Dashboard</span>
+                    </a>
+                    <a @click="currentView = 'history'" href="#"
+                        :class="['sidebar-link flex items-center gap-4 px-4 py-3 rounded-lg hover:bg-white/5 text-gray-400 hover:text-white', currentView === 'history' ? 'active text-white bg-white/5' : '']">
+                        <i data-lucide="database" class="w-5 h-5"></i>
+                        <span class="font-medium">Historie</span>
+                    </a>
+                    <a @click="logout" href="#"
+                        class="sidebar-link flex items-center gap-4 px-4 py-3 rounded-lg hover:bg-white/5 text-gray-400 hover:text-white">
+                        <i data-lucide="log-out" class="w-5 h-5"></i>
+                        <span class="font-medium">Abmelden</span>
+                    </a>
+                </nav>
+            </div>
+
+            <div class="mt-auto p-8 border-t border-white/5">
+                <div class="glass-card p-4 rounded-xl flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-cyan-500 overflow-hidden border-2 border-white/10">
+                        <img :src="`https://api.dicebear.com/7.x/avataaars/svg?seed=${username}`" alt="User">
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold">{{ username }}</p>
+                        <p class="text-xs text-gray-500">{{ isAdmin ? 'Administrator' : 'Premium Plan' }}</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main v-if="isLoggedIn" class="flex-1 ml-72 p-10">
+            <!-- Header -->
+            <header class="flex justify-between items-center mb-12">
+                <div>
+                    <h1 v-if="currentView === 'overview'" class="text-4xl font-bold font-outfit mb-2">System <span
+                            class="text-gradient">Übersicht</span></h1>
+                    <h1 v-else-if="currentView === 'detail'" class="text-4xl font-bold font-outfit mb-2">Sensor <span
+                            class="text-gradient">{{
+                            selectedSensor.id }}</span></h1>
+                    <h1 v-else class="text-4xl font-bold font-outfit mb-2">Daten <span
+                            class="text-gradient">Historie</span></h1>
+
+                    <p class="text-gray-400">{{
+                        currentView === 'overview' ? 'Live-Status Ihrer LoRa-Infrastruktur' :
+                        currentView === 'detail' ? 'Detaillierte Analyse und Diagramme' :
+                        'Kompletter Log aller empfangenen Sensordaten'
+                        }}</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a v-if="currentView === 'history'" href="/api/export"
+                        class="glass px-6 py-2 rounded-xl text-sm font-bold flex items-center gap-2 hover:bg-indigo-600 transition-all active:scale-95 shadow-lg shadow-indigo-600/10">
+                        <i data-lucide="download" class="w-4 h-4"></i>
+                        CSV Export
+                    </a>
+                    <div class="glass px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2">
+                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                        Live
+                    </div>
+                    <button @click="refreshData"
+                        class="w-10 h-10 glass rounded-full flex items-center justify-center hover:bg-white/10 transition-colors">
+                        <i data-lucide="refresh-cw" class="w-5 h-5"></i>
+                    </button>
                 </div>
             </header>
 
-            <div class="dashboard-grid">
-                <div class="stat-card">
-                    <i data-lucide="thermometer"></i>
-                    <span class="label">Temperature</span>
-                    <div class="value"><span id="temp">--</span><span
-                            style="font-size: 1rem; color: var(--text-muted)">°C</span></div>
-                </div>
-                <div class="stat-card">
-                    <i data-lucide="droplets"></i>
-                    <span class="label">Humidity</span>
-                    <div class="value"><span id="humidity">--</span><span
-                            style="font-size: 1rem; color: var(--text-muted)">%</span></div>
-                </div>
-                <div class="stat-card">
-                    <i data-lucide="gauge"></i>
-                    <span class="label">Pressure</span>
-                    <div class="value"><span id="pressure">--</span><span
-                            style="font-size: 1rem; color: var(--text-muted); margin-left: 4px;">hPa</span></div>
-                </div>
-                <div class="stat-card">
-                    <i data-lucide="battery-full" id="battery-icon"></i>
-                    <span class="label">Battery Voltage</span>
-                    <div class="value"><span id="battery">--</span><span
-                            style="font-size: 1rem; color: var(--text-muted); margin-left: 4px;">V</span></div>
-                </div>
-            </div>
-
-            <div class="main-pane">
-                <div class="chart-pane">
-                    <div class="pane-header">
-                        <h3>Environment Trends</h3>
-                        <p style="font-size: 0.8rem; color: var(--text-muted)">Real-time telemetry</p>
-                    </div>
-                    <canvas id="mainChart" height="250"></canvas>
-                </div>
-                <div class="table-pane">
-                    <div class="pane-header">
-                        <h3>Recent Logs</h3>
-                        <div style="display: flex; gap: 0.5rem; align-items: center;">
-                            <a href="/api/export" class="nav-link"
-                                style="margin-bottom: 0; padding: 0.4rem; border: 1px solid var(--border);"
-                                title="Export CSV">
-                                <i data-lucide="download" size="16"></i>
-                            </a>
-                            <i data-lucide="list-filter" size="18" color="#94a3b8"></i>
+            <!-- Vue Transition for View Swapping -->
+            <transition name="fade" mode="out-in" @after-enter="onTransitionEnd">
+                <!-- OVERVIEW -->
+                <div v-if="currentView === 'overview'" key="overview">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+                        <div class="glass-card p-6 rounded-2xl">
+                            <p class="text-gray-400 text-sm mb-1 uppercase tracking-wider font-semibold">Aktive Sensoren
+                            </p>
+                            <p class="text-3xl font-bold font-outfit">{{ sensors.length }}</p>
+                        </div>
+                        <div class="glass-card p-6 rounded-2xl">
+                            <p class="text-gray-400 text-sm mb-1 uppercase tracking-wider font-semibold">Durchschn. Temp
+                            </p>
+                            <p class="text-3xl font-bold font-outfit text-orange-400">{{ avgTemp }}°C</p>
+                        </div>
+                        <div class="glass-card p-6 rounded-2xl">
+                            <p class="text-gray-400 text-sm mb-1 uppercase tracking-wider font-semibold">Status</p>
+                            <p class="text-lg font-bold font-outfit text-green-400 flex items-center gap-2">
+                                <i data-lucide="check-circle" class="w-5 h-5"></i> {{ sensors.length > 0 ? 'Optimal' :
+                                'Warten...' }}
+                            </p>
                         </div>
                     </div>
-                    <table id="history-table">
-                        <thead>
-                            <tr>
-                                <th>Time</th>
-                                <th>Temp</th>
-                                <th>Bat</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Rows via JS -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
 
-        <!-- View: History -->
-        <div id="view-history" class="view" style="display: none;">
-            <header>
-                <div class="welcome">
-                    <h2>Extended Data History</h2>
-                    <p>Full database records for Station Alpha-1</p>
-                </div>
-                <a href="/api/export" class="nav-link active" style="margin-bottom: 0;">
-                    <i data-lucide="download" size="20"></i>
-                    Export All Data
-                </a>
-            </header>
-            <div class="table-pane" style="width: 100%;">
-                <table id="extended-history-table">
-                    <thead>
-                        <tr>
-                            <th>Exact Local Time</th>
-                            <th>Battery</th>
-                            <th>Temp</th>
-                            <th>Hum</th>
-                            <th>Press</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Rows via JS -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                    <h2 class="text-2xl font-bold font-outfit mb-6">Sensoren</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-base">
+                        <div v-for="sensor in sensors" :key="sensor.id" @click="selectSensor(sensor)"
+                            class="glass-card p-6 rounded-3xl cursor-pointer group">
+                            <div class="flex justify-between items-start mb-6">
+                                <div
+                                    class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center group-hover:bg-indigo-500/20 transition-colors">
+                                    <i data-lucide="thermometer" class="w-6 h-6 text-indigo-400"></i>
+                                </div>
+                                <span
+                                    class="text-[10px] bg-white/5 px-2 py-1 rounded-full text-gray-400 uppercase tracking-tighter">{{
+                                    formatTime(sensor.last_seen) }}</span>
+                            </div>
+                            <h3
+                                class="text-xl font-bold font-outfit mb-4 group-hover:text-indigo-400 transition-colors">
+                                {{ sensor.id }}</h3>
 
-        <!-- View: Settings -->
-        <div id="view-settings" class="view" style="display: none;">
-            <header>
-                <div class="welcome">
-                    <h2>Station Configuration</h2>
-                    <p>Manage your LoRa nodes and integration endpoints</p>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="flex flex-col">
+                                    <span class="text-[10px] text-gray-500 uppercase">Temperatur</span>
+                                    <span class="text-lg font-semibold">{{ sensor.latest_values.Temperature }}°C</span>
+                                </div>
+                                <div class="flex flex-col text-right">
+                                    <span class="text-[10px] text-gray-500 uppercase">Feuchte</span>
+                                    <span class="text-lg font-semibold">{{ sensor.latest_values.Humidity }}%</span>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="text-[10px] text-gray-500 uppercase">Batterie</span>
+                                    <span class="text-lg font-semibold text-emerald-400">{{ sensor.latest_values.Battery
+                                        }}V</span>
+                                </div>
+                                <div class="flex flex-col text-right">
+                                    <span class="text-[10px] text-gray-500 uppercase">Regen</span>
+                                    <span class="text-lg font-semibold">{{ sensor.latest_values.Rain }} <small
+                                            class="text-[10px]">mm</small></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </header>
-            <div class="stat-card" style="max-width: 600px;">
-                <h4 style="margin-bottom: 1rem;">Primary Gateway Integration</h4>
-                <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem;">
-                    Point your Things Network (TTN) or Chirpstack uplink to this URL:
-                </p>
-                <code
-                    style="display: block; background: var(--sidebar); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem; color: var(--accent); border: 1px solid var(--border);">
-                    http://[your-pi-ip]:5000/uplink
-                </code>
-                <div style="padding: 1rem; border: 1px dashed var(--border); border-radius: 0.5rem;">
-                    <span
-                        style="color: var(--warning); display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem;">
-                        <i data-lucide="alert-triangle" size="16"></i>
-                        Advanced node provisioning (OTAA/ABP) tools coming soon.
-                    </span>
+
+                <!-- DETAIL -->
+                <div v-else-if="currentView === 'detail'" key="detail">
+                    <button @click="currentView = 'overview'; selectedSensor = null"
+                        class="mb-8 flex items-center gap-2 px-4 py-2 glass rounded-xl hover:bg-white/10 transition-colors text-sm font-medium">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i> Zurück zur Übersicht
+                    </button>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 h-auto">
+                        <div class="glass-card p-8 rounded-[2rem] min-h-[350px]">
+                            <h3 class="text-lg font-bold font-outfit mb-6">Temperaturverlauf</h3>
+                            <div class="relative h-[250px]"><canvas id="tempChart"></canvas></div>
+                        </div>
+
+                        <div class="glass-card p-8 rounded-[2rem] min-h-[350px]">
+                            <h3 class="text-lg font-bold font-outfit mb-6">Luftfeuchtigkeit</h3>
+                            <div class="relative h-[250px]"><canvas id="humidityChart"></canvas></div>
+                        </div>
+
+                        <div class="glass-card p-8 rounded-[2rem] min-h-[350px]">
+                            <h3 class="text-lg font-bold font-outfit mb-6">Einstrahlung (Solar)</h3>
+                            <div class="relative h-[250px]"><canvas id="solarChart"></canvas></div>
+                        </div>
+
+                        <div class="glass-card p-8 rounded-[2rem] min-h-[350px]">
+                            <h3 class="text-lg font-bold font-outfit mb-6">Batterie & Regen</h3>
+                            <div class="relative h-[250px]"><canvas id="batteryRainChart"></canvas></div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </main>
+
+                <!-- HISTORY -->
+                <div v-else-if="currentView === 'history'" key="history">
+                    <div class="glass-card rounded-[2rem] overflow-hidden border-white/5">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left">
+                                <thead
+                                    class="bg-white/5 border-b border-white/10 text-xs font-bold uppercase tracking-widest text-gray-400">
+                                    <tr>
+                                        <th class="px-8 py-5">Zeitpunkt</th>
+                                        <th class="px-8 py-5">Sensor</th>
+                                        <th class="px-8 py-5">Temp (°C)</th>
+                                        <th class="px-8 py-5">Feuchte (%)</th>
+                                        <th class="px-8 py-5">Druck (hPa)</th>
+                                        <th class="px-8 py-5">Batterie (V)</th>
+                                        <th class="px-8 py-5">Regen (mm)</th>
+                                        <th class="px-8 py-5">Solar (W/m2)</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-white/5">
+                                    <tr v-for="entry in allData" :key="entry.timestamp + entry.sensor_id"
+                                        class="hover:bg-white/5 transition-colors">
+                                        <td class="px-8 py-5 text-sm font-medium text-gray-300">{{
+                                            formatDateTime(entry.timestamp) }}</td>
+                                        <td class="px-8 py-5"><span
+                                                class="px-3 py-1 bg-indigo-500/10 text-indigo-400 rounded-lg text-xs font-bold">{{
+                                                entry.sensor_id }}</span></td>
+                                        <td class="px-8 py-5 font-bold">{{ entry.decoded.Temperature }}</td>
+                                        <td class="px-8 py-5">{{ entry.decoded.Humidity }}</td>
+                                        <td class="px-8 py-5 text-xs text-gray-500">{{ entry.decoded.Pressure }}</td>
+                                        <td class="px-8 py-5">{{ entry.decoded.Battery }}</td>
+                                        <td class="px-8 py-5">{{ entry.decoded.Rain }}</td>
+                                        <td class="px-8 py-5 text-indigo-300">{{ entry.decoded.Irradiation }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </transition>
+        </main>
+    </div>
 
     <script>
-        lucide.createIcons();
+        const { createApp, ref, onMounted, computed, watch, nextTick } = Vue;
 
-        function showView(viewId) {
-            document.querySelectorAll('.view').forEach(v => v.style.display = 'none');
-            document.getElementById('view-' + viewId).style.display = 'block';
-            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-            document.getElementById('nav-' + viewId).classList.add('active');
-        }
+        createApp({
+            setup() {
+                const isLoggedIn = ref(false);
+                const username = ref('');
+                const isAdmin = ref(false);
+                const loginForm = ref({ username: '', password: '' });
+                const loginError = ref('');
 
-        const ctx = document.getElementById('mainChart').getContext('2d');
-        let mainChart;
+                const sensors = ref([]);
+                const selectedSensor = ref(null);
+                const sensorData = ref([]);
+                const allData = ref([]);
+                const currentView = ref('overview');
+                const charts = {};
 
-        async function updateDashboard() {
-            try {
-                const response = await fetch('/api/data');
-                const data = await response.json();
-
-                if (!data || data.length === 0) return;
-
-                const latest = data[0];
-                const d = latest.decoded;
-
-                // Update Stats
-                document.getElementById('temp').innerText = d.Temperature || '--';
-                document.getElementById('humidity').innerText = d.Humidity || '--';
-                document.getElementById('pressure').innerText = d.Pressure || '--';
-                document.getElementById('battery').innerText = d.Battery || '--';
-
-                // Status Logic
-                const lastDate = new Date(latest.timestamp);
-                const diffMins = (new Date() - lastDate) / (1000 * 60);
-
-                const statusDot = document.getElementById('status-dot');
-                const statusText = document.getElementById('status-text');
-                const lastSeenText = document.getElementById('last-seen');
-
-                if (diffMins < 15) {
-                    statusDot.className = 'status-dot dot-active';
-                    statusText.innerText = 'Connected';
-                    lastSeenText.innerText = 'Receiving real-time data';
-                } else {
-                    statusDot.className = 'status-dot dot-inactive';
-                    statusText.innerText = 'Offline';
-                    lastSeenText.innerText = `Last seen ${Math.round(diffMins)} minutes ago`;
-                }
-
-                // Table Update (Overview)
-                const tbody = document.querySelector('#history-table tbody');
-                tbody.innerHTML = '';
-                data.slice(0, 10).forEach(item => {
-                    const row = document.createElement('tr');
-                    const time = new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                    row.innerHTML = `
-                        <td class="time-cell">${time}</td>
-                        <td>${item.decoded.Temperature}°</td>
-                        <td>${item.decoded.Battery}V</td>
-                    `;
-                    tbody.appendChild(row);
+                const avgTemp = computed(() => {
+                    const validSensors = sensors.value.filter(s => s.latest_values.Temperature !== undefined);
+                    if (validSensors.length === 0) return 0;
+                    const sum = validSensors.reduce((acc, s) => acc + (s.latest_values.Temperature || 0), 0);
+                    return (sum / validSensors.length).toFixed(1);
                 });
 
-                // Extended Table (History View)
-                const exTbody = document.querySelector('#extended-history-table tbody');
-                exTbody.innerHTML = '';
-                data.forEach(item => {
-                    const row = document.createElement('tr');
-                    const time = new Date(item.timestamp).toLocaleString();
-                    row.innerHTML = `
-                        <td class="time-cell">${time}</td>
-                        <td>${item.decoded.Battery}V</td>
-                        <td>${item.decoded.Temperature}°C</td>
-                        <td>${item.decoded.Humidity}%</td>
-                        <td>${item.decoded.Pressure}hPa</td>
-                    `;
-                    exTbody.appendChild(row);
-                });
-
-                // Chart Update
-                const chartData = [...data].reverse();
-                const labels = chartData.map(item => new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
-                const temps = chartData.map(item => item.decoded.Temperature);
-                const hums = chartData.map(item => item.decoded.Humidity);
-
-                if (mainChart) mainChart.destroy();
-                mainChart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            label: 'Temp',
-                            data: temps,
-                            borderColor: '#3b82f6',
-                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                            fill: true,
-                            tension: 0.4
-                        }, {
-                            label: 'Humidity',
-                            data: hums,
-                            borderColor: '#10b981',
-                            borderDash: [5, 5],
-                            fill: false,
-                            tension: 0.4
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: { legend: { display: false } },
-                        scales: {
-                            x: { grid: { display: false }, ticks: { color: '#94a3b8' } },
-                            y: { grid: { color: '#334155' }, ticks: { color: '#94a3b8' } }
+                const checkAuth = async () => {
+                    try {
+                        const res = await fetch('/api/status');
+                        const data = await res.json();
+                        isLoggedIn.value = data.logged_in;
+                        if (isLoggedIn.value) {
+                            username.value = data.username;
+                            isAdmin.value = data.is_admin;
+                            refreshData();
                         }
+                    } catch (e) { }
+                };
+
+                const login = async () => {
+                    loginError.value = '';
+                    try {
+                        const res = await fetch('/api/login', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(loginForm.value)
+                        });
+                        const data = await res.json();
+                        if (data.success) {
+                            await checkAuth();
+                        } else {
+                            loginError.value = data.message || 'Login fehlgeschlagen';
+                        }
+                    } catch (e) { loginError.value = 'Serverfehler'; }
+                };
+
+                const logout = async () => {
+                    await fetch('/api/logout');
+                    isLoggedIn.value = false;
+                    currentView.value = 'overview';
+                };
+
+                const refreshData = async () => {
+                    if (!isLoggedIn.value) return;
+                    try {
+                        const res = await fetch('/api/sensors');
+                        sensors.value = await res.json();
+
+                        if (selectedSensor.value) {
+                            await loadSensorDetails(selectedSensor.value.id);
+                        }
+
+                        if (currentView.value === 'history') {
+                            await loadAllHistory();
+                        }
+
+                        nextTick(() => lucide.createIcons());
+                    } catch (e) { console.error("Fetch error:", e); }
+                };
+
+                const loadAllHistory = async () => {
+                    // Fetch history for all sensors
+                    let combined = [];
+                    for (const s of sensors.value) {
+                        try {
+                            const res = await fetch(`/api/data/${s.id}`);
+                            const data = await res.json();
+                            combined = [...combined, ...data];
+                        } catch (e) { }
+                    }
+                    allData.value = combined.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)).slice(0, 100);
+                };
+
+                const selectSensor = async (sensor) => {
+                    selectedSensor.value = sensor;
+                    currentView.value = 'detail';
+                    await loadSensorDetails(sensor.id);
+                };
+
+                const loadSensorDetails = async (id) => {
+                    try {
+                        const res = await fetch(`/api/data/${id}`);
+                        sensorData.value = await res.json();
+                        nextTick(() => renderCharts());
+                    } catch (e) { console.error("Data error:", e); }
+                };
+
+                const renderCharts = () => {
+                    if (!sensorData.value.length) return;
+                    const labels = sensorData.value.map(d => formatTime(d.timestamp));
+
+                    createLineChart('tempChart', labels, 'Temperatur', sensorData.value.map(d => d.decoded.Temperature), '#fb923c');
+                    createLineChart('humidityChart', labels, 'Feuchtigkeit', sensorData.value.map(d => d.decoded.Humidity), '#22d3ee');
+                    createLineChart('solarChart', labels, 'Einstrahlung', sensorData.value.map(d => d.decoded.Irradiation), '#818cf8');
+                    createMixedChart('batteryRainChart', labels, sensorData.value.map(d => d.decoded.Battery), sensorData.value.map(d => d.decoded.Rain));
+                };
+
+                const createLineChart = (id, labels, label, data, color) => {
+                    if (charts[id]) charts[id].destroy();
+                    const el = document.getElementById(id);
+                    if (!el) return;
+                    const ctx = el.getContext('2d');
+                    charts[id] = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: label,
+                                data: data,
+                                borderColor: color,
+                                backgroundColor: color + '15',
+                                fill: true,
+                                tension: 0.4,
+                                pointRadius: 0,
+                                pointHoverRadius: 6,
+                            }]
+                        },
+                        options: chartOptions(color)
+                    });
+                };
+
+                const createMixedChart = (id, labels, batt, rain) => {
+                    if (charts[id]) charts[id].destroy();
+                    const el = document.getElementById(id);
+                    if (!el) return;
+                    const ctx = el.getContext('2d');
+                    charts[id] = new Chart(ctx, {
+                        data: {
+                            labels: labels,
+                            datasets: [
+                                { type: 'line', label: 'Batterie (V)', data: batt, borderColor: '#10b981', tension: 0.4, yAxisID: 'y' },
+                                { type: 'bar', label: 'Regen (mm)', data: rain, backgroundColor: '#60a5fa33', borderRadius: 4, yAxisID: 'y1' }
+                            ]
+                        },
+                        options: {
+                            ...chartOptions('#10b981'),
+                            scales: {
+                                y: { display: true, position: 'left', grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8', font: { size: 10 } } },
+                                y1: { display: true, position: 'right', grid: { display: false }, ticks: { color: '#60a5fa', font: { size: 10 } } },
+                                x: { display: true, grid: { display: false }, ticks: { color: '#64748b', font: { size: 9 }, maxRotation: 0 } }
+                            }
+                        }
+                    });
+                };
+
+                const chartOptions = (color) => ({
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                            padding: 12,
+                            cornerRadius: 12,
+                            displayColors: false,
+                        }
+                    },
+                    scales: {
+                        x: { grid: { display: false }, ticks: { color: '#64748b', font: { size: 9 }, maxRotation: 0 } },
+                        y: { grid: { color: 'rgba(255,255,255,0.05)', drawBorder: false }, ticks: { color: '#94a3b8', font: { size: 10 } } }
                     }
                 });
 
-            } catch (error) {
-                console.error('Update failed:', error);
-            }
-        }
+                const formatTime = (ts) => ts && ts.includes('T') ? ts.split('T')[1].slice(0, 5) : ts;
+                const formatDateTime = (ts) => ts && ts.includes('T') ? ts.replace('T', ' ').slice(0, 16) : ts;
 
-        updateDashboard();
-        setInterval(updateDashboard, 60000);
+                const onTransitionEnd = () => {
+                    lucide.createIcons();
+                    if (currentView.value === 'detail') renderCharts();
+                    if (currentView.value === 'history') loadAllHistory();
+                };
+
+                onMounted(() => {
+                    checkAuth();
+                    setInterval(() => { if (isLoggedIn.value) refreshData(); }, 30000);
+                    lucide.createIcons();
+                });
+
+                return {
+                    isLoggedIn, username, isAdmin, loginForm, loginError,
+                    sensors, selectedSensor, sensorData, allData, currentView,
+                    avgTemp, selectSensor, refreshData, formatTime, formatDateTime, onTransitionEnd, login, logout
+                };
+            }
+        }).mount('#app');
     </script>
+
 </body>
 
 </html>
+{% endraw %}

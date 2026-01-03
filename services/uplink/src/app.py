@@ -84,6 +84,8 @@ def uplink():
     try:
         data = request.get_json(force=True)
         payload_b64 = data.get("data")
+        device_id = data.get("device_id") or data.get("sensor_id") or "Hardware_Sensor_01"
+        
         if not payload_b64:
             raise ValueError("Feld 'data' fehlt im JSON oder ist leer.")
 
@@ -91,7 +93,7 @@ def uplink():
         decoded = Decoder(payload_bytes)
 
         # Save to MySQL
-        success = database.save_sensor_data(payload_b64, decoded)
+        success = database.save_sensor_data(payload_b64, decoded, device_id)
         
         if success:
             print(f"✅ Data saved to DB: {decoded}")

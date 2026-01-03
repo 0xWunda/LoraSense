@@ -10,7 +10,7 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-BASE_DIR = "/home/wunder/Lorasense"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 RAW_DIR = os.path.join(BASE_DIR, "json")   # rohe Serverdaten
 DECODED_DIR = os.path.join(BASE_DIR, "data")  # entschlüsselte Daten
 
