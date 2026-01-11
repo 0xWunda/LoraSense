@@ -3,16 +3,16 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
         <div class="glass p-6 rounded-3xl metric-card transition-all duration-300 relative overflow-hidden group">
             <div
-                class="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-3xl -mr-10 -mt-10 group-hover:bg-indigo-500/20 transition-all">
+                class="absolute top-0 right-0 w-32 h-32 bg-[#00AEEF]/10 rounded-full blur-3xl -mr-10 -mt-10 group-hover:bg-[#00AEEF]/20 transition-all">
             </div>
             <div class="flex items-center justify-between mb-4 relative">
-                <div class="bg-indigo-500/20 p-3 rounded-2xl">
-                    <i data-lucide="cpu" class="text-indigo-400 w-6 h-6"></i>
+                <div class="bg-[#00AEEF]/20 p-3 rounded-2xl">
+                    <i data-lucide="cpu" class="text-[#00AEEF] w-6 h-6"></i>
                 </div>
                 <span class="text-xs font-bold uppercase tracking-widest text-gray-500">Sensoren</span>
             </div>
             <div class="text-4xl font-bold font-outfit mb-1 relative">[[ sensors.length ]]</div>
-            <div class="text-sm text-indigo-300 font-medium">Aktiv im Netzwerk</div>
+            <div class="text-sm text-[#00AEEF]/80 font-medium">Aktiv im Netzwerk</div>
         </div>
 
         <div class="glass p-6 rounded-3xl metric-card transition-all duration-300 relative overflow-hidden group">
@@ -61,9 +61,9 @@
     <!-- SENSOR GRID -->
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         <div v-for="sensor in sensors" :key="sensor.id" @click="selectSensor(sensor.id)"
-            class="glass p-8 rounded-[2rem] cursor-pointer hover:bg-white/5 transition-all duration-300 border border-white/5 hover:border-indigo-500/30 group relative overflow-hidden">
+            class="glass p-8 rounded-[2rem] cursor-pointer hover:bg-white/5 transition-all duration-300 border border-white/5 hover:border-[#00AEEF]/30 group relative overflow-hidden">
             <div
-                class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-indigo-500/10 to-transparent rounded-full blur-3xl -mr-20 -mt-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-[#00AEEF]/10 to-transparent rounded-full blur-3xl -mr-20 -mt-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
             </div>
 
             <div class="flex justify-between items-start mb-8 relative">
@@ -72,13 +72,13 @@
                         <div class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.5)]"></div>
                         <span class="text-xs font-bold text-emerald-400 tracking-wider">ONLINE</span>
                     </div>
-                    <h3 class="text-xl font-bold text-white group-hover:text-indigo-400 transition-colors">[[ sensor.id
+                    <h3 class="text-xl font-bold text-white group-hover:text-[#00AEEF] transition-colors">[[ sensor.id
                         ]]</h3>
                     <p class="text-xs text-gray-500 mt-1">Last seen: [[ formatDateTime(sensor.last_seen) ]]</p>
                 </div>
-                <div class="bg-white/5 p-3 rounded-2xl group-hover:bg-indigo-500/20 transition-colors">
+                <div class="bg-white/5 p-3 rounded-2xl group-hover:bg-[#00AEEF]/20 transition-colors">
                     <i data-lucide="router"
-                        class="w-6 h-6 text-gray-400 group-hover:text-indigo-400 transition-colors"></i>
+                        class="w-6 h-6 text-gray-400 group-hover:text-[#00AEEF] transition-colors"></i>
                 </div>
             </div>
 

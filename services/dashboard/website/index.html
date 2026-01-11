@@ -39,8 +39,8 @@
 
         .metric-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(99, 102, 241, 0.15);
-            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 12px 40px rgba(0, 174, 239, 0.15);
+            border-color: rgba(0, 174, 239, 0.3);
         }
 
         .login-overlay {
@@ -83,7 +83,7 @@
 </head>
 
 <body class="overflow-hidden">
-    <div id="app" v-cloak class="flex h-screen selection:bg-indigo-500/30">
+    <div id="app" v-cloak class="flex h-screen selection:bg-[#00AEEF]/30">
 
         <!-- LOGIN OVERLAY -->
         {% include 'partials/login.html' %}
@@ -94,28 +94,29 @@
             <div class="px-4 lg:px-8">
                 <div class="flex items-center gap-4 mb-12">
                     <div
-                        class="w-10 h-10 bg-gradient-to-tr from-indigo-500 to-purple-500 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/20 shrink-0">
-                        <i data-lucide="activity" class="text-white w-6 h-6"></i>
+                        class="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center shadow-lg shadow-sky-500/20 shrink-0 p-2">
+                        <img src="{{ url_for('static', filename='images/LoRaSense_Logo.png') }}" alt="LoRaSense Logo"
+                            class="w-full h-full object-contain">
                     </div>
                     <span class="text-xl font-bold tracking-tight hidden lg:block">Lora<span
-                            class="text-indigo-400">Sense</span></span>
+                            class="text-[#00AEEF]">Sense</span></span>
                 </div>
 
                 <nav class="space-y-2">
                     <a @click="currentView = 'dashboard'"
-                        :class="{'bg-white/10 text-white shadow-lg shadow-white/5': currentView === 'dashboard', 'text-gray-400 hover:text-white hover:bg-white/5': currentView !== 'dashboard'}"
+                        :class="{'bg-[#005696]/20 text-[#00AEEF] shadow-lg shadow-[#00AEEF]/5': currentView === 'dashboard', 'text-gray-400 hover:text-[#00AEEF] hover:bg-[#00AEEF]/5': currentView !== 'dashboard'}"
                         class="flex items-center gap-4 px-4 py-3 rounded-2xl cursor-pointer transition-all duration-200 group">
                         <i data-lucide="layout-grid" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
                         <span class="font-medium hidden lg:block">Dashboard</span>
                     </a>
                     <a @click="currentView = 'history'"
-                        :class="{'bg-white/10 text-white shadow-lg shadow-white/5': currentView === 'history', 'text-gray-400 hover:text-white hover:bg-white/5': currentView !== 'history'}"
+                        :class="{'bg-[#005696]/20 text-[#00AEEF] shadow-lg shadow-[#00AEEF]/5': currentView === 'history', 'text-gray-400 hover:text-[#00AEEF] hover:bg-[#00AEEF]/5': currentView !== 'history'}"
                         class="flex items-center gap-4 px-4 py-3 rounded-2xl cursor-pointer transition-all duration-200 group">
                         <i data-lucide="history" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
                         <span class="font-medium hidden lg:block">Historie</span>
                     </a>
                     <a v-if="isAdmin" @click="fetchUsers(); currentView = 'admin'"
-                        :class="{'bg-white/10 text-white shadow-lg shadow-white/5': currentView === 'admin', 'text-gray-400 hover:text-white hover:bg-white/5': currentView !== 'admin'}"
+                        :class="{'bg-[#005696]/20 text-[#00AEEF] shadow-lg shadow-[#00AEEF]/5': currentView === 'admin', 'text-gray-400 hover:text-[#00AEEF] hover:bg-[#00AEEF]/5': currentView !== 'admin'}"
                         class="flex items-center gap-4 px-4 py-3 rounded-2xl cursor-pointer transition-all duration-200 group">
                         <i data-lucide="users" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
                         <span class="font-medium hidden lg:block">Verwaltung</span>
@@ -127,7 +128,7 @@
                 <div class="p-4 glass rounded-2xl mb-4 hidden lg:block">
                     <div class="flex items-center gap-3 mb-2">
                         <div class="w-2 h-2 rounded-full animate-pulse"
-                            :class="isConnected ? 'bg-emerald-400' : 'bg-red-400'"></div>
+                            :class="isConnected ? 'bg-[#00AEEF]' : 'bg-red-400'"></div>
                         <span class="text-xs font-bold uppercase tracking-wider text-gray-400">System Status</span>
                     </div>
                     <div class="text-sm font-medium text-gray-200">[[ isConnected ? 'Online' : 'Offline' ]]</div>
@@ -158,7 +159,7 @@
                     </a>
                     <div class="glass px-4 py-2 rounded-xl flex items-center gap-3">
                         <div
-                            class="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-xs font-bold">
+                            class="w-8 h-8 rounded-full bg-gradient-to-br from-[#005696] to-[#00AEEF] flex items-center justify-center text-xs font-bold">
                             [[ username.charAt(0).toUpperCase() ]]
                         </div>
                         <span class="text-sm font-medium hidden sm:block">[[ username ]]</span>
@@ -189,7 +190,7 @@
 
     <!-- VUE APP LOGIC -->
     <script>
-        const { createApp, ref, onMounted, computed, watch, nextTick } = Vue;
+        const { createApp, ref, onMounted, computed, watch, nextTick, reactive } = Vue;
         const app = createApp({
             delimiters: ['[[', ']]'],
             setup() {
@@ -208,6 +209,8 @@
         // Admin State
         const userList = ref([]);
         const showAdminModal = ref(false);
+        const showCreateUserModal = ref(false);
+        const createUserForm = reactive({ username: '', password: '', is_admin: false });
         const selectedUser = ref(null);
         const tempPermissions = ref([]);
         const allAvailableSensors = ref([]);
@@ -320,6 +323,55 @@
             }
         };
 
+        const openCreateUserModal = () => {
+            createUserForm.username = '';
+            createUserForm.password = '';
+            createUserForm.is_admin = false;
+            showCreateUserModal.value = true;
+        };
+
+        const closeCreateUserModal = () => {
+            showCreateUserModal.value = false;
+        };
+
+        const createUser = async () => {
+            if (!createUserForm.username || !createUserForm.password) return;
+            try {
+                const res = await fetch('/api/admin/users/create', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(createUserForm)
+                });
+
+                if (!res.ok) {
+                    // Try to parse error message if possible
+                    try {
+                        const data = await res.json();
+                        alert('Fehler: ' + (data.message || 'Serverfehler (' + res.status + ')'));
+                    } catch (e) {
+                        // If not JSON, it might be a 404 HTML page if the server code isn't updated
+                        if (res.status === 404) {
+                            alert('Fehler (404): API nicht gefunden. Bitte Server neu starten!');
+                        } else {
+                            alert('Server Fehler (' + res.status + ')');
+                        }
+                    }
+                    return;
+                }
+
+                const data = await res.json();
+                if (data.success) {
+                    closeCreateUserModal();
+                    fetchUsers(); // Refresh list
+                } else {
+                    alert('Fehler: ' + (data.message || 'Konnte Benutzer nicht erstellen'));
+                }
+            } catch (e) {
+                console.error(e);
+                alert('Netzwerkfehler: ' + e.message);
+            }
+        };
+
         const openPermissionsModal = async (user) => {
             selectedUser.value = user;
             // Fetch permissions
@@ -408,8 +460,8 @@
                 });
             };
 
-            createLineChart('tempChart', 'Temperatur (°C)', dataPoints.map(d => d.decoded.Temperature), '#6366f1');
-            createLineChart('humChart', 'Luftfeuchtigkeit (%)', dataPoints.map(d => d.decoded.Humidity), '#3b82f6');
+            createLineChart('tempChart', 'Temperatur (°C)', dataPoints.map(d => d.decoded.Temperature), '#00AEEF');
+            createLineChart('humChart', 'Luftfeuchtigkeit (%)', dataPoints.map(d => d.decoded.Humidity), '#005696');
             createLineChart('pressureChart', 'Luftdruck (hPa)', dataPoints.map(d => d.decoded.Pressure), '#10b981');
             createLineChart('batteryChart', 'Batterie (V)', dataPoints.map(d => d.decoded.Battery), '#f59e0b');
             createLineChart('rainChart', 'Regen (mm)', dataPoints.map(d => d.decoded.Rain), '#06b6d4');
@@ -444,7 +496,9 @@
             viewTitle, viewSubtitle, avgTemp, allData, formatDateTime,
             // Admin exports
             userList, showAdminModal, selectedUser, tempPermissions, allAvailableSensors,
-            fetchUsers, openPermissionsModal, closeAdminModal, toggleSensorPermission, savePermissions
+            fetchUsers, openPermissionsModal, closeAdminModal, toggleSensorPermission, savePermissions,
+            // Create User exports
+            showCreateUserModal, createUserForm, openCreateUserModal, closeCreateUserModal, createUser
         };
             }
         });

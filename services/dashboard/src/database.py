@@ -119,6 +119,22 @@ def update_user_sensors(user_id, sensor_ids):
     finally:
         conn.close()
 
+def create_user(username, password, is_admin=False):
+    conn = get_db()
+    try:
+        pw_hash = generate_password_hash(password)
+        conn.execute("INSERT INTO users (username, password_hash, is_admin) VALUES (?, ?, ?)", 
+                  (username, pw_hash, is_admin))
+        conn.commit()
+        return True
+    except sqlite3.IntegrityError:
+        return False # Username likely exists
+    except Exception as e:
+        print(f"Error creating user: {e}")
+        return False
+    finally:
+        conn.close()
+
 def get_latest_data(limit=1, sensor_id=None):
     # This is a stub since we rely mostly on mock data in app.py for now,
     # or the actual uplink server would write here.

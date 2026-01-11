@@ -2,10 +2,10 @@
     <div class="glass-card p-10 rounded-[2.5rem] w-full max-w-md border-white/10 shadow-2xl">
         <div class="flex flex-col items-center mb-10">
             <div
-                class="w-16 h-16 bg-indigo-600 rounded-3xl flex items-center justify-center mb-6 shadow-xl shadow-indigo-500/20">
+                class="w-16 h-16 bg-[#005696] rounded-3xl flex items-center justify-center mb-6 shadow-xl shadow-[#005696]/20">
                 <i data-lucide="radio" class="text-white w-10 h-10"></i>
             </div>
-            <h1 class="text-3xl font-bold font-outfit mb-2">LoraSense <span class="text-indigo-400">Pro</span></h1>
+            <h1 class="text-3xl font-bold font-outfit mb-2">LoraSense <span class="text-[#00AEEF]">Pro</span></h1>
             <p class="text-gray-400 text-sm">Bitte melden Sie sich an</p>
         </div>
 
@@ -14,19 +14,19 @@
                 <label
                     class="block text-xs font-semibold text-gray-500 uppercase tracking-widest mb-2 ml-1">Benutzername</label>
                 <input v-model="loginForm.username" type="text"
-                    class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 focus:border-indigo-500 transition-all outline-none text-white placeholder-gray-600"
+                    class="w-full bg-[#005696] border border-white/10 rounded-2xl px-5 py-4 focus:border-[#00AEEF] transition-all outline-none text-white placeholder-gray-600"
                     placeholder="admin">
             </div>
             <div>
                 <label
                     class="block text-xs font-semibold text-gray-500 uppercase tracking-widest mb-2 ml-1">Passwort</label>
                 <input v-model="loginForm.password" type="password"
-                    class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 focus:border-indigo-500 transition-all outline-none text-white placeholder-gray-600"
+                    class="w-full bg-[#005696] border border-white/10 rounded-2xl px-5 py-4 focus:border-[#00AEEF] transition-all outline-none text-white placeholder-gray-600"
                     placeholder="••••••••">
             </div>
             <p v-if="loginError" class="text-red-400 text-sm italic">[[ loginError ]]</p>
             <button type="submit"
-                class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 rounded-2xl transition-all shadow-lg shadow-indigo-500/25 active:scale-[0.98]">
+                class="w-full bg-[#00AEEF] hover:bg-[#005696] text-white font-bold py-4 rounded-2xl transition-all shadow-lg shadow-[#00AEEF]/25 active:scale-[0.98]">
                 Anmelden
             </button>
         </form>

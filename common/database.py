@@ -2,6 +2,7 @@ import mysql.connector
 import os
 import time
 from datetime import datetime
+from werkzeug.security import generate_password_hash
 
 def get_db_connection():
     max_retries = 10
@@ -344,3 +345,25 @@ def get_allowed_sensors(user_id):
     finally:
         if cursor: cursor.close()
         if conn: conn.close()
+
+def create_user(username, password, is_admin=False):
+    conn = get_db_connection()
+    if not conn:
+        return False
+    cursor = None
+    try:
+        pw_hash = generate_password_hash(password)
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO users (username, password_hash, is_admin) VALUES (%s, %s, %s)", 
+                  (username, pw_hash, is_admin))
+        conn.commit()
+        return True
+    except mysql.connector.IntegrityError:
+        return False # Username likely exists
+    except mysql.connector.Error as err:
+        print(f"Error creating user: {err}")
+        return False
+    finally:
+        if cursor: cursor.close()
+        if conn: conn.close()
+

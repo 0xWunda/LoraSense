@@ -244,6 +244,30 @@ def update_user_sensors(user_id):
     else:
         return jsonify({"success": False, "message": "Update failed"}), 500
 
+@app.route("/api/admin/users/create", methods=["POST"])
+def create_user():
+    if 'user_id' not in session:
+        return jsonify({"error": "Unauthorized"}), 401
+
+    # Check if admin (trust session)
+    if not session.get('is_admin'):
+         return jsonify({"error": "Unauthorized"}), 403
+         
+    data = request.json
+    username = data.get("username")
+    password = data.get("password")
+    is_admin = data.get("is_admin", False)
+    
+    if not username or not password:
+        return jsonify({"success": False, "message": "Missing username or password"}), 400
+        
+    success = database.create_user(username, password, is_admin)
+    
+    if success:
+        return jsonify({"success": True})
+    else:
+        return jsonify({"success": False, "message": "Creation failed (username might exist)"}), 500
+
 @app.route("/api/export")
 def export_data():
     if 'user_id' not in session:
@@ -294,4 +318,4 @@ def export_data():
 
 if __name__ == "__main__":
     database.init_db()
-    app.run(host="0.0.0.0", port=8080)
+    app.run(host="0.0.0.0", port=8080, debug=True)
