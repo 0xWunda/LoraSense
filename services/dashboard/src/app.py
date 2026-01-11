@@ -4,8 +4,7 @@ import csv
 from flask_cors import CORS
 import os
 import database
-import random
-from datetime import datetime, timedelta
+import mock_service
 from werkzeug.security import generate_password_hash, check_password_hash
 
 # Paths inside container
@@ -14,33 +13,6 @@ WEBSITE_DIR = os.path.join(os.getcwd(), "website")
 app = Flask(__name__, template_folder=WEBSITE_DIR, static_folder=WEBSITE_DIR)
 app.secret_key = os.getenv("FLASK_SECRET", "super-secret-dev-key")
 CORS(app)
-
-def generate_mock_data():
-    """Generiert hochwertige Test-Daten für mehrere Sensoren."""
-    sensors = [
-        {"id": "LoraSense-Alpha-01", "temp": 22, "hum": 45},
-        {"id": "LoraSense-Beta-02", "temp": 18, "hum": 60},
-        {"id": "LoraSense-Gamma-03", "temp": 25, "hum": 35},
-        {"id": "LoraSense-Delta-04", "temp": 15, "hum": 70}
-    ]
-    history = []
-    now = datetime.now()
-    for s in sensors:
-        for i in range(50): # More points for history
-            ts = now - timedelta(minutes=i*30)
-            history.append({
-                "sensor_id": s["id"],
-                "timestamp": ts.isoformat(),
-                "decoded": {
-                    "Temperature": round(s["temp"] + random.uniform(-3, 3), 1),
-                    "Humidity": round(s["hum"] + random.uniform(-5, 5), 1),
-                    "Pressure": round(1013 + random.uniform(-10, 10), 1),
-                    "Battery": round(3.6 + random.uniform(-0.4, 0.4), 2),
-                    "Rain": round(max(0, random.uniform(-2, 5)), 1),
-                    "Irradiation": round(random.uniform(0, 1000), 0)
-                }
-            })
-    return history
 
 @app.route("/")
 def home():
@@ -63,34 +35,20 @@ def login():
     
     print(f"DEBUG: Login attempt for {username}")
     user = database.get_user_by_username(username)
-    
-    # Fallback / Hardcoded users logic (if DB fails or user deleted)
-    # Allows login even if DB is messed up
+
+    # Emergency Fallback (Restored to fix login issues if DB is out of sync)
     if username == "admin" and password == "admin123":
-        session['user_id'] = user['id'] if user else 1
+        session['user_id'] = 1
         session['username'] = "admin"
         session['is_admin'] = True
         return jsonify({"success": True})
-
+        
     if username == "testuser" and password == "test123":
-        session['user_id'] = user['id'] if user else 2
+        session['user_id'] = 2
         session['username'] = "testuser"
         session['is_admin'] = False
         return jsonify({"success": True})
-
-    # Hardcoded fallbacks for additional test users (since hash generation in common/database.py is hard without dependencies)
-    if username == "testuser1" and password == "test1123":
-        session['user_id'] = user['id'] if user else 3
-        session['username'] = "testuser1"
-        session['is_admin'] = False
-        return jsonify({"success": True})
-
-    if username == "testuser2" and password == "test2123":
-        session['user_id'] = user['id'] if user else 4
-        session['username'] = "testuser2"
-        session['is_admin'] = False
-        return jsonify({"success": True})
-        
+    
     if not user:
         print(f"DEBUG: User {username} not found")
         return jsonify({"success": False, "message": "User not found"}), 401
@@ -141,7 +99,7 @@ def get_sensors():
             if m_id not in allowed_ids:
                 allowed_ids.append(m_id)
     
-    mock_data = generate_mock_data()
+    mock_data = mock_service.generate_mock_data()
     sensor_list = []
     for s_id in allowed_ids:
         latest_data = database.get_latest_data(limit=1, sensor_id=s_id)
@@ -180,7 +138,7 @@ def api_sensor_data(sensor_id):
     history = database.get_latest_data(limit=100, sensor_id=sensor_id)
     
     if not history and "LoraSense" in sensor_id:
-        mock = generate_mock_data()
+        mock = mock_service.generate_mock_data()
         history = [item for item in mock if item["sensor_id"] == sensor_id]
         
     return jsonify(history)
@@ -268,6 +226,28 @@ def create_user():
     else:
         return jsonify({"success": False, "message": "Creation failed (username might exist)"}), 500
 
+@app.route("/api/admin/users/<int:user_id>", methods=["DELETE"])
+def delete_user(user_id):
+    if 'user_id' not in session:
+        return jsonify({"error": "Unauthorized"}), 401
+
+    if not session.get('is_admin'):
+         return jsonify({"error": "Unauthorized"}), 403
+         
+    # Prevent deleting yourself
+    if session['user_id'] == user_id:
+        return jsonify({"success": False, "message": "Cannot delete yourself"}), 400
+        
+    try:
+        success = database.delete_user(user_id)
+        
+        if success:
+            return jsonify({"success": True})
+        else:
+            return jsonify({"success": False, "message": "Deletion failed"}), 500
+    except Exception as e:
+        return jsonify({"success": False, "message": f"Server Error: {str(e)}"}), 500
+
 @app.route("/api/export")
 def export_data():
     if 'user_id' not in session:
@@ -281,7 +261,7 @@ def export_data():
     selected_sensor_ids = request.args.getlist('sensor_ids')
     
     history = database.get_latest_data(limit=1000)
-    mock_history = generate_mock_data()
+    mock_history = mock_service.generate_mock_data()
     
     # Combine real and mock history
     combined = history + mock_history

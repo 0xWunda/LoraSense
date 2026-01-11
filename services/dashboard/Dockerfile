@@ -6,7 +6,7 @@ COPY services/dashboard/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY services/dashboard/src/ .
-COPY common/database.py .
+# COPY common/database.py .
 COPY services/dashboard/website/ website/
 
 EXPOSE 8080

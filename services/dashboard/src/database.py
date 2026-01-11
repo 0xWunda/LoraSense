@@ -135,6 +135,21 @@ def create_user(username, password, is_admin=False):
     finally:
         conn.close()
 
+def delete_user(user_id):
+    conn = get_db()
+    try:
+        # Prevent deleting the last admin or specific essential users if needed
+        # For now, just delete. App.py can handle logic.
+        conn.execute("DELETE FROM user_sensors WHERE user_id = ?", (user_id,))
+        conn.execute("DELETE FROM users WHERE id = ?", (user_id,))
+        conn.commit()
+        return True
+    except Exception as e:
+        print(f"Error deleting user: {e}")
+        return False
+    finally:
+        conn.close()
+
 def get_latest_data(limit=1, sensor_id=None):
     # This is a stub since we rely mostly on mock data in app.py for now,
     # or the actual uplink server would write here.
