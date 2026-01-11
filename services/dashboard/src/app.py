@@ -277,6 +277,9 @@ def export_data():
     mock_sensor_ids = ["LoraSense-Alpha-01", "LoraSense-Beta-02", "LoraSense-Gamma-03", "LoraSense-Delta-04"]
     is_admin = session.get('is_admin', False)
 
+    # Get selected sensor IDs from query parameters
+    selected_sensor_ids = request.args.getlist('sensor_ids')
+    
     history = database.get_latest_data(limit=1000)
     mock_history = generate_mock_data()
     
@@ -287,10 +290,34 @@ def export_data():
     filtered = []
     for item in combined:
         sid = item['sensor_id']
+        # Check if sensor is allowed
+        has_access = False
         if sid in allowed_ids:
-            filtered.append(item)
+            has_access = True
         elif is_admin and sid in mock_sensor_ids:
-            filtered.append(item)
+            has_access = True
+            
+        # If user has access, check if sensor is in selection (if selection exists)
+        if has_access:
+            if selected_sensor_ids:
+                # Only include if in selected list
+                if sid in selected_sensor_ids:
+                    filtered.append(item)
+            else:
+                # No selection means all allowed sensors
+                filtered.append(item)
+
+    # Generate filename based on selection
+    if selected_sensor_ids:
+        if len(selected_sensor_ids) == 1:
+            # Single sensor - use sensor name in filename
+            filename = f"lorasense_{selected_sensor_ids[0]}_{datetime.now().strftime('%Y%m%d')}.csv"
+        else:
+            # Multiple sensors - use count in filename
+            filename = f"lorasense_{len(selected_sensor_ids)}_stations_{datetime.now().strftime('%Y%m%d')}.csv"
+    else:
+        # All sensors
+        filename = f"lorasense_export_{datetime.now().strftime('%Y%m%d')}.csv"
 
     def generate():
         data = io.StringIO()
@@ -314,7 +341,7 @@ def export_data():
             yield data.getvalue()
             data.seek(0)
             data.truncate(0)
-    return Response(generate(), mimetype="text/csv", headers={"Content-disposition": f"attachment; filename=lorasense_export_{datetime.now().strftime('%Y%m%d')}.csv"})
+    return Response(generate(), mimetype="text/csv", headers={"Content-disposition": f"attachment; filename={filename}"})
 
 if __name__ == "__main__":
     database.init_db()

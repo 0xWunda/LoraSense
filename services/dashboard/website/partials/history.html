@@ -1,4 +1,47 @@
 <div v-if="currentView === 'history'" key="history">
+    <!-- Station Selector Card -->
+    <div class="glass-card rounded-[2rem] p-6 mb-6 border-white/5">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                <i data-lucide="filter" class="w-5 h-5 text-[#00AEEF]"></i>
+                Stationen auswählen
+            </h3>
+            <div class="flex gap-2">
+                <button @click="selectAllSensors"
+                    class="px-4 py-2 text-xs font-bold rounded-xl bg-[#005696]/20 text-[#00AEEF] hover:bg-[#005696]/30 transition-all">
+                    Alle auswählen
+                </button>
+                <button @click="clearSensorSelection"
+                    class="px-4 py-2 text-xs font-bold rounded-xl bg-white/5 text-gray-400 hover:bg-white/10 transition-all">
+                    Auswahl löschen
+                </button>
+            </div>
+        </div>
+
+        <!-- Checkpoint Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <label v-for="sensor in sensors" :key="sensor.id"
+                class="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 cursor-pointer transition-all group">
+                <input type="checkbox" :value="sensor.id" v-model="selectedSensorIds"
+                    class="w-4 h-4 rounded accent-[#00AEEF] cursor-pointer">
+                <span class="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">
+                    [[ sensor.id ]]
+                </span>
+            </label>
+        </div>
+
+        <!-- Selection Summary -->
+        <div class="mt-4 flex items-center justify-between">
+            <p class="text-sm text-gray-400">
+                <span v-if="selectedSensorIds.length === 0">Keine Station ausgewählt - </span>
+                <span v-else-if="selectedSensorIds.length === 1">1 Station ausgewählt - </span>
+                <span v-else>[[ selectedSensorIds.length ]] Stationen ausgewählt - </span>
+                <span class="text-[#00AEEF]">[[ sensors.length ]] verfügbar</span>
+            </p>
+        </div>
+    </div>
+
+    <!-- History Table -->
     <div class="glass-card rounded-[2rem] overflow-hidden border-white/5">
         <!-- Scaling Fix: Wrapper for horizontal scrolling -->
         <div class="overflow-x-auto">

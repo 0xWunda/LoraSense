@@ -153,10 +153,10 @@
                     <p class="text-gray-400 mt-1">[[ viewSubtitle ]]</p>
                 </div>
                 <div class="flex items-center gap-4">
-                    <a v-if="currentView === 'history'" href="/api/export"
+                    <button v-if="currentView === 'history'" @click="exportSelectedSensors"
                         class="glass px-6 py-2 rounded-xl text-sm font-bold flex items-center gap-2 hover:bg-indigo-600 transition-all active:scale-95 shadow-lg shadow-indigo-600/10">
                         <i data-lucide="download" class="w-4 h-4"></i> Export CSV
-                    </a>
+                    </button>
                     <div class="glass px-4 py-2 rounded-xl flex items-center gap-3">
                         <div
                             class="w-8 h-8 rounded-full bg-gradient-to-br from-[#005696] to-[#00AEEF] flex items-center justify-center text-xs font-bold">
@@ -205,6 +205,7 @@
         const isConnected = ref(true);
         const loginForm = ref({ username: '', password: '' });
         const loginError = ref('');
+        const selectedSensorIds = ref([]); // For CSV export station selection
 
         // Admin State
         const userList = ref([]);
@@ -472,6 +473,23 @@
             return new Date(iso).toLocaleString();
         };
 
+        const exportSelectedSensors = () => {
+            let url = '/api/export';
+            if (selectedSensorIds.value.length > 0) {
+                const params = selectedSensorIds.value.map(id => `sensor_ids=${encodeURIComponent(id)}`).join('&');
+                url = `${url}?${params}`;
+            }
+            window.location.href = url;
+        };
+
+        const selectAllSensors = () => {
+            selectedSensorIds.value = sensors.value.map(s => s.id);
+        };
+
+        const clearSensorSelection = () => {
+            selectedSensorIds.value = [];
+        };
+
         const avgTemp = computed(() => {
             const valid = sensors.value.filter(s => s.latest_values.Temperature !== undefined);
             if (valid.length === 0) return 0;
@@ -494,6 +512,8 @@
             isLoggedIn, username, isAdmin, currentView, sensors, selectedSensor, sensorData,
             isConnected, loginForm, loginError, login, logout, selectSensor,
             viewTitle, viewSubtitle, avgTemp, allData, formatDateTime,
+            // Export functionality
+            selectedSensorIds, exportSelectedSensors, selectAllSensors, clearSensorSelection,
             // Admin exports
             userList, showAdminModal, selectedUser, tempPermissions, allAvailableSensors,
             fetchUsers, openPermissionsModal, closeAdminModal, toggleSensorPermission, savePermissions,
