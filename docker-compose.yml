@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   db:
     image: mariadb:10.6
@@ -43,7 +41,7 @@ services:
     volumes:
       - ./services/dashboard/src:/app
       - ./services/dashboard/website:/app/website
-      # - ./common/database.py:/app/database.py
+      - ./common/database.py:/app/database.py
     environment:
       - MYSQL_HOST=db
       - MYSQL_USER=lora_user
