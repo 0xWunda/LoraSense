@@ -1,7 +1,8 @@
 import mysql.connector
 import os
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
+import random
 from werkzeug.security import generate_password_hash
 
 def get_db_connection():
@@ -82,6 +83,47 @@ def init_db():
             )
         """)
 
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS sensor_types (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                name VARCHAR(100) UNIQUE NOT NULL,
+                decoder_config TEXT,
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
+
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS devices (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                dev_eui VARCHAR(50) UNIQUE NOT NULL,
+                name VARCHAR(100),
+                sensor_type_id INT,
+                tenant_id INT DEFAULT 1,
+                activation_mode VARCHAR(20) DEFAULT 'OTAA',
+                join_eui VARCHAR(50),
+                app_key VARCHAR(50),
+                nwk_key VARCHAR(50),
+                status VARCHAR(20) DEFAULT 'active',
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (sensor_type_id) REFERENCES sensor_types(id) ON DELETE SET NULL
+            )
+        """)
+
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS uplinks (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                device_id INT,
+                dev_eui VARCHAR(50),
+                fcnt INT,
+                port INT,
+                payload_raw TEXT,
+                rssi INT,
+                snr FLOAT,
+                received_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (device_id) REFERENCES devices(id) ON DELETE SET NULL
+            )
+        """)
+
         # Migration: Ensure is_admin column exists (for legacy databases)
         try:
             cursor.execute("SHOW COLUMNS FROM users LIKE 'is_admin'")
@@ -144,6 +186,14 @@ def init_db():
              print("🔹 Assigning default sensors to test user")
              cursor.execute("INSERT INTO user_sensors (user_id, sensor_id) VALUES (%s, 'LoraSense-Alpha-01')", (test_user_id,))
         
+        # Seed basic sensor types
+        cursor.execute("SELECT id FROM sensor_types LIMIT 1")
+        if not cursor.fetchone():
+            print("🔹 Seeding sensor types")
+            cursor.execute("INSERT INTO sensor_types (name, decoder_config) VALUES ('Barani MeteoHelix', 'v1')")
+            cursor.execute("INSERT INTO sensor_types (name, decoder_config) VALUES ('Dragino LHT65', 'v1')")
+            cursor.execute("INSERT INTO sensor_types (name, decoder_config) VALUES ('Custom Payload', 'custom')")
+        
         # Migration: Ensure device_id column exists if table was already there
         try:
             cursor.execute("SHOW COLUMNS FROM sensor_data LIKE 'device_id'")
@@ -153,8 +203,23 @@ def init_db():
                 cursor.execute("ALTER TABLE sensor_data ADD COLUMN device_id VARCHAR(100)")
         except mysql.connector.Error as err:
             print(f"Migration error: {err}")
+
+        # Migration: Add Key columns if missing
+        try:
+             cursor.execute("SHOW COLUMNS FROM devices LIKE 'app_key'")
+             if not cursor.fetchone():
+                 print("🔹 Migrating: Adding LoRaWAN key columns to devices")
+                 cursor.execute("ALTER TABLE devices ADD COLUMN join_eui VARCHAR(50)")
+                 cursor.execute("ALTER TABLE devices ADD COLUMN app_key VARCHAR(50)")
+                 cursor.execute("ALTER TABLE devices ADD COLUMN nwk_key VARCHAR(50)")
+        except mysql.connector.Error as err:
+             print(f"Migration error (keys): {err}")
             
         conn.commit()
+        
+        # Seed Mock Data (Safe to call as it manages its own connection)
+        seed_mock_data()
+        
     except mysql.connector.Error as err:
         print(f"Error initializing DB: {err}")
     finally:
@@ -162,6 +227,87 @@ def init_db():
             cursor.close()
         if conn:
             conn.close()
+
+def seed_mock_data():
+    conn = get_db_connection()
+    if not conn: return
+    cursor = None
+    try:
+        cursor = conn.cursor()
+        
+        # 1. Ensure Mock Devices Exist
+        mock_sensors = [
+            {"id": "LoraSense-Alpha-01", "name": "Alpha Station (Mock)", "temp": 22, "hum": 45},
+            {"id": "LoraSense-Beta-02", "name": "Beta Station (Mock)", "temp": 18, "hum": 60},
+            {"id": "LoraSense-Gamma-03", "name": "Gamma Station (Mock)", "temp": 25, "hum": 35},
+            {"id": "LoraSense-Delta-04", "name": "Delta Station (Mock)", "temp": 15, "hum": 70}
+        ]
+        
+        # Get Sensor Type ID for "Barani" (or use 1)
+        cursor.execute("SELECT id FROM sensor_types LIMIT 1")
+        res = cursor.fetchone()
+        type_id = res[0] if res else 1
+
+        for s in mock_sensors:
+            # Check if exists (using dev_eui as ID)
+            cursor.execute("SELECT id FROM devices WHERE dev_eui = %s", (s['id'],))
+            if not cursor.fetchone():
+                print(f"🔹 Creating mock device {s['id']}")
+                cursor.execute("""
+                    INSERT INTO devices (dev_eui, name, sensor_type_id, status) 
+                    VALUES (%s, %s, %s, 'active')
+                """, (s['id'], s['name'], type_id))
+        
+        conn.commit()
+
+        # 2. Seed History if empty for these sensors
+        # Check if we have recent data
+        cursor.execute("SELECT count(*) FROM sensor_data WHERE device_id = 'LoraSense-Alpha-01'")
+        count = cursor.fetchone()[0]
+        
+        if count < 10:
+            print("🔹 Seeding historical mock data...")
+            now = datetime.now()
+            
+            for s in mock_sensors:
+                for i in range(50): # 24h worth of data roughly
+                    ts = now - timedelta(minutes=i*30)
+                    
+                    # Generate values
+                    temp = round(s["temp"] + random.uniform(-3, 3), 1)
+                    hum = round(s["hum"] + random.uniform(-5, 5), 1)
+                    press = round(1013 + random.uniform(-10, 10), 1)
+                    batt = round(3.6 + random.uniform(-0.4, 0.4), 2)
+                    rain = round(max(0, random.uniform(-2, 5)), 1)
+                    irr = round(random.uniform(0, 1000), 0)
+                    
+                    decoded = {
+                        "Temperature": temp,
+                        "Humidity": hum,
+                        "Pressure": press,
+                        "Battery": batt,
+                        "Rain": rain,
+                        "Irradiation": irr,
+                        "Type": 0, "T_min": temp-1, "T_max": temp+1, "Irr_max": irr, "Rain_min_time": 0
+                    }
+                    
+                    sql = """
+                        INSERT INTO sensor_data 
+                        (timestamp, raw_payload, type, battery, temperature, t_min, t_max, humidity, pressure, irradiation, irr_max, rain, rain_min_time, device_id)
+                        VALUES (%s, 'MOCK', %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    """
+                    values = (
+                        ts, 0, batt, temp, temp-1, temp+1, hum, press, irr, irr, rain, 0, s['id']
+                    )
+                    cursor.execute(sql, values)
+            conn.commit()
+            print("✅ Mock data seeded.")
+            
+    except mysql.connector.Error as err:
+        print(f"Error seeding mock data: {err}")
+    finally:
+        if cursor: cursor.close()
+        if conn: conn.close()
 
 def save_sensor_data(raw_payload, decoded, device_id="Unknown"):
     conn = get_db_connection()
@@ -367,3 +513,124 @@ def create_user(username, password, is_admin=False):
         if cursor: cursor.close()
         if conn: conn.close()
 
+
+# --- Device Management Functions ---
+
+# --- Device Management Functions ---
+
+def create_device(dev_eui, name, sensor_type_id, tenant_id=1, join_eui=None, app_key=None, nwk_key=None):
+    conn = get_db_connection()
+    if not conn: return False
+    cursor = None
+    try:
+        cursor = conn.cursor()
+        sql = """INSERT INTO devices 
+                 (dev_eui, name, sensor_type_id, tenant_id, join_eui, app_key, nwk_key) 
+                 VALUES (%s, %s, %s, %s, %s, %s, %s)"""
+        cursor.execute(sql, (dev_eui, name, sensor_type_id, tenant_id, join_eui, app_key, nwk_key))
+        conn.commit()
+        return True
+    except mysql.connector.Error as err:
+        print(f"Error creating device: {err}")
+        return False
+    finally:
+        if cursor: cursor.close()
+        if conn: conn.close()
+
+def get_devices(tenant_id=None):
+    conn = get_db_connection()
+    if not conn: return []
+    cursor = None
+    try:
+        cursor = conn.cursor(dictionary=True)
+        # Always fetch sensor type name with device
+        sql = """
+            SELECT d.*, st.name as sensor_type_name 
+            FROM devices d 
+            LEFT JOIN sensor_types st ON d.sensor_type_id = st.id
+        """
+        params = []
+        if tenant_id:
+            sql += " WHERE d.tenant_id = %s"
+            params.append(tenant_id)
+            
+        cursor.execute(sql, params)
+        return cursor.fetchall()
+    except mysql.connector.Error as err:
+        print(f"Error getting devices: {err}")
+        return []
+    finally:
+        if cursor: cursor.close()
+        if conn: conn.close()
+
+def get_device_by_eui(dev_eui):
+    conn = get_db_connection()
+    if not conn: return None
+    cursor = None
+    try:
+        cursor = conn.cursor(dictionary=True)
+        sql = "SELECT * FROM devices WHERE dev_eui = %s"
+        cursor.execute(sql, (dev_eui,))
+        return cursor.fetchone()
+    except mysql.connector.Error as err:
+        print(f"Error getting device by EUI: {err}")
+        return None
+    finally:
+        if cursor: cursor.close()
+        if conn: conn.close()
+
+def update_device_status(dev_eui, status):
+    conn = get_db_connection()
+    if not conn: return False
+    cursor = None
+    try:
+        cursor = conn.cursor()
+        sql = "UPDATE devices SET status = %s WHERE dev_eui = %s"
+        cursor.execute(sql, (status, dev_eui))
+        conn.commit()
+        return True
+    except mysql.connector.Error as err:
+        print(f"Error updating device status: {err}")
+        return False
+    finally:
+        if cursor: cursor.close()
+        if conn: conn.close()
+
+# --- Sensor Types Functions ---
+
+def get_sensor_types():
+    conn = get_db_connection()
+    if not conn: return []
+    cursor = None
+    try:
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM sensor_types")
+        return cursor.fetchall()
+    except mysql.connector.Error as err:
+        print(f"Error getting sensor types: {err}")
+        return []
+    finally:
+        if cursor: cursor.close()
+        if conn: conn.close()
+
+# --- Uplink Functions ---
+
+def save_uplink(dev_eui, payload_raw, fcnt=0, port=1, rssi=0, snr=0, device_db_id=None):
+    conn = get_db_connection()
+    if not conn: return False
+    cursor = None
+    try:
+        cursor = conn.cursor()
+        sql = """
+            INSERT INTO uplinks (device_id, dev_eui, fcnt, port, payload_raw, rssi, snr)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)
+        """
+        cursor.execute(sql, (device_db_id, dev_eui, fcnt, port, payload_raw, rssi, snr))
+        conn.commit()
+        return True
+    except mysql.connector.Error as err:
+        print(f"Error saving uplink: {err}")
+        return False
+    finally:
+        if cursor: cursor.close()
+        if conn: conn.close()

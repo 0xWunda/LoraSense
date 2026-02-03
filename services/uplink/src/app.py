@@ -89,10 +89,24 @@ def uplink():
         if not payload_b64:
             raise ValueError("Feld 'data' fehlt im JSON oder ist leer.")
 
+        # 1. Lookup Device
+        device = database.get_device_by_eui(device_id)
+        
+        # 2. Decode
+        # TODO: Load decoder based on device['sensor_type_id']
+        # For now, default to internal Decoder
         payload_bytes = base64.b64decode(payload_b64)
         decoded = Decoder(payload_bytes)
 
-        # Save to MySQL
+        # 3. Save Raw Uplink
+        database.save_uplink(
+            dev_eui=device_id,
+            payload_raw=payload_b64,
+            device_db_id=device['id'] if device else None
+        )
+
+        # 4. Save Measurements (only if valid device or lenient mode?)
+        # For now, save even if unknown device (legacy behavior) but link to device_id if known
         success = database.save_sensor_data(payload_b64, decoded, device_id)
         
         if success:
@@ -102,7 +116,8 @@ def uplink():
 
         return jsonify({
             "status": "ok" if success else "error",
-            "decoded": decoded
+            "decoded": decoded,
+            "device_known": bool(device)
         }), 200 if success else 500
 
     except Exception as e:

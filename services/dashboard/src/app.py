@@ -5,7 +5,6 @@ from datetime import datetime
 from flask_cors import CORS
 import os
 import database
-import mock_service
 from werkzeug.security import generate_password_hash, check_password_hash
 
 # Paths inside container
@@ -79,6 +78,49 @@ def status():
         })
     return jsonify({"logged_in": False})
 
+@app.route("/api/devices", methods=["GET"])
+def get_devices_api():
+    if 'user_id' not in session:
+        return jsonify([]), 401
+    
+    # Validation: user access?
+    # For now, let's assume all users can see devices, or tenant logic
+    # In database.py we have tenant_id. Let's assume single tenant for now or user-based.
+    # But wait, get_devices takes tenant_id.
+    # Let's return all devices for admin, and maybe filter for others?
+    
+    rows = database.get_devices(tenant_id=1) # Default tenant
+    return jsonify(rows)
+
+@app.route("/api/devices", methods=["POST"])
+def create_device_api():
+    if 'user_id' not in session:
+        return jsonify({"error": "Unauthorized"}), 401
+        
+    data = request.json
+    dev_eui = data.get("dev_eui")
+    name = data.get("name")
+    sensor_type_id = data.get("sensor_type_id")
+    join_eui = data.get("join_eui")
+    app_key = data.get("app_key")
+    nwk_key = data.get("nwk_key")
+    
+    if not all([dev_eui, name, sensor_type_id]):
+        return jsonify({"success": False, "message": "Missing fields"}), 400
+        
+    success = database.create_device(dev_eui, name, sensor_type_id, join_eui=join_eui, app_key=app_key, nwk_key=nwk_key)
+    if success:
+        return jsonify({"success": True})
+    else:
+        return jsonify({"success": False, "message": "Failed to create device"}), 500
+
+@app.route("/api/sensor-types", methods=["GET"])
+def get_sensor_types_api():
+    if 'user_id' not in session:
+        return jsonify([]), 401
+    types = database.get_sensor_types()
+    return jsonify(types)
+
 @app.route("/api/sensors")
 def get_sensors():
     if 'user_id' not in session:
@@ -86,36 +128,32 @@ def get_sensors():
         
     allowed_ids = database.get_allowed_sensors(session['user_id'])
     
-    # Strict mode: Only show assigned sensors.
-    # Admin gets everything via database.get_allowed_sensors logic (if implemented there),
-    # or we explicitly check here.
-    # But database.py says: if admin, returns distinct from user_sensors... which might be empty if no one has sensors!
-    # Let's fix logic: If admin, show ALL mock sensors + all assigned.
+    # NEW: Also fetch real devices from DB (which now includes seeded mock devices)
+    # If admin, we mostly rely on allowed_ids which should include everything if we implemented get_allowed_sensors for admin correctly
+    # database.get_allowed_sensors(admin) returns ALL devices in sensor_data.
     
-    is_admin = session.get('is_admin', False)
-    mock_sensor_ids = ["LoraSense-Alpha-01", "LoraSense-Beta-02", "LoraSense-Gamma-03", "LoraSense-Delta-04"]
-
-    if is_admin:
-        for m_id in mock_sensor_ids:
-            if m_id not in allowed_ids:
-                allowed_ids.append(m_id)
+    # Also fetch from DEVICES table to ensure even those without data are shown
+    all_devices = database.get_devices(tenant_id=1)
     
-    mock_data = mock_service.generate_mock_data()
-    sensor_list = []
+    # Merge list
+    final_list = []
+    
+    # 1. Map existing allowed_ids
     for s_id in allowed_ids:
+        device_info = next((d for d in all_devices if d['dev_eui'] == s_id), None)
+        name = device_info['name'] if device_info else s_id
+        
         latest_data = database.get_latest_data(limit=1, sensor_id=s_id)
         latest = latest_data[0] if latest_data else None
         
-        # Fallback auf mock
-        if not latest and "LoraSense" in s_id:
-            latest = next((item for item in mock_data if item["sensor_id"] == s_id), None)
-
-        sensor_list.append({
+        final_list.append({
             "id": s_id,
+            "name": name,
             "last_seen": latest["timestamp"] if latest else "N/A",
             "latest_values": latest["decoded"] if latest else {}
         })
-    return jsonify(sensor_list)
+        
+    return jsonify(final_list)
 
 @app.route("/api/data/<sensor_id>")
 def api_sensor_data(sensor_id):
@@ -137,11 +175,6 @@ def api_sensor_data(sensor_id):
         return jsonify([]), 403
 
     history = database.get_latest_data(limit=100, sensor_id=sensor_id)
-    
-    if not history and "LoraSense" in sensor_id:
-        mock = mock_service.generate_mock_data()
-        history = [item for item in mock if item["sensor_id"] == sensor_id]
-        
     return jsonify(history)
 
 @app.route("/api/admin/users", methods=["GET"])
@@ -262,31 +295,19 @@ def export_data():
     selected_sensor_ids = request.args.getlist('sensor_ids')
     
     history = database.get_latest_data(limit=1000)
-    mock_history = mock_service.generate_mock_data()
     
-    # Combine real and mock history
-    combined = history + mock_history
-    
-    # Filter only allowed/mock sensors
+    # Filter only allowed sensors
     filtered = []
-    for item in combined:
+    for item in history:
         sid = item['sensor_id']
         # Check if sensor is allowed
-        has_access = False
         if sid in allowed_ids:
-            has_access = True
-        elif is_admin and sid in mock_sensor_ids:
-            has_access = True
-            
-        # If user has access, check if sensor is in selection (if selection exists)
-        if has_access:
-            if selected_sensor_ids:
-                # Only include if in selected list
-                if sid in selected_sensor_ids:
-                    filtered.append(item)
-            else:
-                # No selection means all allowed sensors
-                filtered.append(item)
+             # If selection exists, check against it
+             if selected_sensor_ids:
+                 if sid in selected_sensor_ids:
+                     filtered.append(item)
+             else:
+                 filtered.append(item)
 
     # Generate filename based on selection
     if selected_sensor_ids:

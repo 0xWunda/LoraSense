@@ -25,6 +25,19 @@ const app = createApp({
         const tempPermissions = ref([]);
         const allAvailableSensors = ref([]);
 
+        // Add Device State
+        const showAddDeviceModal = ref(false);
+        const showAdvanced = ref(false);
+        const sensorTypes = ref([]);
+        const newDevice = reactive({
+            name: '',
+            dev_eui: '',
+            sensor_type_id: '',
+            join_eui: '',
+            app_key: '',
+            nwk_key: ''
+        });
+
         let charts = {};
         let updateTimer = null;
 
@@ -247,6 +260,54 @@ const app = createApp({
             closeAdminModal();
         };
 
+        const fetchSensorTypes = async () => {
+            try {
+                const res = await fetch('/api/sensor-types');
+                if (res.ok) {
+                    sensorTypes.value = await res.json();
+                }
+            } catch (e) {
+                console.error("Error fetching sensor types", e);
+            }
+        };
+
+        const openAddDeviceModal = async () => {
+            await fetchSensorTypes();
+            newDevice.name = '';
+            newDevice.dev_eui = '';
+            newDevice.sensor_type_id = '';
+            newDevice.join_eui = '';
+            newDevice.app_key = '';
+            newDevice.nwk_key = '';
+            showAdvanced.value = false;
+            if (sensorTypes.value.length > 0) newDevice.sensor_type_id = sensorTypes.value[0].id; // default
+            showAddDeviceModal.value = true;
+            nextTick(() => lucide.createIcons());
+        };
+
+        const createDevice = async () => {
+            if (!newDevice.name || !newDevice.dev_eui || !newDevice.sensor_type_id) return;
+            try {
+                const res = await fetch('/api/devices', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(newDevice)
+                });
+
+                if (res.ok) {
+                    alert("Sensor erfolgreich hinzugefügt!");
+                    showAddDeviceModal.value = false;
+                    fetchSensors(); // Refresh list
+                } else {
+                    const data = await res.json();
+                    alert("Fehler: " + (data.message || "Konnte Sensor nicht erstellen"));
+                }
+            } catch (e) {
+                console.error(e);
+                alert("Netzwerkfehler");
+            }
+        };
+
         const selectSensor = async (id) => {
             selectedSensor.value = id;
             currentView.value = 'detail';
@@ -358,7 +419,9 @@ const app = createApp({
             userList, showAdminModal, selectedUser, tempPermissions, allAvailableSensors,
             fetchUsers, openPermissionsModal, closeAdminModal, toggleSensorPermission, savePermissions, deleteUser,
             // Create User exports
-            showCreateUserModal, createUserForm, openCreateUserModal, closeCreateUserModal, createUser
+            showCreateUserModal, createUserForm, openCreateUserModal, closeCreateUserModal, createUser,
+            // Add Device exports
+            showAddDeviceModal, sensorTypes, newDevice, openAddDeviceModal, createDevice, showAdvanced
         };
     }
 });
