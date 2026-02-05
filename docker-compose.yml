@@ -3,16 +3,16 @@ services:
     image: mariadb:10.6
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root_pass
-      MYSQL_DATABASE: lorasense_db
-      MYSQL_USER: lora_user
-      MYSQL_PASSWORD: lora_pass
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
       - db_data:/var/lib/mysql
     ports:
       - "3306:3306"
     healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "lora_user", "-plora_pass" ]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "${MYSQL_USER}", "-p${MYSQL_PASSWORD}" ]
       timeout: 20s
       retries: 10
 
@@ -25,9 +25,10 @@ services:
         condition: service_started
     environment:
       - MYSQL_HOST=db
-      - MYSQL_USER=lora_user
-      - MYSQL_PASSWORD=lora_pass
-      - MYSQL_DATABASE=lorasense_db
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - PYTHONUNBUFFERED=1
     ports:
       - "5000:5000"
 
@@ -44,9 +45,10 @@ services:
       - ./common/database.py:/app/database.py
     environment:
       - MYSQL_HOST=db
-      - MYSQL_USER=lora_user
-      - MYSQL_PASSWORD=lora_pass
-      - MYSQL_DATABASE=lorasense_db
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - FLASK_SECRET=${FLASK_SECRET}
     ports:
       - "8080:8080"
 
@@ -58,8 +60,8 @@ services:
         condition: service_healthy
     environment:
       - PMA_HOST=db
-      - PMA_USER=lora_user
-      - PMA_PASSWORD=lora_pass
+      - PMA_USER=${MYSQL_USER}
+      - PMA_PASSWORD=${MYSQL_PASSWORD}
     ports:
       - "8081:80"
 

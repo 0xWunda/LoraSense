@@ -112,8 +112,6 @@ const app = createApp({
 
                     // Collect unique sensor IDs for admin selection (from history + current)
                     const ids = new Set(sensors.value.map(s => s.id));
-                    // Also add mock sensors if not present (hack for demo)
-                    ["LoraSense-Alpha-01", "LoraSense-Beta-02", "LoraSense-Gamma-03", "LoraSense-Delta-04"].forEach(id => ids.add(id));
                     allAvailableSensors.value = Array.from(ids).sort();
                 }
             } catch (e) {
@@ -391,6 +389,28 @@ const app = createApp({
             selectedSensorIds.value = [];
         };
 
+        const deleteSensor = async (sensorId) => {
+            if (!confirm(`Möchten Sie den Sensor "${sensorId}" wirklich unwiderruflich löschen? Alle Daten gehen verloren.`)) return;
+
+            try {
+                const res = await fetch(`/api/sensors/${sensorId}`, {
+                    method: 'DELETE'
+                });
+
+                if (!res.ok) {
+                    const data = await res.json();
+                    alert('Fehler: ' + (data.message || 'Konnte Sensor nicht löschen'));
+                    return;
+                }
+
+                alert('Sensor gelöscht');
+                fetchSensors(); // Refresh dashboard
+            } catch (e) {
+                console.error(e);
+                alert('Netzwerkfehler beim Löschen');
+            }
+        };
+
         const avgTemp = computed(() => {
             const valid = sensors.value.filter(s => s.latest_values.Temperature !== undefined);
             if (valid.length === 0) return 0;
@@ -411,7 +431,7 @@ const app = createApp({
 
         return {
             isLoggedIn, username, isAdmin, currentView, sensors, selectedSensor, sensorData,
-            isConnected, loginForm, loginError, login, logout, selectSensor,
+            isConnected, loginForm, loginError, login, logout, selectSensor, deleteSensor,
             viewTitle, viewSubtitle, avgTemp, allData, formatDateTime,
             // Export functionality
             selectedSensorIds, exportSelectedSensors, selectAllSensors, clearSensorSelection,

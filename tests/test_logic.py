@@ -7,7 +7,7 @@ from unittest.mock import MagicMock, patch
 sys.path.append(os.path.join(os.getcwd(), "services", "uplink", "src"))
 sys.path.append(os.path.join(os.getcwd(), "common"))
 
-import app as uplink_app
+import uplink_app
 import database
 
 class TestLoRaSenseLogic(unittest.TestCase):

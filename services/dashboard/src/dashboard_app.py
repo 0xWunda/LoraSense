@@ -1,4 +1,5 @@
 from flask import Flask, render_template, jsonify, Response, request, session, redirect, url_for
+import json
 import io
 import csv
 from datetime import datetime
@@ -11,24 +12,37 @@ from werkzeug.security import generate_password_hash, check_password_hash
 WEBSITE_DIR = os.path.join(os.getcwd(), "website")
 
 app = Flask(__name__, template_folder=WEBSITE_DIR, static_folder=WEBSITE_DIR)
-app.secret_key = os.getenv("FLASK_SECRET", "super-secret-dev-key")
+app.secret_key = os.getenv("FLASK_SECRET")
+if not app.secret_key:
+    # Generate a random key for this session (invalidates sessions on restart, but secure)
+    import secrets
+    app.secret_key = secrets.token_hex(32)
+    print("WARNING: FLASK_SECRET not set. Using generated random key.")
 CORS(app)
 
 @app.route("/")
 def home():
+    """Renders the main dashboard page. Shows login modal if not authenticated."""
     if 'user_id' not in session:
         return render_template("index.html", show_login=True)
     return render_template("index.html", show_login=False)
 
 # Initialize DB immediately to ensure tables exist
-try:
-    with app.app_context():
-        database.init_db()
-except Exception as e:
-    print(f"Warning: DB Init failed: {e}")
+def init_app_db():
+    try:
+        with app.app_context():
+            database.init_db()
+    except Exception as e:
+        print(f"Warning: DB Init failed: {e}")
+
+init_app_db()
 
 @app.route("/api/login", methods=["POST"])
 def login():
+    """
+    Authenticates a user.
+    Expects JSON: {'username': '...', 'password': '...'}
+    """
     data = request.json
     username = data.get("username")
     password = data.get("password")
@@ -36,18 +50,8 @@ def login():
     print(f"DEBUG: Login attempt for {username}")
     user = database.get_user_by_username(username)
 
-    # Emergency Fallback (Restored to fix login issues if DB is out of sync)
-    if username == "admin" and password == "admin123":
-        session['user_id'] = 1
-        session['username'] = "admin"
-        session['is_admin'] = True
-        return jsonify({"success": True})
-        
-    if username == "testuser" and password == "test123":
-        session['user_id'] = 2
-        session['username'] = "testuser"
-        session['is_admin'] = False
-        return jsonify({"success": True})
+    # Emergency Fallback REMOVED
+
     
     if not user:
         print(f"DEBUG: User {username} not found")
@@ -114,6 +118,17 @@ def create_device_api():
     else:
         return jsonify({"success": False, "message": "Failed to create device"}), 500
 
+@app.route("/api/sensors/<dev_eui>", methods=["DELETE"])
+def delete_sensor(dev_eui):
+    if 'user_id' not in session or not session.get('is_admin'):
+        return jsonify({"error": "Unauthorized"}), 401
+        
+    success = database.delete_device(dev_eui)
+    if success:
+        return jsonify({"success": True})
+    else:
+        return jsonify({"success": False, "message": "Failed to delete device"}), 500
+
 @app.route("/api/sensor-types", methods=["GET"])
 def get_sensor_types_api():
     if 'user_id' not in session:
@@ -123,6 +138,10 @@ def get_sensor_types_api():
 
 @app.route("/api/sensors")
 def get_sensors():
+    """
+    Returns a list of sensors the current user is allowed to see,
+    including their name, last seen timestamp, and latest measured values.
+    """
     if 'user_id' not in session:
         return jsonify([]), 401
         
@@ -139,12 +158,17 @@ def get_sensors():
     final_list = []
     
     # 1. Map existing allowed_ids
+    import sys
+    print(f"DEBUG: allowed_ids: {allowed_ids}", file=sys.stderr, flush=True)
     for s_id in allowed_ids:
         device_info = next((d for d in all_devices if d['dev_eui'] == s_id), None)
         name = device_info['name'] if device_info else s_id
         
         latest_data = database.get_latest_data(limit=1, sensor_id=s_id)
+        print(f"DEBUG: s_id='{s_id}', latest_data_len={len(latest_data)}", file=sys.stderr, flush=True)
         latest = latest_data[0] if latest_data else None
+        if latest:
+            print(f"DEBUG: latest: {json.dumps(latest)}", file=sys.stderr, flush=True)
         
         final_list.append({
             "id": s_id,
@@ -152,7 +176,10 @@ def get_sensors():
             "last_seen": latest["timestamp"] if latest else "N/A",
             "latest_values": latest["decoded"] if latest else {}
         })
-        
+
+    print(f"DEBUG: returning sensors list of length {len(final_list)}", file=sys.stderr, flush=True)
+    if len(final_list) > 0:
+        print(f"DEBUG: first sensor data: {json.dumps(final_list[0])}", file=sys.stderr, flush=True)
     return jsonify(final_list)
 
 @app.route("/api/data/<sensor_id>")
@@ -162,13 +189,14 @@ def api_sensor_data(sensor_id):
     
     allowed_ids = database.get_allowed_sensors(session['user_id'])
     is_admin = session.get('is_admin', False)
-    mock_sensor_ids = ["LoraSense-Alpha-01", "LoraSense-Beta-02", "LoraSense-Gamma-03", "LoraSense-Delta-04"]
 
     # Check access
     has_access = False
     if sensor_id in allowed_ids:
         has_access = True
-    elif is_admin and sensor_id in mock_sensor_ids:
+    elif is_admin:
+        # Admin can access all sensors by default if they exist in DB
+        # Note: database.get_allowed_sensors(admin) already returns all sensors with data
         has_access = True
         
     if not has_access:
@@ -288,10 +316,6 @@ def export_data():
         return "Unauthorized", 401
         
     allowed_ids = database.get_allowed_sensors(session['user_id'])
-    mock_sensor_ids = ["LoraSense-Alpha-01", "LoraSense-Beta-02", "LoraSense-Gamma-03", "LoraSense-Delta-04"]
-    is_admin = session.get('is_admin', False)
-
-    # Get selected sensor IDs from query parameters
     selected_sensor_ids = request.args.getlist('sensor_ids')
     
     history = database.get_latest_data(limit=1000)
@@ -346,5 +370,4 @@ def export_data():
     return Response(generate(), mimetype="text/csv", headers={"Content-disposition": f"attachment; filename={filename}"})
 
 if __name__ == "__main__":
-    database.init_db()
     app.run(host="0.0.0.0", port=8080, debug=True)

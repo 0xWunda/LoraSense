@@ -5,7 +5,21 @@ from datetime import datetime, timedelta
 import random
 from werkzeug.security import generate_password_hash
 
+# Load .env manually if exists (for local dev compatibility)
+env_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env')
+if os.path.exists(env_path):
+    with open(env_path, 'r') as f:
+        for line in f:
+            if '=' in line:
+                key, value = line.strip().split('=', 1)
+                if key and not os.getenv(key):
+                     os.environ[key] = value
+
 def get_db_connection():
+    """
+    Establishes and returns a connection to the MariaDB database.
+    Retries up to 10 times with a 3-second delay if the connection fails.
+    """
     max_retries = 10
     retry_delay = 3
     
@@ -33,6 +47,10 @@ def get_db_connection():
     return None
 
 def init_db():
+    """
+    Initializes the database schema by creating necessary tables if they don't exist.
+    Also handles migrations for legacy versions (e.g., adding columns) and seeds default users.
+    """
     conn = get_db_connection()
     if not conn:
         print("❌ Skip DB Init: No connection")
@@ -133,12 +151,13 @@ def init_db():
         except mysql.connector.Error as err:
             print(f"Migration error (is_admin): {err}")
             
-        # Create default admin user if not exists
+            # Create default admin user if not exists
         cursor.execute("SELECT id FROM users WHERE username = 'admin'")
         if not cursor.fetchone():
             print("🔹 Creating default admin user")
-            # Using a mock hash for now, app.py will handle verified hashing
-            cursor.execute("INSERT INTO users (username, password_hash, is_admin) VALUES ('admin', 'pbkdf2:sha256:260000$mockhash', TRUE)")
+            # Generate real hash
+            pw_hash = generate_password_hash("admin123") 
+            cursor.execute("INSERT INTO users (username, password_hash, is_admin) VALUES ('admin', %s, TRUE)", (pw_hash,))
         else:
              # Ensure existing admin has admin rights (fix for legacy data)
              print("🔹 Updating admin user permissions")
@@ -149,7 +168,8 @@ def init_db():
         test_user = cursor.fetchone()
         if not test_user:
             print("🔹 Creating test user")
-            cursor.execute("INSERT INTO users (username, password_hash, is_admin) VALUES ('testuser', 'pbkdf2:sha256:260000$mockhash', FALSE)")
+            pw_hash = generate_password_hash("test123")
+            cursor.execute("INSERT INTO users (username, password_hash, is_admin) VALUES ('testuser', %s, FALSE)", (pw_hash,))
             cursor.execute("SELECT id FROM users WHERE username = 'testuser'")
             test_user_id = cursor.fetchone()[0]
         else:
@@ -161,30 +181,14 @@ def init_db():
             cursor.execute("SELECT id FROM users WHERE username = %s", (u_name,))
             if not cursor.fetchone():
                  print(f"🔹 Creating {u_name}")
-                 # password: test{i}123 -> mock hash, we rely on app.py or we should ideally hash it properly.
-                 # But since app.py checks hash, we need a hash that verify_password accepts if we use standard flow.
-                 # However, app.py also has fallback for testuser/admin but NOT for testuser1/2.
-                 # We need to make sure `check_password_hash` works.
-                 # werkzeug `generate_password_hash` default is pbkdf2:sha256.
-                 # We can't easily import werkzeug here if it's not in the image for common?
-                 # Wait, dashboard image has werkzeug. Uplink might not.
-                 # This file is shared.
-                 # Safe bet: Insert a known hash or handle it in app.py specific logic?
-                 # Actually, app.py uses `check_password_hash`.
-                 # If I put "pbkdf2:sha256:..." text here, I need to generate it correctly.
-                 # For now, I will use a placeholder and Ensure app.py handles testuser1/2 like testuser/admin in fallback, OR I rely on the fact that I can't easily generate valid hashes here without werkzeug.
-                 # UPDATE: app.py handles logic.
-                 # Let's import werkzeug here? common/ might be used by uplink which is python-slim.
-                 # Dockerfile for uplink?
-                 # Let's check `services/uplink/Dockerfile`? No need.
-                 # I'll just use the same mock hash string structure and HOPE app.py handles it, OR I will add fallback in app.py for testuser1/2 as well.
-                 cursor.execute("INSERT INTO users (username, password_hash, is_admin) VALUES (%s, 'pbkdf2:sha256:260000$mockhash', FALSE)", (u_name,))
+                 pw_hash = generate_password_hash(f"test{i}123")
+                 cursor.execute("INSERT INTO users (username, password_hash, is_admin) VALUES (%s, %s, FALSE)", (u_name, pw_hash))
 
         # Ensure test user has at least one sensor assigned
         cursor.execute("SELECT * FROM user_sensors WHERE user_id = %s", (test_user_id,))
         if not cursor.fetchone():
-             print("🔹 Assigning default sensors to test user")
-             cursor.execute("INSERT INTO user_sensors (user_id, sensor_id) VALUES (%s, 'LoraSense-Alpha-01')", (test_user_id,))
+             # No longer assigning default mock sensors
+             pass
         
         # Seed basic sensor types
         cursor.execute("SELECT id FROM sensor_types LIMIT 1")
@@ -217,8 +221,8 @@ def init_db():
             
         conn.commit()
         
-        # Seed Mock Data (Safe to call as it manages its own connection)
-        seed_mock_data()
+        # Mock Data seeding disabled
+        # # seed_mock_data()
         
     except mysql.connector.Error as err:
         print(f"Error initializing DB: {err}")
@@ -309,7 +313,14 @@ def seed_mock_data():
         if cursor: cursor.close()
         if conn: conn.close()
 
-def save_sensor_data(raw_payload, decoded, device_id="Unknown"):
+def save_sensor_data(raw_payload, decoded, device_id="Unknown", timestamp=None):
+    """
+    Saves decoded sensor measurement data into the sensor_data table.
+    :param raw_payload: The original base64 payload received.
+    :param decoded: Dictionary of decoded values (Battery, Temperature, etc.)
+    :param device_id: The DevEUI or unique ID of the sensor.
+    :param timestamp: Optional specific timestamp (used for historical data import).
+    """
     conn = get_db_connection()
     if not conn:
         return False
@@ -317,26 +328,50 @@ def save_sensor_data(raw_payload, decoded, device_id="Unknown"):
     cursor = None
     try:
         cursor = conn.cursor()
-        sql = """
-            INSERT INTO sensor_data 
-            (raw_payload, type, battery, temperature, t_min, t_max, humidity, pressure, irradiation, irr_max, rain, rain_min_time, device_id)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-        """
-        values = (
-            raw_payload,
-            decoded.get("Type"),
-            decoded.get("Battery"),
-            decoded.get("Temperature"),
-            decoded.get("T_min"),
-            decoded.get("T_max"),
-            decoded.get("Humidity"),
-            decoded.get("Pressure"),
-            decoded.get("Irradiation"),
-            decoded.get("Irr_max"),
-            decoded.get("Rain"),
-            decoded.get("Rain_min_time"),
-            device_id
-        )
+        
+        if timestamp:
+            sql = """
+                INSERT INTO sensor_data 
+                (timestamp, raw_payload, type, battery, temperature, t_min, t_max, humidity, pressure, irradiation, irr_max, rain, rain_min_time, device_id)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            """
+            values = (
+                timestamp,
+                raw_payload,
+                decoded.get("Type"),
+                decoded.get("Battery"),
+                decoded.get("Temperature"),
+                decoded.get("T_min"),
+                decoded.get("T_max"),
+                decoded.get("Humidity"),
+                decoded.get("Pressure"),
+                decoded.get("Irradiation"),
+                decoded.get("Irr_max"),
+                decoded.get("Rain"),
+                decoded.get("Rain_min_time"),
+                device_id
+            )
+        else:
+            sql = """
+                INSERT INTO sensor_data 
+                (raw_payload, type, battery, temperature, t_min, t_max, humidity, pressure, irradiation, irr_max, rain, rain_min_time, device_id)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            """
+            values = (
+                raw_payload,
+                decoded.get("Type"),
+                decoded.get("Battery"),
+                decoded.get("Temperature"),
+                decoded.get("T_min"),
+                decoded.get("T_max"),
+                decoded.get("Humidity"),
+                decoded.get("Pressure"),
+                decoded.get("Irradiation"),
+                decoded.get("Irr_max"),
+                decoded.get("Rain"),
+                decoded.get("Rain_min_time"),
+                device_id
+            )
         cursor.execute(sql, values)
         conn.commit()
         return True
@@ -368,7 +403,7 @@ def get_latest_data(limit=100, sensor_id=None):
         for row in rows:
             history.append({
                 "sensor_id": row["device_id"] or "Unknown",
-                "timestamp": row["timestamp"].isoformat() if isinstance(row["timestamp"], datetime) else str(row["timestamp"]),
+                "timestamp": row["timestamp"].strftime("%Y-%m-%d %H:%M:%S") if isinstance(row["timestamp"], datetime) else str(row["timestamp"]),
                 "decoded": {
                     "Type": row["type"],
                     "Battery": row["battery"],
@@ -479,7 +514,12 @@ def get_allowed_sensors(user_id):
         cursor.execute("SELECT is_admin FROM users WHERE id = %s", (user_id,))
         user = cursor.fetchone()
         if user and user[0]:
-            cursor.execute("SELECT DISTINCT device_id FROM sensor_data")
+            # Return unique IDs from both devices table and sensor_data table
+            cursor.execute("""
+                SELECT dev_eui FROM devices 
+                UNION 
+                SELECT DISTINCT device_id FROM sensor_data
+            """)
             return [row[0] for row in cursor.fetchall() if row[0]]
         
         # Regular user gets mapped sensors
@@ -569,7 +609,12 @@ def get_device_by_eui(dev_eui):
     cursor = None
     try:
         cursor = conn.cursor(dictionary=True)
-        sql = "SELECT * FROM devices WHERE dev_eui = %s"
+        sql = """
+            SELECT d.*, st.decoder_config 
+            FROM devices d 
+            LEFT JOIN sensor_types st ON d.sensor_type_id = st.id 
+            WHERE d.dev_eui = %s
+        """
         cursor.execute(sql, (dev_eui,))
         return cursor.fetchone()
     except mysql.connector.Error as err:
@@ -596,6 +641,35 @@ def update_device_status(dev_eui, status):
         if cursor: cursor.close()
         if conn: conn.close()
 
+def delete_device(dev_eui):
+    conn = get_db_connection()
+    if not conn: return False
+    cursor = None
+    try:
+        cursor = conn.cursor()
+        
+        # 1. Delete from user_sensors mapping
+        cursor.execute("DELETE FROM user_sensors WHERE sensor_id = %s", (dev_eui,))
+        
+        # 2. Delete from sensor_data
+        cursor.execute("DELETE FROM sensor_data WHERE device_id = %s", (dev_eui,))
+        
+        # 3. Delete from uplinks
+        # Note: we need the device DB ID if we want to be precise, or just use dev_eui if we stored it
+        cursor.execute("DELETE FROM uplinks WHERE dev_eui = %s", (dev_eui,))
+        
+        # 4. Finally delete the device itself
+        cursor.execute("DELETE FROM devices WHERE dev_eui = %s", (dev_eui,))
+        
+        conn.commit()
+        return True
+    except mysql.connector.Error as err:
+        print(f"Error deleting device: {err}")
+        return False
+    finally:
+        if cursor: cursor.close()
+        if conn: conn.close()
+
 # --- Sensor Types Functions ---
 
 def get_sensor_types():
@@ -615,17 +689,24 @@ def get_sensor_types():
 
 # --- Uplink Functions ---
 
-def save_uplink(dev_eui, payload_raw, fcnt=0, port=1, rssi=0, snr=0, device_db_id=None):
+def save_uplink(dev_eui, payload_raw, fcnt=0, port=1, rssi=0, snr=0, device_db_id=None, received_at=None):
     conn = get_db_connection()
     if not conn: return False
     cursor = None
     try:
         cursor = conn.cursor()
-        sql = """
-            INSERT INTO uplinks (device_id, dev_eui, fcnt, port, payload_raw, rssi, snr)
-            VALUES (%s, %s, %s, %s, %s, %s, %s)
-        """
-        cursor.execute(sql, (device_db_id, dev_eui, fcnt, port, payload_raw, rssi, snr))
+        if received_at:
+             sql = """
+                INSERT INTO uplinks (device_id, dev_eui, fcnt, port, payload_raw, rssi, snr, received_at)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+            """
+             cursor.execute(sql, (device_db_id, dev_eui, fcnt, port, payload_raw, rssi, snr, received_at))
+        else:
+            sql = """
+                INSERT INTO uplinks (device_id, dev_eui, fcnt, port, payload_raw, rssi, snr)
+                VALUES (%s, %s, %s, %s, %s, %s, %s)
+            """
+            cursor.execute(sql, (device_db_id, dev_eui, fcnt, port, payload_raw, rssi, snr))
         conn.commit()
         return True
     except mysql.connector.Error as err:

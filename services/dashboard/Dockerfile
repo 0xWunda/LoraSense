@@ -11,4 +11,4 @@ COPY services/dashboard/website/ website/
 
 EXPOSE 8080
 
-CMD ["python", "app.py"]
+CMD ["python", "dashboard_app.py"]
