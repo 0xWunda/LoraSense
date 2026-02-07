@@ -1,4 +1,5 @@
 import mysql.connector
+import sqlite3
 import os
 import time
 from datetime import datetime, timedelta
@@ -15,13 +16,47 @@ if os.path.exists(env_path):
                 if key and not os.getenv(key):
                      os.environ[key] = value
 
+SQLITE_DB_PATH = "/data/lorasense_fallback.db"
+
+class DBConnection:
+    """Wrapper to handle differences between MySQL and SQLite connections."""
+    def __init__(self, conn, db_type):
+        self.conn = conn
+        self.db_type = db_type
+
+    def cursor(self, dictionary=False):
+        if self.db_type == 'mysql':
+            return self.conn.cursor(dictionary=dictionary)
+        else:
+            if dictionary:
+                self.conn.row_factory = sqlite3.Row
+            else:
+                self.conn.row_factory = None
+            return self.conn.cursor()
+
+    def commit(self):
+        return self.conn.commit()
+
+    def close(self):
+        return self.conn.close()
+
+    def rollback(self):
+        return self.conn.rollback()
+
+def normalize_query(sql, db_type):
+    """Replaces %s with ? for SQLite queries."""
+    if db_type == 'sqlite':
+        return sql.replace('%s', '?')
+    return sql
+
 def get_db_connection():
     """
     Establishes and returns a connection to the MariaDB database.
     Retries up to 10 times with a 3-second delay if the connection fails.
+    Falls back to SQLite if MariaDB is unavailable.
     """
-    max_retries = 10
-    retry_delay = 3
+    max_retries = 3 # Reduced for faster fallback in production
+    retry_delay = 2
     
     # Credentials from environment variables
     db_host = os.getenv("MYSQL_HOST", "db")
@@ -29,22 +64,34 @@ def get_db_connection():
     db_pass = os.getenv("MYSQL_PASSWORD", "lora_pass")
     db_name = os.getenv("MYSQL_DATABASE", "lorasense_db")
 
-    while max_retries > 0:
+    # Try MariaDB first
+    for attempt in range(max_retries):
         try:
             conn = mysql.connector.connect(
                 host=db_host,
                 user=db_user,
                 password=db_pass,
-                database=db_name
+                database=db_name,
+                connect_timeout=5
             )
-            return conn
+            return DBConnection(conn, 'mysql')
         except mysql.connector.Error as err:
-            print(f"Waiting for database... ({max_retries} retries left). Error: {err}")
-            max_retries -= 1
-            time.sleep(retry_delay)
+            print(f"Waiting for MariaDB... ({max_retries - attempt - 1} retries left). Error: {err}")
+            if attempt < max_retries - 1:
+                time.sleep(retry_delay)
     
-    print("Could not connect to database.")
-    return None
+    # Fallback to SQLite
+    print("WARNING: MariaDB unavailable. Falling back to SQLite.")
+    try:
+        # Ensure data directory exists (if running outside docker)
+        dir_name = os.path.dirname(SQLITE_DB_PATH)
+        if dir_name:
+            os.makedirs(dir_name, exist_ok=True)
+        conn = sqlite3.connect(SQLITE_DB_PATH)
+        return DBConnection(conn, 'sqlite')
+    except Exception as e:
+        print(f"ERROR: Critical Error: Could not connect to SQLite fallback: {e}")
+        return None
 
 def init_db():
     """
@@ -53,19 +100,27 @@ def init_db():
     """
     conn = get_db_connection()
     if not conn:
-        print("❌ Skip DB Init: No connection")
+        print("Skip DB Init: No connection")
         return
     
     cursor = None
     try:
         cursor = conn.cursor()
-        db_name = os.getenv('MYSQL_DATABASE', 'lorasense_db')
-        cursor.execute(f"CREATE DATABASE IF NOT EXISTS {db_name}")
-        cursor.execute(f"USE {db_name}")
+        db_type = conn.db_type
         
-        cursor.execute("""
+        if db_type == 'mysql':
+            db_name = os.getenv('MYSQL_DATABASE', 'lorasense_db')
+            cursor.execute(f"CREATE DATABASE IF NOT EXISTS {db_name}")
+            cursor.execute(f"USE {db_name}")
+        
+        # Table definitions (standard SQL used, works on both mostly)
+        # Replacing AUTO_INCREMENT with AUTOINCREMENT logic if needed, but INT PRIMARY KEY is usually enough in SQLite
+        def exec_q(sql, params=()):
+            cursor.execute(normalize_query(sql, db_type), params)
+
+        exec_q(f"""
             CREATE TABLE IF NOT EXISTS sensor_data (
-                id INT AUTO_INCREMENT PRIMARY KEY,
+                id INTEGER PRIMARY KEY {"AUTO_INCREMENT" if db_type == "mysql" else "AUTOINCREMENT"},
                 timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
                 raw_payload TEXT,
                 type INT,
@@ -83,16 +138,16 @@ def init_db():
             )
         """)
 
-        cursor.execute("""
+        exec_q(f"""
             CREATE TABLE IF NOT EXISTS users (
-                id INT AUTO_INCREMENT PRIMARY KEY,
+                id INTEGER PRIMARY KEY {"AUTO_INCREMENT" if db_type == "mysql" else "AUTOINCREMENT"},
                 username VARCHAR(50) UNIQUE NOT NULL,
                 password_hash VARCHAR(255) NOT NULL,
                 is_admin BOOLEAN DEFAULT FALSE
             )
         """)
 
-        cursor.execute("""
+        exec_q("""
             CREATE TABLE IF NOT EXISTS user_sensors (
                 user_id INT,
                 sensor_id VARCHAR(100),
@@ -101,18 +156,18 @@ def init_db():
             )
         """)
 
-        cursor.execute("""
+        exec_q(f"""
             CREATE TABLE IF NOT EXISTS sensor_types (
-                id INT AUTO_INCREMENT PRIMARY KEY,
+                id INTEGER PRIMARY KEY {"AUTO_INCREMENT" if db_type == "mysql" else "AUTOINCREMENT"},
                 name VARCHAR(100) UNIQUE NOT NULL,
                 decoder_config TEXT,
                 created_at DATETIME DEFAULT CURRENT_TIMESTAMP
             )
         """)
 
-        cursor.execute("""
+        exec_q(f"""
             CREATE TABLE IF NOT EXISTS devices (
-                id INT AUTO_INCREMENT PRIMARY KEY,
+                id INTEGER PRIMARY KEY {"AUTO_INCREMENT" if db_type == "mysql" else "AUTOINCREMENT"},
                 dev_eui VARCHAR(50) UNIQUE NOT NULL,
                 name VARCHAR(100),
                 sensor_type_id INT,
@@ -127,9 +182,9 @@ def init_db():
             )
         """)
 
-        cursor.execute("""
+        exec_q(f"""
             CREATE TABLE IF NOT EXISTS uplinks (
-                id INT AUTO_INCREMENT PRIMARY KEY,
+                id INTEGER PRIMARY KEY {"AUTO_INCREMENT" if db_type == "mysql" else "AUTOINCREMENT"},
                 device_id INT,
                 dev_eui VARCHAR(50),
                 fcnt INT,
@@ -142,89 +197,75 @@ def init_db():
             )
         """)
 
-        # Migration: Ensure is_admin column exists (for legacy databases)
-        try:
-            cursor.execute("SHOW COLUMNS FROM users LIKE 'is_admin'")
-            if not cursor.fetchone():
-                print("🔹 Migrating: Adding 'is_admin' column to users table")
-                cursor.execute("ALTER TABLE users ADD COLUMN is_admin BOOLEAN DEFAULT FALSE")
-        except mysql.connector.Error as err:
-            print(f"Migration error (is_admin): {err}")
-            
-            # Create default admin user if not exists
-        cursor.execute("SELECT id FROM users WHERE username = 'admin'")
-        if not cursor.fetchone():
-            print("🔹 Creating default admin user")
-            # Generate real hash
-            pw_hash = generate_password_hash("admin123") 
-            cursor.execute("INSERT INTO users (username, password_hash, is_admin) VALUES ('admin', %s, TRUE)", (pw_hash,))
+        # Migration logic (simplified for SQLite as it starts blank usually)
+        if db_type == 'mysql':
+            try:
+                cursor.execute("SHOW COLUMNS FROM users LIKE 'is_admin'")
+                if not cursor.fetchone():
+                    print("Migrating: Adding 'is_admin' column to users table")
+                    cursor.execute("ALTER TABLE users ADD COLUMN is_admin BOOLEAN DEFAULT FALSE")
+            except mysql.connector.Error as err:
+                print(f"Migration error (is_admin): {err}")
         else:
-             # Ensure existing admin has admin rights (fix for legacy data)
-             print("🔹 Updating admin user permissions")
-             cursor.execute("UPDATE users SET is_admin = TRUE WHERE username = 'admin'")
+            # SQLite handles PRAGMA table_info(users)
+            cursor.execute("PRAGMA table_info(users)")
+            cols = [c[1] for c in cursor.fetchall()]
+            if 'is_admin' not in cols:
+                cursor.execute("ALTER TABLE users ADD COLUMN is_admin BOOLEAN DEFAULT FALSE")
+
+        # Create default admin user if not exists
+        exec_q("SELECT id FROM users WHERE username = 'admin'")
+        if not cursor.fetchone():
+            print("Creating default admin user")
+            pw_hash = generate_password_hash("admin123") 
+            exec_q("INSERT INTO users (username, password_hash, is_admin) VALUES ('admin', %s, TRUE)", (pw_hash,))
+        else:
+             print("Updating admin user permissions")
+             exec_q("UPDATE users SET is_admin = TRUE WHERE username = 'admin'")
             
-        # Create test user if not exists (password: test123)
-        cursor.execute("SELECT id FROM users WHERE username = 'testuser'")
+        exec_q("SELECT id FROM users WHERE username = 'testuser'")
         test_user = cursor.fetchone()
         if not test_user:
-            print("🔹 Creating test user")
+            print("Creating test user")
             pw_hash = generate_password_hash("test123")
-            cursor.execute("INSERT INTO users (username, password_hash, is_admin) VALUES ('testuser', %s, FALSE)", (pw_hash,))
-            cursor.execute("SELECT id FROM users WHERE username = 'testuser'")
-            test_user_id = cursor.fetchone()[0]
+            exec_q("INSERT INTO users (username, password_hash, is_admin) VALUES ('testuser', %s, FALSE)", (pw_hash,))
+            exec_q("SELECT id FROM users WHERE username = 'testuser'")
+            res = cursor.fetchone()
+            test_user_id = res['id'] if isinstance(res, dict) else res[0]
         else:
-             test_user_id = test_user[0]
+             test_user_id = test_user['id'] if isinstance(test_user, dict) else test_user[0]
 
-        # Create additional test users
         for i in range(1, 3):
             u_name = f"testuser{i}"
-            cursor.execute("SELECT id FROM users WHERE username = %s", (u_name,))
+            exec_q("SELECT id FROM users WHERE username = %s", (u_name,))
             if not cursor.fetchone():
-                 print(f"🔹 Creating {u_name}")
+                 print(f"Creating {u_name}")
                  pw_hash = generate_password_hash(f"test{i}123")
-                 cursor.execute("INSERT INTO users (username, password_hash, is_admin) VALUES (%s, %s, FALSE)", (u_name, pw_hash))
+                 exec_q("INSERT INTO users (username, password_hash, is_admin) VALUES (%s, %s, FALSE)", (u_name, pw_hash))
 
-        # Ensure test user has at least one sensor assigned
-        cursor.execute("SELECT * FROM user_sensors WHERE user_id = %s", (test_user_id,))
+        exec_q("SELECT id FROM sensor_types LIMIT 1")
         if not cursor.fetchone():
-             # No longer assigning default mock sensors
-             pass
+            print("Seeding sensor types")
+            exec_q("INSERT INTO sensor_types (name, decoder_config) VALUES ('Barani MeteoHelix', 'v1')")
+            exec_q("INSERT INTO sensor_types (name, decoder_config) VALUES ('Dragino LHT65', 'v1')")
+            exec_q("INSERT INTO sensor_types (name, decoder_config) VALUES ('Custom Payload', 'custom')")
         
-        # Seed basic sensor types
-        cursor.execute("SELECT id FROM sensor_types LIMIT 1")
-        if not cursor.fetchone():
-            print("🔹 Seeding sensor types")
-            cursor.execute("INSERT INTO sensor_types (name, decoder_config) VALUES ('Barani MeteoHelix', 'v1')")
-            cursor.execute("INSERT INTO sensor_types (name, decoder_config) VALUES ('Dragino LHT65', 'v1')")
-            cursor.execute("INSERT INTO sensor_types (name, decoder_config) VALUES ('Custom Payload', 'custom')")
-        
-        # Migration: Ensure device_id column exists if table was already there
-        try:
-            cursor.execute("SHOW COLUMNS FROM sensor_data LIKE 'device_id'")
-            result = cursor.fetchone()
-            if not result:
-                print("🔹 Migrating: Adding 'device_id' column to sensor_data table")
+        if db_type == 'mysql':
+            try:
+                cursor.execute("SHOW COLUMNS FROM sensor_data LIKE 'device_id'")
+                if not cursor.fetchone():
+                    print("Migrating: Adding 'device_id' column to sensor_data table")
+                    cursor.execute("ALTER TABLE sensor_data ADD COLUMN device_id VARCHAR(100)")
+            except mysql.connector.Error as err:
+                print(f"Migration error: {err}")
+        else:
+            cursor.execute("PRAGMA table_info(sensor_data)")
+            cols = [c[1] for c in cursor.fetchall()]
+            if 'device_id' not in cols:
                 cursor.execute("ALTER TABLE sensor_data ADD COLUMN device_id VARCHAR(100)")
-        except mysql.connector.Error as err:
-            print(f"Migration error: {err}")
 
-        # Migration: Add Key columns if missing
-        try:
-             cursor.execute("SHOW COLUMNS FROM devices LIKE 'app_key'")
-             if not cursor.fetchone():
-                 print("🔹 Migrating: Adding LoRaWAN key columns to devices")
-                 cursor.execute("ALTER TABLE devices ADD COLUMN join_eui VARCHAR(50)")
-                 cursor.execute("ALTER TABLE devices ADD COLUMN app_key VARCHAR(50)")
-                 cursor.execute("ALTER TABLE devices ADD COLUMN nwk_key VARCHAR(50)")
-        except mysql.connector.Error as err:
-             print(f"Migration error (keys): {err}")
-            
         conn.commit()
-        
-        # Mock Data seeding disabled
-        # # seed_mock_data()
-        
-    except mysql.connector.Error as err:
+    except Exception as err:
         print(f"Error initializing DB: {err}")
     finally:
         if cursor:
@@ -316,10 +357,6 @@ def seed_mock_data():
 def save_sensor_data(raw_payload, decoded, device_id="Unknown", timestamp=None):
     """
     Saves decoded sensor measurement data into the sensor_data table.
-    :param raw_payload: The original base64 payload received.
-    :param decoded: Dictionary of decoded values (Battery, Temperature, etc.)
-    :param device_id: The DevEUI or unique ID of the sensor.
-    :param timestamp: Optional specific timestamp (used for historical data import).
     """
     conn = get_db_connection()
     if not conn:
@@ -328,6 +365,7 @@ def save_sensor_data(raw_payload, decoded, device_id="Unknown", timestamp=None):
     cursor = None
     try:
         cursor = conn.cursor()
+        db_type = conn.db_type
         
         if timestamp:
             sql = """
@@ -372,10 +410,10 @@ def save_sensor_data(raw_payload, decoded, device_id="Unknown", timestamp=None):
                 decoded.get("Rain_min_time"),
                 device_id
             )
-        cursor.execute(sql, values)
+        cursor.execute(normalize_query(sql, db_type), values)
         conn.commit()
         return True
-    except mysql.connector.Error as err:
+    except Exception as err:
         print(f"Error saving data: {err}")
         return False
     finally:
@@ -392,18 +430,29 @@ def get_latest_data(limit=100, sensor_id=None):
     cursor = None
     try:
         cursor = conn.cursor(dictionary=True)
+        db_type = conn.db_type
         if sensor_id:
-            cursor.execute("SELECT * FROM sensor_data WHERE device_id = %s ORDER BY timestamp DESC LIMIT %s", (sensor_id, limit))
+            sql = "SELECT * FROM sensor_data WHERE device_id = %s ORDER BY timestamp DESC LIMIT %s"
+            cursor.execute(normalize_query(sql, db_type), (sensor_id, limit))
         else:
-            cursor.execute("SELECT * FROM sensor_data ORDER BY timestamp DESC LIMIT %s", (limit,))
+            sql = "SELECT * FROM sensor_data ORDER BY timestamp DESC LIMIT %s"
+            cursor.execute(normalize_query(sql, db_type), (limit,))
             
         rows = cursor.fetchall()
         
         history = []
         for row in rows:
+            # Handle potential string timestamps from SQLite
+            ts = row["timestamp"]
+            if isinstance(ts, str):
+                try:
+                    ts = datetime.strptime(ts, "%Y-%m-%d %H:%M:%S")
+                except:
+                    pass
+
             history.append({
                 "sensor_id": row["device_id"] or "Unknown",
-                "timestamp": row["timestamp"].strftime("%Y-%m-%d %H:%M:%S") if isinstance(row["timestamp"], datetime) else str(row["timestamp"]),
+                "timestamp": ts.strftime("%Y-%m-%d %H:%M:%S") if isinstance(ts, datetime) else str(ts),
                 "decoded": {
                     "Type": row["type"],
                     "Battery": row["battery"],
@@ -419,7 +468,7 @@ def get_latest_data(limit=100, sensor_id=None):
                 }
             })
         return history
-    except mysql.connector.Error as err:
+    except Exception as err:
         print(f"Error fetching data: {err}")
         return []
     finally:
@@ -436,10 +485,12 @@ def get_unique_sensors():
     cursor = None
     try:
         cursor = conn.cursor()
-        cursor.execute("SELECT DISTINCT device_id FROM sensor_data")
+        db_type = conn.db_type
+        sql = "SELECT DISTINCT device_id FROM sensor_data"
+        cursor.execute(normalize_query(sql, db_type))
         rows = cursor.fetchall()
         return [row[0] for row in rows if row[0]]
-    except mysql.connector.Error as err:
+    except Exception as err:
         print(f"Error fetching sensors: {err}")
         return []
     finally:
@@ -454,9 +505,11 @@ def get_user_by_username(username):
     cursor = None
     try:
         cursor = conn.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM users WHERE username = %s", (username,))
+        db_type = conn.db_type
+        sql = "SELECT * FROM users WHERE username = %s"
+        cursor.execute(normalize_query(sql, db_type), (username,))
         return cursor.fetchone()
-    except mysql.connector.Error as err:
+    except Exception as err:
         print(f"Error fetching user: {err}")
         return None
     finally:
@@ -470,9 +523,11 @@ def get_all_users():
     cursor = None
     try:
         cursor = conn.cursor(dictionary=True)
-        cursor.execute("SELECT id, username, is_admin FROM users")
+        db_type = conn.db_type
+        sql = "SELECT id, username, is_admin FROM users"
+        cursor.execute(normalize_query(sql, db_type))
         return cursor.fetchall()
-    except mysql.connector.Error as err:
+    except Exception as err:
         print(f"Error fetching users: {err}")
         return []
     finally:
@@ -486,17 +541,25 @@ def update_user_sensors(user_id, sensor_ids):
     cursor = None
     try:
         cursor = conn.cursor()
+        db_type = conn.db_type
         # Delete existing mappings
-        cursor.execute("DELETE FROM user_sensors WHERE user_id = %s", (user_id,))
+        sql_del = "DELETE FROM user_sensors WHERE user_id = %s"
+        cursor.execute(normalize_query(sql_del, db_type), (user_id,))
         
         # Insert new mappings
         if sensor_ids:
-            values = [(user_id, s_id) for s_id in sensor_ids]
-            cursor.executemany("INSERT INTO user_sensors (user_id, sensor_id) VALUES (%s, %s)", values)
+            sql_ins = "INSERT INTO user_sensors (user_id, sensor_id) VALUES (%s, %s)"
+            if db_type == 'mysql':
+                values = [(user_id, s_id) for s_id in sensor_ids]
+                cursor.executemany(sql_ins, values)
+            else:
+                # SQLite executemany works similar but parameters are different
+                for s_id in sensor_ids:
+                    cursor.execute(normalize_query(sql_ins, db_type), (user_id, s_id))
         
         conn.commit()
         return True
-    except mysql.connector.Error as err:
+    except Exception as err:
         print(f"Error updating user sensors: {err}")
         return False
     finally:
@@ -510,22 +573,35 @@ def get_allowed_sensors(user_id):
     cursor = None
     try:
         cursor = conn.cursor()
+        db_type = conn.db_type
         # Admin gets all sensors
-        cursor.execute("SELECT is_admin FROM users WHERE id = %s", (user_id,))
-        user = cursor.fetchone()
-        if user and user[0]:
+        sql_admin_check = "SELECT is_admin FROM users WHERE id = %s"
+        cursor.execute(normalize_query(sql_admin_check, db_type), (user_id,))
+        user_row = cursor.fetchone()
+        
+        # Consistent row access
+        is_admin = False
+        if user_row:
+            if isinstance(user_row, dict):
+                is_admin = user_row.get('is_admin')
+            else:
+                is_admin = user_row[0]
+
+        if is_admin:
             # Return unique IDs from both devices table and sensor_data table
-            cursor.execute("""
+            sql_union = """
                 SELECT dev_eui FROM devices 
                 UNION 
                 SELECT DISTINCT device_id FROM sensor_data
-            """)
+            """
+            cursor.execute(normalize_query(sql_union, db_type))
             return [row[0] for row in cursor.fetchall() if row[0]]
         
         # Regular user gets mapped sensors
-        cursor.execute("SELECT sensor_id FROM user_sensors WHERE user_id = %s", (user_id,))
+        sql_user_sensors = "SELECT sensor_id FROM user_sensors WHERE user_id = %s"
+        cursor.execute(normalize_query(sql_user_sensors, db_type), (user_id,))
         return [row[0] for row in cursor.fetchall()]
-    except mysql.connector.Error as err:
+    except Exception as err:
         print(f"Error fetching allowed sensors: {err}")
         return []
     finally:
@@ -540,13 +616,12 @@ def create_user(username, password, is_admin=False):
     try:
         pw_hash = generate_password_hash(password)
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO users (username, password_hash, is_admin) VALUES (%s, %s, %s)", 
-                  (username, pw_hash, is_admin))
+        db_type = conn.db_type
+        sql = "INSERT INTO users (username, password_hash, is_admin) VALUES (%s, %s, %s)"
+        cursor.execute(normalize_query(sql, db_type), (username, pw_hash, is_admin))
         conn.commit()
         return True
-    except mysql.connector.IntegrityError:
-        return False # Username likely exists
-    except mysql.connector.Error as err:
+    except Exception as err:
         print(f"Error creating user: {err}")
         return False
     finally:
@@ -564,13 +639,14 @@ def create_device(dev_eui, name, sensor_type_id, tenant_id=1, join_eui=None, app
     cursor = None
     try:
         cursor = conn.cursor()
+        db_type = conn.db_type
         sql = """INSERT INTO devices 
                  (dev_eui, name, sensor_type_id, tenant_id, join_eui, app_key, nwk_key) 
                  VALUES (%s, %s, %s, %s, %s, %s, %s)"""
-        cursor.execute(sql, (dev_eui, name, sensor_type_id, tenant_id, join_eui, app_key, nwk_key))
+        cursor.execute(normalize_query(sql, db_type), (dev_eui, name, sensor_type_id, tenant_id, join_eui, app_key, nwk_key))
         conn.commit()
         return True
-    except mysql.connector.Error as err:
+    except Exception as err:
         print(f"Error creating device: {err}")
         return False
     finally:
@@ -583,6 +659,7 @@ def get_devices(tenant_id=None):
     cursor = None
     try:
         cursor = conn.cursor(dictionary=True)
+        db_type = conn.db_type
         # Always fetch sensor type name with device
         sql = """
             SELECT d.*, st.name as sensor_type_name 
@@ -594,9 +671,9 @@ def get_devices(tenant_id=None):
             sql += " WHERE d.tenant_id = %s"
             params.append(tenant_id)
             
-        cursor.execute(sql, params)
+        cursor.execute(normalize_query(sql, db_type), params)
         return cursor.fetchall()
-    except mysql.connector.Error as err:
+    except Exception as err:
         print(f"Error getting devices: {err}")
         return []
     finally:
@@ -609,15 +686,16 @@ def get_device_by_eui(dev_eui):
     cursor = None
     try:
         cursor = conn.cursor(dictionary=True)
+        db_type = conn.db_type
         sql = """
             SELECT d.*, st.decoder_config 
             FROM devices d 
             LEFT JOIN sensor_types st ON d.sensor_type_id = st.id 
             WHERE d.dev_eui = %s
         """
-        cursor.execute(sql, (dev_eui,))
+        cursor.execute(normalize_query(sql, db_type), (dev_eui,))
         return cursor.fetchone()
-    except mysql.connector.Error as err:
+    except Exception as err:
         print(f"Error getting device by EUI: {err}")
         return None
     finally:
@@ -630,11 +708,12 @@ def update_device_status(dev_eui, status):
     cursor = None
     try:
         cursor = conn.cursor()
+        db_type = conn.db_type
         sql = "UPDATE devices SET status = %s WHERE dev_eui = %s"
-        cursor.execute(sql, (status, dev_eui))
+        cursor.execute(normalize_query(sql, db_type), (status, dev_eui))
         conn.commit()
         return True
-    except mysql.connector.Error as err:
+    except Exception as err:
         print(f"Error updating device status: {err}")
         return False
     finally:
@@ -647,23 +726,27 @@ def delete_device(dev_eui):
     cursor = None
     try:
         cursor = conn.cursor()
+        db_type = conn.db_type
         
         # 1. Delete from user_sensors mapping
-        cursor.execute("DELETE FROM user_sensors WHERE sensor_id = %s", (dev_eui,))
+        sql1 = "DELETE FROM user_sensors WHERE sensor_id = %s"
+        cursor.execute(normalize_query(sql1, db_type), (dev_eui,))
         
         # 2. Delete from sensor_data
-        cursor.execute("DELETE FROM sensor_data WHERE device_id = %s", (dev_eui,))
+        sql2 = "DELETE FROM sensor_data WHERE device_id = %s"
+        cursor.execute(normalize_query(sql2, db_type), (dev_eui,))
         
         # 3. Delete from uplinks
-        # Note: we need the device DB ID if we want to be precise, or just use dev_eui if we stored it
-        cursor.execute("DELETE FROM uplinks WHERE dev_eui = %s", (dev_eui,))
+        sql3 = "DELETE FROM uplinks WHERE dev_eui = %s"
+        cursor.execute(normalize_query(sql3, db_type), (dev_eui,))
         
         # 4. Finally delete the device itself
-        cursor.execute("DELETE FROM devices WHERE dev_eui = %s", (dev_eui,))
+        sql4 = "DELETE FROM devices WHERE dev_eui = %s"
+        cursor.execute(normalize_query(sql4, db_type), (dev_eui,))
         
         conn.commit()
         return True
-    except mysql.connector.Error as err:
+    except Exception as err:
         print(f"Error deleting device: {err}")
         return False
     finally:
@@ -678,9 +761,11 @@ def get_sensor_types():
     cursor = None
     try:
         cursor = conn.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM sensor_types")
+        db_type = conn.db_type
+        sql = "SELECT * FROM sensor_types"
+        cursor.execute(normalize_query(sql, db_type))
         return cursor.fetchall()
-    except mysql.connector.Error as err:
+    except Exception as err:
         print(f"Error getting sensor types: {err}")
         return []
     finally:
@@ -695,21 +780,22 @@ def save_uplink(dev_eui, payload_raw, fcnt=0, port=1, rssi=0, snr=0, device_db_i
     cursor = None
     try:
         cursor = conn.cursor()
+        db_type = conn.db_type
         if received_at:
              sql = """
                 INSERT INTO uplinks (device_id, dev_eui, fcnt, port, payload_raw, rssi, snr, received_at)
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
             """
-             cursor.execute(sql, (device_db_id, dev_eui, fcnt, port, payload_raw, rssi, snr, received_at))
+             cursor.execute(normalize_query(sql, db_type), (device_db_id, dev_eui, fcnt, port, payload_raw, rssi, snr, received_at))
         else:
             sql = """
                 INSERT INTO uplinks (device_id, dev_eui, fcnt, port, payload_raw, rssi, snr)
                 VALUES (%s, %s, %s, %s, %s, %s, %s)
             """
-            cursor.execute(sql, (device_db_id, dev_eui, fcnt, port, payload_raw, rssi, snr))
+            cursor.execute(normalize_query(sql, db_type), (device_db_id, dev_eui, fcnt, port, payload_raw, rssi, snr))
         conn.commit()
         return True
-    except mysql.connector.Error as err:
+    except Exception as err:
         print(f"Error saving uplink: {err}")
         return False
     finally:

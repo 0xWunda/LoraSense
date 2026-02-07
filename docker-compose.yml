@@ -31,6 +31,8 @@ services:
       - PYTHONUNBUFFERED=1
     ports:
       - "5000:5000"
+    volumes:
+      - ./data:/data
 
   dashboard:
     build:
@@ -43,6 +45,7 @@ services:
       - ./services/dashboard/src:/app
       - ./services/dashboard/website:/app/website
       - ./common/database.py:/app/database.py
+      - ./data:/data
     environment:
       - MYSQL_HOST=db
       - MYSQL_USER=${MYSQL_USER}
