@@ -4,7 +4,7 @@ import unittest
 import base64
 
 # Add common directory to path
-sys.path.append(os.path.join(os.getcwd(), 'common'))
+sys.path.append(os.path.join(os.getcwd(), 'libs/common'))
 
 from decoder import decode_payload, DecoderFactory
 

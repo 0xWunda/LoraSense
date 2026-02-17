@@ -8,10 +8,15 @@ import json
 from datetime import datetime
 
 # URL of the Uplink Service (locally)
-UPLINK_URL = "http://localhost:5000/uplink"
+UPLINK_URL = "http://localhost:5001/uplink"
 
-# Default Mock Devices removed
-MOCK_DEVICES = []
+# Default Mock Devices
+MOCK_DEVICES = [
+    "LoraSense-Alpha-01",
+    "LoraSense-Beta-02",
+    "LoraSense-Gamma-03",
+    "LoraSense-Delta-04"
+]
 
 class BaraniEncoder:
     """

@@ -1,22 +1,48 @@
+/**
+ * LoraSense Frontend Application Logic
+ * Verwendet Vue 3 (Composition API), Chart.js und Lucide Icons.
+ */
 const { createApp, ref, onMounted, computed, watch, nextTick, reactive } = Vue;
+
 const app = createApp({
     delimiters: ['[[', ']]'],
     setup() {
-        // STATE
-        // Initial state logic injected via global window.INITIAL_STATE
-        const isLoggedIn = ref(window.INITIAL_STATE ? window.INITIAL_STATE.isLoggedIn : false);
-        const username = ref('User');
-        const isAdmin = ref(false);
-        const currentView = ref('dashboard'); // dashboard, detail, history, admin
-        const sensors = ref([]);
-        const selectedSensor = ref(null);
-        const sensorData = ref([]);
-        const isConnected = ref(true);
-        const loginForm = ref({ username: '', password: '' });
-        const loginError = ref('');
-        const selectedSensorIds = ref([]); // For CSV export station selection
+        // --- REACTIVE STATE ---
 
-        // Admin State
+        /** @type {import('vue').Ref<boolean>} Authentifizierungsstatus */
+        const isLoggedIn = ref(window.INITIAL_STATE ? window.INITIAL_STATE.isLoggedIn : false);
+
+        /** @type {import('vue').Ref<string>} Aktueller Benutzername */
+        const username = ref('User');
+
+        /** @type {import('vue').Ref<boolean>} Gibt an, ob der Benutzer Admin-Rechte hat */
+        const isAdmin = ref(false);
+
+        /** @type {import('vue').Ref<string>} Aktive Ansicht (dashboard, detail, history, admin) */
+        const currentView = ref('dashboard');
+
+        /** @type {import('vue').Ref<Array>} Liste der verfügbaren Sensoren */
+        const sensors = ref([]);
+
+        /** @type {import('vue').Ref<string|null>} ID des aktuell ausgewählten Sensors */
+        const selectedSensor = ref(null);
+
+        /** @type {import('vue').Ref<Array>} Historische Daten des ausgewählten Sensors */
+        const sensorData = ref([]);
+
+        /** @type {import('vue').Ref<boolean>} Verbindungsstatus zum Backend */
+        const isConnected = ref(true);
+
+        /** Login-Formular-Daten */
+        const loginForm = ref({ username: '', password: '' });
+
+        /** Fehlermeldung für den Login-Dialog */
+        const loginError = ref('');
+
+        /** @type {import('vue').Ref<Array<string>>} Ausgewählte Sensor-IDs für den CSV-Export */
+        const selectedSensorIds = ref([]);
+
+        // --- ADMIN & MANAGEMENT STATE ---
         const userList = ref([]);
         const showAdminModal = ref(false);
         const showCreateUserModal = ref(false);
@@ -25,7 +51,7 @@ const app = createApp({
         const tempPermissions = ref([]);
         const allAvailableSensors = ref([]);
 
-        // Add Device State
+        // --- GERÄTE-MODAL STATE ---
         const showAddDeviceModal = ref(false);
         const showAdvanced = ref(false);
         const sensorTypes = ref([]);
@@ -38,12 +64,16 @@ const app = createApp({
             nwk_key: ''
         });
 
+        /** @type {Object<string, Chart>} Chart.js Instanzen für die Graphen */
         let charts = {};
+
+        /** @type {number|null} ID des Intervall-Timers für Daten-Updates */
         let updateTimer = null;
 
-        // COMPUTED
-        const allData = ref([]); // For history view
+        // --- COMPUTED PROPERTIES ---
+        const allData = ref([]); // Kombinierte Historie für die Tabellenansicht
 
+        /** Titel der aktuellen Ansicht */
         const viewTitle = computed(() => {
             if (currentView.value === 'dashboard') return 'Übersicht';
             if (currentView.value === 'detail') return selectedSensor.value ? selectedSensor.value : 'Details';
@@ -52,6 +82,7 @@ const app = createApp({
             return '';
         });
 
+        /** Untertitel der aktuellen Ansicht */
         const viewSubtitle = computed(() => {
             if (currentView.value === 'dashboard') return 'Echtzeit-Daten aller Sensoren';
             if (currentView.value === 'detail') return 'Detaillierte Analyse & Graphen';
@@ -60,7 +91,12 @@ const app = createApp({
             return '';
         });
 
-        // METHODS
+        // --- AUTH METHODS ---
+
+        /** 
+         * Führt den Login durch. 
+         * Sendet Anmeldedaten an das Backend und aktualisiert den App-Status.
+         */
         const login = async () => {
             try {
                 const res = await fetch('/api/login', {
@@ -71,7 +107,6 @@ const app = createApp({
                 const data = await res.json();
                 if (data.success) {
                     checkStatus();
-                    // Force refresh sensors
                     fetchSensors();
                 } else {
                     loginError.value = data.message || 'Login fehlgeschlagen';
@@ -81,6 +116,7 @@ const app = createApp({
             }
         };
 
+        /** Meldet den Benutzer ab und setzt den State zurück. */
         const logout = async () => {
             await fetch('/api/logout');
             isLoggedIn.value = false;
@@ -88,6 +124,10 @@ const app = createApp({
             selectedSensor.value = null;
         };
 
+        /** 
+         * Prüft beim Laden der Seite, ob eine aktive Session besteht. 
+         * Lädt bei Erfolg die Benutzerdaten und Sensoren.
+         */
         const checkStatus = async () => {
             const res = await fetch('/api/status');
             const data = await res.json();
@@ -99,51 +139,53 @@ const app = createApp({
             }
         };
 
+        /** 
+         * Lädt die Liste der Sensoren und deren aktuellste Daten.
+         * Berechnet zudem die kombinierte Historie für die Tabellenansicht.
+         */
         const fetchSensors = async () => {
             if (!isLoggedIn.value) return;
             try {
                 const res = await fetch('/api/sensors');
                 if (res.ok) {
                     sensors.value = await res.json();
-                    // Fetch history for all sensors for the table
+
+                    // Historie für alle Sensoren parallel laden (für die 'Historie' Tabelle)
                     const promises = sensors.value.map(s => fetch('/api/data/' + s.id).then(r => r.json()));
                     const results = await Promise.all(promises);
+
+                    // Daten flachklopfen und nach Zeitstempel absteigend sortieren
                     allData.value = results.flat().sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
 
-                    // Collect unique sensor IDs for admin selection (from history + current)
+                    // Liste aller verfügbaren Sensor-IDs für die Admin-Rechteverwaltung sammeln
                     const ids = new Set(sensors.value.map(s => s.id));
                     allAvailableSensors.value = Array.from(ids).sort();
                 }
             } catch (e) {
-                console.error("Error fetching sensors", e);
+                console.error("Fehler beim Laden der Sensoren", e);
                 isConnected.value = false;
             }
         };
 
+        /** 
+         * (Backend-Admin) Lädt alle registrierten Benutzer.
+         * Nur für Administratoren zugänglich.
+         */
         const fetchUsers = async () => {
-            console.log("Fetching users...");
-            if (!isAdmin.value) {
-                console.warn("fetchUsers called but not admin");
-                return;
-            }
+            if (!isAdmin.value) return;
             try {
                 const res = await fetch('/api/admin/users');
-                if (!res.ok) {
-                    console.error("fetchUsers failed", res.status);
-                    return;
-                }
+                if (!res.ok) return;
                 const data = await res.json();
-                console.log("Users fetched:", data);
                 if (Array.isArray(data)) {
                     userList.value = data;
-                } else {
-                    console.error("Data is not array:", data);
                 }
             } catch (e) {
-                console.error("fetchUsers error:", e);
+                console.error("fetchUsers-Fehler:", e);
             }
         };
 
+        /** Öffnet den Dialog zum Erstellen eines neuen Benutzers. */
         const openCreateUserModal = () => {
             createUserForm.username = '';
             createUserForm.password = '';
@@ -151,10 +193,12 @@ const app = createApp({
             showCreateUserModal.value = true;
         };
 
+        /** Schließt den Benutzer-Erstellungs-Dialog. */
         const closeCreateUserModal = () => {
             showCreateUserModal.value = false;
         };
 
+        /** Sendet die Daten für einen neuen Benutzer an die API. */
         const createUser = async () => {
             if (!createUserForm.username || !createUserForm.password) return;
             try {
@@ -165,17 +209,11 @@ const app = createApp({
                 });
 
                 if (!res.ok) {
-                    // Try to parse error message if possible
                     try {
                         const data = await res.json();
-                        alert('Fehler: ' + (data.message || 'Serverfehler (' + res.status + ')'));
+                        alert('Fehler: ' + (data.message || 'Serverfehler'));
                     } catch (e) {
-                        // If not JSON, it might be a 404 HTML page if the server code isn't updated
-                        if (res.status === 404) {
-                            alert('Fehler (404): API nicht gefunden. Bitte Server neu starten!');
-                        } else {
-                            alert('Server Fehler (' + res.status + ')');
-                        }
+                        alert('Server Fehler (' + res.status + ')');
                     }
                     return;
                 }
@@ -183,16 +221,16 @@ const app = createApp({
                 const data = await res.json();
                 if (data.success) {
                     closeCreateUserModal();
-                    fetchUsers(); // Refresh list
+                    fetchUsers(); // Liste aktualisieren
                 } else {
                     alert('Fehler: ' + (data.message || 'Konnte Benutzer nicht erstellen'));
                 }
             } catch (e) {
-                console.error(e);
                 alert('Netzwerkfehler: ' + e.message);
             }
         };
 
+        /** Löscht einen Benutzer nach Bestätigung. */
         const deleteUser = async (user) => {
             if (!confirm(`Möchten Sie den Benutzer "${user.username}" wirklich löschen?`)) return;
 
@@ -202,43 +240,37 @@ const app = createApp({
                 });
 
                 if (!res.ok) {
-                    const text = await res.text();
-                    let errorMessage = `Fehler: ${res.status} ${res.statusText}`;
-
-                    try {
-                        const data = JSON.parse(text);
-                        errorMessage = 'Fehler: ' + (data.message || errorMessage);
-                    } catch (e) {
-                        // Not JSON (likely HTML 404/500), stick to status text
-                    }
-                    alert(errorMessage);
+                    alert('Löschen fehlgeschlagen (' + res.status + ')');
                     return;
                 }
 
-                // Success
                 fetchUsers();
                 alert("Benutzer gelöscht!");
             } catch (e) {
-                console.error(e);
                 alert('Fehler beim Löschen: ' + e.message);
             }
         };
 
+        /** 
+         * Öffnet den Rechte-Verwaltungs-Dialog für einen bestimmten Benutzer.
+         * Lädt die aktuell zugewiesenen Sensoren.
+         */
         const openPermissionsModal = async (user) => {
             selectedUser.value = user;
-            // Fetch permissions
             const res = await fetch(`/api/admin/users/${user.id}/sensors`);
             const sensors = await res.json();
             tempPermissions.value = sensors;
             showAdminModal.value = true;
         };
 
+        /** Schließt den Rechte-Dialog. */
         const closeAdminModal = () => {
             showAdminModal.value = false;
             selectedUser.value = null;
             tempPermissions.value = [];
         };
 
+        /** Wechselt eine Sensor-Berechtigung in der temporären Liste (UI-Only). */
         const toggleSensorPermission = (sensorId) => {
             const index = tempPermissions.value.indexOf(sensorId);
             if (index === -1) {
@@ -248,6 +280,7 @@ const app = createApp({
             }
         };
 
+        /** Speichert die geänderten Sensor-Berechtigungen dauerhaft in der DB. */
         const savePermissions = async () => {
             if (!selectedUser.value) return;
             await fetch(`/api/admin/users/${selectedUser.value.id}/sensors`, {
@@ -258,6 +291,7 @@ const app = createApp({
             closeAdminModal();
         };
 
+        /** Lädt die verfügbaren Sensortypen für das Neu-Gerät-Formular. */
         const fetchSensorTypes = async () => {
             try {
                 const res = await fetch('/api/sensor-types');
@@ -265,10 +299,11 @@ const app = createApp({
                     sensorTypes.value = await res.json();
                 }
             } catch (e) {
-                console.error("Error fetching sensor types", e);
+                console.error("Fehler beim Laden der Sensortypen", e);
             }
         };
 
+        /** Öffnet den Dialog zum Hinzufügen eines neuen Sensors. */
         const openAddDeviceModal = async () => {
             await fetchSensorTypes();
             newDevice.name = '';
@@ -278,11 +313,13 @@ const app = createApp({
             newDevice.app_key = '';
             newDevice.nwk_key = '';
             showAdvanced.value = false;
-            if (sensorTypes.value.length > 0) newDevice.sensor_type_id = sensorTypes.value[0].id; // default
+            // Ersten verfügbaren Typ als Standard wählen
+            if (sensorTypes.value.length > 0) newDevice.sensor_type_id = sensorTypes.value[0].id;
             showAddDeviceModal.value = true;
             nextTick(() => lucide.createIcons());
         };
 
+        /** Sendet die neuen Gerätedaten an das Backend. */
         const createDevice = async () => {
             if (!newDevice.name || !newDevice.dev_eui || !newDevice.sensor_type_id) return;
             try {
@@ -295,42 +332,63 @@ const app = createApp({
                 if (res.ok) {
                     alert("Sensor erfolgreich hinzugefügt!");
                     showAddDeviceModal.value = false;
-                    fetchSensors(); // Refresh list
+                    fetchSensors(); // Liste aktualisieren
                 } else {
                     const data = await res.json();
                     alert("Fehler: " + (data.message || "Konnte Sensor nicht erstellen"));
                 }
             } catch (e) {
-                console.error(e);
                 alert("Netzwerkfehler");
             }
         };
 
+        /** 
+         * Wählt einen Sensor für die Detailansicht aus und lädt dessen Daten. 
+         * @param {string} id - Die DevEUI des Sensors.
+         */
         const selectSensor = async (id) => {
             selectedSensor.value = id;
             currentView.value = 'detail';
             await fetchSensorData(id);
+            // Warten bis DOM updated, dann Graphen zeichnen
             nextTick(() => {
                 renderCharts();
                 lucide.createIcons();
             });
         };
 
+        /** 
+         * Lädt die historischen Daten für einen bestimmten Sensor.
+         * @param {string} id - Die DevEUI des Sensors.
+         */
         const fetchSensorData = async (id) => {
             const res = await fetch(`/api/data/${id}`);
             sensorData.value = await res.json();
         };
 
+        /** 
+         * Erstellt oder aktualisiert die Chart.js Instanzen für die Detailseite.
+         * Nutzt die geladenen Daten aus `sensorData`.
+         */
         const renderCharts = () => {
             if (currentView.value !== 'detail') return;
 
-            const ctxIds = ['tempChart', 'humChart', 'pressureChart', 'batteryChart', 'rainChart', 'solarChart'];
+            // Labels für die Zeitachse (HH:mm) extrahieren
             const labels = sensorData.value.map(d => new Date(d.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })).reverse();
-            const dataPoints = sensorData.value.slice().reverse(); // Show oldest to newest left to right? usually chart shows time axis ->
+            const dataPoints = sensorData.value.slice().reverse();
 
+            /** 
+             * Hilfsfunktion zum Erstellen eines Linien-Diagramms.
+             * @param {string} id - Die Canvas-ID.
+             * @param {string} label - Name der Datenreihe.
+             * @param {Array} data - Die Messwerte.
+             * @param {string} color - Die Linienfarbe (Hex).
+             */
             const createLineChart = (id, label, data, color) => {
                 const ctx = document.getElementById(id);
                 if (!ctx) return;
+
+                // Bestehenden Chart zerstören, um Overlays zu vermeiden
                 if (charts[id]) charts[id].destroy();
 
                 charts[id] = new Chart(ctx, {
@@ -341,17 +399,17 @@ const app = createApp({
                             label: label,
                             data: data,
                             borderColor: color,
-                            backgroundColor: color + '20',
+                            backgroundColor: color + '20', // Transparente Fläche
                             borderWidth: 2,
-                            tension: 0.4,
+                            tension: 0.4, // Smooth Curves
                             fill: true,
-                            pointRadius: 0
+                            pointRadius: 0 // Keine Punkte für sauberen Look
                         }]
                     },
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        plugins: { legend: { display: false } }, // Minimal look
+                        plugins: { legend: { display: false } },
                         scales: {
                             x: { grid: { display: false }, ticks: { color: '#94a3b8' } },
                             y: { grid: { color: '#ffffff10' }, ticks: { color: '#94a3b8' } }
@@ -360,6 +418,7 @@ const app = createApp({
                 });
             };
 
+            // Einzelne Diagramme initialisieren
             createLineChart('tempChart', 'Temperatur (°C)', dataPoints.map(d => d.decoded.Temperature), '#00AEEF');
             createLineChart('humChart', 'Luftfeuchtigkeit (%)', dataPoints.map(d => d.decoded.Humidity), '#005696');
             createLineChart('pressureChart', 'Luftdruck (hPa)', dataPoints.map(d => d.decoded.Pressure), '#10b981');
@@ -368,10 +427,15 @@ const app = createApp({
             createLineChart('solarChart', 'Einstrahlung (W/m²)', dataPoints.map(d => d.decoded.Irradiation), '#818cf8');
         };
 
+        /** Formatiert einen ISO-Zeitstempel in eine lesbare lokale Darstellung. */
         const formatDateTime = (iso) => {
             return new Date(iso).toLocaleString();
         };
 
+        /** 
+         * Startet den CSV-Export für die aktuell ausgewählten Sensoren.
+         * Öffnet den generierten Link im Browser.
+         */
         const exportSelectedSensors = () => {
             let url = '/api/export';
             if (selectedSensorIds.value.length > 0) {
@@ -381,14 +445,17 @@ const app = createApp({
             window.location.href = url;
         };
 
+        /** Wählt alle Sensoren für den Export aus. */
         const selectAllSensors = () => {
             selectedSensorIds.value = sensors.value.map(s => s.id);
         };
 
+        /** Hebt die Auswahl aller Sensoren für den Export auf. */
         const clearSensorSelection = () => {
             selectedSensorIds.value = [];
         };
 
+        /** Löscht einen Sensor dauerhaft aus dem System. */
         const deleteSensor = async (sensorId) => {
             if (!confirm(`Möchten Sie den Sensor "${sensorId}" wirklich unwiderruflich löschen? Alle Daten gehen verloren.`)) return;
 
@@ -404,13 +471,13 @@ const app = createApp({
                 }
 
                 alert('Sensor gelöscht');
-                fetchSensors(); // Refresh dashboard
+                fetchSensors();
             } catch (e) {
-                console.error(e);
                 alert('Netzwerkfehler beim Löschen');
             }
         };
 
+        /** Berechnet die durchschnittliche Temperatur über alle aktiven Sensoren. */
         const avgTemp = computed(() => {
             const valid = sensors.value.filter(s => s.latest_values.Temperature !== undefined);
             if (valid.length === 0) return 0;
@@ -418,13 +485,17 @@ const app = createApp({
             return (sum / valid.length).toFixed(1);
         });
 
-        // LIFECYCLE
+        // --- LIFECYCLE HOOKS ---
         onMounted(() => {
+            // Lucide Icons initialisieren
             lucide.createIcons();
+            // Auth-Status prüfen
             checkStatus();
+            // Polling für Live-Updates (alle 5 Sekunden)
             updateTimer = setInterval(fetchSensors, 5000);
         });
 
+        // Icons bei Ansichtswechsel neu rendern
         watch(currentView, () => {
             nextTick(() => lucide.createIcons());
         });
@@ -433,14 +504,10 @@ const app = createApp({
             isLoggedIn, username, isAdmin, currentView, sensors, selectedSensor, sensorData,
             isConnected, loginForm, loginError, login, logout, selectSensor, deleteSensor,
             viewTitle, viewSubtitle, avgTemp, allData, formatDateTime,
-            // Export functionality
             selectedSensorIds, exportSelectedSensors, selectAllSensors, clearSensorSelection,
-            // Admin exports
             userList, showAdminModal, selectedUser, tempPermissions, allAvailableSensors,
             fetchUsers, openPermissionsModal, closeAdminModal, toggleSensorPermission, savePermissions, deleteUser,
-            // Create User exports
             showCreateUserModal, createUserForm, openCreateUserModal, closeCreateUserModal, createUser,
-            // Add Device exports
             showAddDeviceModal, sensorTypes, newDevice, openAddDeviceModal, createDevice, showAdvanced
         };
     }

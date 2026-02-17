@@ -1,0 +1,7 @@
+2026-02-05 19:55:23,671 - dashboard - INFO - Login successful for admin
+2026-02-17 07:34:34,743 - dashboard - INFO - Login attempt for user: log_test
+2026-02-17 07:34:34,745 - dashboard - WARNING - Login failed: User log_test not found
+2026-02-17 07:36:28,859 - dashboard - INFO - Login attempt for user: admin
+2026-02-17 07:36:28,948 - dashboard - WARNING - Login failed: Invalid password for user admin
+2026-02-17 07:36:30,634 - dashboard - INFO - Login attempt for user: admin
+2026-02-17 07:36:30,718 - dashboard - INFO - Login successful for user: admin

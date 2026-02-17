@@ -1,0 +1,1 @@
+2026-02-17 07:42:27,355 - database - WARNING - Waiting for MariaDB... (2 retries left). Error: 2003 (HY000): Can't connect to MySQL server on 'db:3306' (111)

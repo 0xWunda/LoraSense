@@ -1,3 +1,7 @@
+<!-- 
+    Benutzerverwaltung-Ansicht (Admin-Bereich)
+    Ermöglicht das Erstellen/Löschen von Benutzern und die Zuweisung von Sensoren.
+-->
 <div v-if="currentView === 'admin'" key="admin">
     <div class="glass-card rounded-[2rem] p-8 border-white/5">
         <div class="mb-8 flex justify-between items-center">
@@ -37,7 +41,7 @@
                             <div class="flex items-center justify-end gap-2">
                                 <button @click="openPermissionsModal(user)"
                                     class="bg-[#00AEEF] hover:bg-[#005696] text-white px-4 py-2 rounded-lg text-sm font-bold transition-all shadow-lg shadow-[#00AEEF]/20 active:scale-95 flex items-center gap-2">
-                                    <i data-lucide="shield-check" class="w-4 h-4"></i> Rights
+                                    <i data-lucide="shield-check" class="w-4 h-4"></i> Rechte
                                 </button>
                                 <button @click="deleteUser(user)"
                                     class="bg-red-500/10 hover:bg-red-500/20 text-red-500 border border-red-500/20 px-3 py-2 rounded-lg text-sm font-bold transition-all active:scale-95 flex items-center gap-2"
