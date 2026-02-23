@@ -1,0 +1,7 @@
+2026-02-23 09:12:23,504 - dashboard - WARNING - FLASK_SECRET nicht gesetzt. Nutze zufälligen Schlüssel (Sessions gehen bei Neustart verloren).
+2026-02-23 09:12:44,971 - dashboard - WARNING - FLASK_SECRET nicht gesetzt. Nutze zufälligen Schlüssel (Sessions gehen bei Neustart verloren).
+2026-02-23 09:14:40,971 - dashboard - WARNING - FLASK_SECRET nicht gesetzt. Nutze zufälligen Schlüssel (Sessions gehen bei Neustart verloren).
+2026-02-23 09:19:09,063 - dashboard - WARNING - FLASK_SECRET nicht gesetzt. Nutze zufälligen Schlüssel (Sessions gehen bei Neustart verloren).
+2026-02-23 09:21:02,601 - dashboard - WARNING - FLASK_SECRET nicht gesetzt. Nutze zufälligen Schlüssel (Sessions gehen bei Neustart verloren).
+2026-02-23 09:23:49,854 - dashboard - WARNING - FLASK_SECRET nicht gesetzt. Nutze zufälligen Schlüssel (Sessions gehen bei Neustart verloren).
+2026-02-23 09:27:48,746 - dashboard - WARNING - FLASK_SECRET nicht gesetzt. Nutze zufälligen Schlüssel (Sessions gehen bei Neustart verloren).

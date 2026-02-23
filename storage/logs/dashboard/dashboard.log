@@ -5,3 +5,7 @@
 2026-02-17 07:36:28,948 - dashboard - WARNING - Login failed: Invalid password for user admin
 2026-02-17 07:36:30,634 - dashboard - INFO - Login attempt for user: admin
 2026-02-17 07:36:30,718 - dashboard - INFO - Login successful for user: admin
+2026-02-23 08:08:03,703 - dashboard - INFO - Login-Versuch für Benutzer: admin
+2026-02-23 08:08:03,793 - dashboard - INFO - Login erfolgreich: admin
+2026-02-23 09:10:17,875 - dashboard - INFO - Login-Versuch für Benutzer: admin
+2026-02-23 09:10:17,958 - dashboard - INFO - Login erfolgreich: admin

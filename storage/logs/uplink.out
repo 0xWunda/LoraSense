@@ -1,0 +1,1283 @@
+2026-02-23 09:27:48,775 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:27:48,777 - database - ERROR - Fehler bei der DB-Initialisierung: module 'hashlib' has no attribute 'scrypt'
+Erstelle Standard-Admin-Benutzer
+Erstelle Test-Benutzer
+ * Serving Flask app 'uplink_app'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://10.20.131.5:5001
+[33mPress CTRL+C to quit[0m
+2026-02-23 09:27:48,808 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:27:48,808 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:27:48,809 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:27:48,809 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:27:48,810 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 4.15, 'Temperature': 26.8, 'T_min': 24.7, 'T_max': 27.2, 'Humidity': 44.6, 'Pressure': 1021.4, 'Irradiation': 26, 'Irr_max': 66, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:27:48] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:27:48,811 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:27:48,812 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:27:48,812 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:27:48,812 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:27:48,813 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.8, 'Temperature': 17.7, 'T_min': 13.1, 'T_max': 19.9, 'Humidity': 70.0, 'Pressure': 1021.0, 'Irradiation': 118, 'Irr_max': 212, 'Rain': 10.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:27:48] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:27:48,814 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:27:48,814 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:27:48,814 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:27:48,815 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:27:48,815 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.75, 'Temperature': 28.7, 'T_min': 26.3, 'T_max': 32.1, 'Humidity': 61.4, 'Pressure': 984.35, 'Irradiation': 136, 'Irr_max': 192, 'Rain': 8.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:27:48] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:27:48,817 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:27:48,817 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:27:48,817 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:27:48,818 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:27:48,818 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 4.1, 'Temperature': 21.3, 'T_min': 20.8, 'T_max': 26.3, 'Humidity': 39.0, 'Pressure': 1013.3, 'Irradiation': 92, 'Irr_max': 188, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:27:48] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:28:03,828 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:28:03,828 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:03,829 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:03,831 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:03,832 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.65, 'Temperature': 27.5, 'T_min': 26.7, 'T_max': 31.8, 'Humidity': 31.6, 'Pressure': 1015.05, 'Irradiation': 210, 'Irr_max': 280, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:28:03] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:28:03,835 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:28:03,836 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:03,836 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:03,837 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:03,838 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.85, 'Temperature': 27.3, 'T_min': 22.6, 'T_max': 29.9, 'Humidity': 41.6, 'Pressure': 1013.45, 'Irradiation': 394, 'Irr_max': 422, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:28:03] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:28:03,841 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:28:03,841 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:03,842 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:03,843 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:03,843 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 4.05, 'Temperature': 26.2, 'T_min': 25.5, 'T_max': 28.0, 'Humidity': 68.2, 'Pressure': 1028.35, 'Irradiation': 382, 'Irr_max': 452, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:28:03] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:28:03,846 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:28:03,846 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:03,846 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:03,847 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:03,848 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 4.15, 'Temperature': 26.9, 'T_min': 24.3, 'T_max': 28.8, 'Humidity': 57.4, 'Pressure': 1019.3, 'Irradiation': 528, 'Irr_max': 584, 'Rain': 2.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:28:03] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:28:18,854 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:28:18,855 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:18,855 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:18,857 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:18,858 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 4.2, 'Temperature': 15.3, 'T_min': 13.5, 'T_max': 17.7, 'Humidity': 63.4, 'Pressure': 1008.4, 'Irradiation': 62, 'Irr_max': 116, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:28:18] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:28:18,861 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:28:18,861 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:18,861 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:18,862 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:18,862 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.95, 'Temperature': 19.0, 'T_min': 15.1, 'T_max': 20.9, 'Humidity': 60.2, 'Pressure': 985.3, 'Irradiation': 466, 'Irr_max': 494, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:28:18] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:28:18,865 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:28:18,865 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:18,865 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:18,866 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:18,867 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.7, 'Temperature': 24.2, 'T_min': 22.1, 'T_max': 27.0, 'Humidity': 59.4, 'Pressure': 992.95, 'Irradiation': 192, 'Irr_max': 286, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:28:18] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:28:18,869 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:28:18,869 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:18,869 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:18,870 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:18,870 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 3.6, 'Temperature': 15.9, 'T_min': 12.5, 'T_max': 19.5, 'Humidity': 45.0, 'Pressure': 1007.3, 'Irradiation': 542, 'Irr_max': 582, 'Rain': 1.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:28:18] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:28:33,880 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:28:33,880 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:33,881 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:33,882 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:33,883 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 4.0, 'Temperature': 15.9, 'T_min': 15.6, 'T_max': 19.7, 'Humidity': 75.8, 'Pressure': 989.3, 'Irradiation': 138, 'Irr_max': 232, 'Rain': 7.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:28:33] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:28:33,887 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:28:33,887 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:33,887 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:33,888 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:33,889 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.6, 'Temperature': 24.0, 'T_min': 22.3, 'T_max': 26.5, 'Humidity': 77.6, 'Pressure': 1019.5, 'Irradiation': 164, 'Irr_max': 182, 'Rain': 5.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:28:33] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:28:33,891 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:28:33,891 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:33,892 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:33,893 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:33,894 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.9, 'Temperature': 22.9, 'T_min': 20.9, 'T_max': 26.1, 'Humidity': 58.4, 'Pressure': 996.25, 'Irradiation': 114, 'Irr_max': 138, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:28:33] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:28:33,896 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:28:33,896 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:33,896 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:33,897 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:33,898 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 4.15, 'Temperature': 20.2, 'T_min': 18.0, 'T_max': 23.4, 'Humidity': 52.8, 'Pressure': 1005.65, 'Irradiation': 264, 'Irr_max': 274, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:28:33] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:28:48,903 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:28:48,903 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:48,904 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:48,905 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:48,906 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 4.1, 'Temperature': 18.3, 'T_min': 17.7, 'T_max': 20.6, 'Humidity': 59.8, 'Pressure': 991.4, 'Irradiation': 774, 'Irr_max': 856, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:28:48] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:28:48,909 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:28:48,909 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:48,910 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:48,911 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:48,911 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.95, 'Temperature': 20.7, 'T_min': 16.6, 'T_max': 25.1, 'Humidity': 32.4, 'Pressure': 1007.55, 'Irradiation': 516, 'Irr_max': 520, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:28:48] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:28:48,914 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:28:48,914 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:48,914 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:48,915 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:48,915 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 4.1, 'Temperature': 27.5, 'T_min': 23.5, 'T_max': 27.8, 'Humidity': 56.2, 'Pressure': 999.2, 'Irradiation': 302, 'Irr_max': 374, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:28:48] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:28:48,917 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:28:48,918 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:48,918 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:48,919 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:28:48,919 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 4.15, 'Temperature': 17.2, 'T_min': 15.7, 'T_max': 19.9, 'Humidity': 38.2, 'Pressure': 985.65, 'Irradiation': 238, 'Irr_max': 300, 'Rain': 2.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:28:48] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:29:03,932 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:29:03,932 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:03,934 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:03,935 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:03,936 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.95, 'Temperature': 18.7, 'T_min': 14.7, 'T_max': 22.6, 'Humidity': 32.6, 'Pressure': 1001.95, 'Irradiation': 88, 'Irr_max': 174, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:29:03] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:29:03,941 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:29:03,941 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:03,942 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:03,943 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:03,944 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 4.2, 'Temperature': 23.4, 'T_min': 19.3, 'T_max': 26.5, 'Humidity': 76.0, 'Pressure': 1004.3, 'Irradiation': 352, 'Irr_max': 450, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:29:03] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:29:03,948 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:29:03,948 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:03,949 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:03,950 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:03,951 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.6, 'Temperature': 23.9, 'T_min': 23.7, 'T_max': 27.9, 'Humidity': 66.6, 'Pressure': 1008.25, 'Irradiation': 170, 'Irr_max': 170, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:29:03] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:29:03,954 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:29:03,954 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:03,955 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:03,956 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:03,956 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 3.95, 'Temperature': 21.7, 'T_min': 18.3, 'T_max': 26.2, 'Humidity': 46.2, 'Pressure': 987.1, 'Irradiation': 656, 'Irr_max': 672, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:29:03] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:29:18,968 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:29:18,968 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:18,969 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:18,971 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:18,972 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.7, 'Temperature': 28.5, 'T_min': 26.7, 'T_max': 30.8, 'Humidity': 44.8, 'Pressure': 1015.9, 'Irradiation': 22, 'Irr_max': 118, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:29:18] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:29:18,977 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:29:18,978 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:18,978 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:18,979 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:18,980 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.75, 'Temperature': 26.0, 'T_min': 21.9, 'T_max': 28.2, 'Humidity': 74.4, 'Pressure': 1010.5, 'Irradiation': 12, 'Irr_max': 106, 'Rain': 3.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:29:18] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:29:18,983 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:29:18,984 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:18,984 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:18,986 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:18,987 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 4.05, 'Temperature': 24.1, 'T_min': 22.0, 'T_max': 27.2, 'Humidity': 49.2, 'Pressure': 989.1, 'Irradiation': 136, 'Irr_max': 162, 'Rain': 6.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:29:18] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:29:18,991 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:29:18,991 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:18,991 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:18,992 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:18,993 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 3.75, 'Temperature': 18.5, 'T_min': 17.5, 'T_max': 18.7, 'Humidity': 74.4, 'Pressure': 994.7, 'Irradiation': 274, 'Irr_max': 316, 'Rain': 3.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:29:18] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:29:34,005 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:29:34,005 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:34,007 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:34,009 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:34,012 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.95, 'Temperature': 18.9, 'T_min': 16.6, 'T_max': 21.3, 'Humidity': 58.0, 'Pressure': 1020.75, 'Irradiation': 626, 'Irr_max': 686, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:29:34] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:29:34,018 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:29:34,018 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:34,019 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:34,020 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:34,021 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 4.1, 'Temperature': 20.0, 'T_min': 16.3, 'T_max': 23.1, 'Humidity': 37.8, 'Pressure': 1021.75, 'Irradiation': 762, 'Irr_max': 784, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:29:34] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:29:34,025 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:29:34,025 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:34,025 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:34,026 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:34,027 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.95, 'Temperature': 25.4, 'T_min': 20.8, 'T_max': 27.4, 'Humidity': 54.0, 'Pressure': 995.8, 'Irradiation': 144, 'Irr_max': 174, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:29:34] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:29:34,029 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:29:34,029 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:34,030 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:34,030 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:34,031 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 3.6, 'Temperature': 18.0, 'T_min': 17.4, 'T_max': 22.9, 'Humidity': 57.2, 'Pressure': 1018.95, 'Irradiation': 512, 'Irr_max': 542, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:29:34] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:29:49,043 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:29:49,043 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:49,045 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:49,046 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:49,048 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.65, 'Temperature': 23.6, 'T_min': 22.1, 'T_max': 27.3, 'Humidity': 37.0, 'Pressure': 1006.5, 'Irradiation': 708, 'Irr_max': 804, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:29:49] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:29:49,052 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:29:49,052 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:49,053 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:49,054 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:49,055 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 4.15, 'Temperature': 15.4, 'T_min': 10.7, 'T_max': 17.6, 'Humidity': 37.6, 'Pressure': 993.8, 'Irradiation': 664, 'Irr_max': 678, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:29:49] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:29:49,059 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:29:49,059 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:49,060 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:49,061 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:49,062 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.9, 'Temperature': 23.5, 'T_min': 18.5, 'T_max': 28.2, 'Humidity': 62.4, 'Pressure': 1027.25, 'Irradiation': 334, 'Irr_max': 414, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:29:49] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:29:49,065 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:29:49,065 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:49,066 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:49,067 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:29:49,068 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 4.0, 'Temperature': 21.4, 'T_min': 16.8, 'T_max': 23.3, 'Humidity': 69.4, 'Pressure': 1005.75, 'Irradiation': 156, 'Irr_max': 202, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:29:49] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:30:04,080 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:30:04,080 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:04,081 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:04,083 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:04,084 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.65, 'Temperature': 20.2, 'T_min': 15.7, 'T_max': 24.2, 'Humidity': 37.4, 'Pressure': 982.15, 'Irradiation': 580, 'Irr_max': 610, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:30:04] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:30:04,088 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:30:04,088 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:04,089 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:04,090 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:04,091 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.8, 'Temperature': 17.2, 'T_min': 13.7, 'T_max': 19.0, 'Humidity': 38.0, 'Pressure': 1011.9, 'Irradiation': 28, 'Irr_max': 56, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:30:04] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:30:04,094 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:30:04,095 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:04,095 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:04,097 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:04,098 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 4.05, 'Temperature': 29.4, 'T_min': 27.1, 'T_max': 30.1, 'Humidity': 56.8, 'Pressure': 1028.3, 'Irradiation': 720, 'Irr_max': 722, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:30:04] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:30:04,101 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:30:04,101 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:04,102 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:04,103 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:04,104 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 3.9, 'Temperature': 16.1, 'T_min': 13.1, 'T_max': 16.5, 'Humidity': 37.8, 'Pressure': 997.65, 'Irradiation': 76, 'Irr_max': 118, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:30:04] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:30:19,115 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:30:19,115 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:19,117 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:19,118 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:19,120 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.95, 'Temperature': 15.4, 'T_min': 11.6, 'T_max': 19.1, 'Humidity': 50.2, 'Pressure': 1014.75, 'Irradiation': 614, 'Irr_max': 646, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:30:19] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:30:19,124 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:30:19,124 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:19,125 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:19,126 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:19,127 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 4.2, 'Temperature': 17.3, 'T_min': 15.1, 'T_max': 18.2, 'Humidity': 49.0, 'Pressure': 990.6, 'Irradiation': 2, 'Irr_max': 50, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:30:19] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:30:19,131 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:30:19,131 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:19,132 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:19,133 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:19,134 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 4.2, 'Temperature': 26.5, 'T_min': 25.7, 'T_max': 28.5, 'Humidity': 76.2, 'Pressure': 984.85, 'Irradiation': 570, 'Irr_max': 624, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:30:19] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:30:19,137 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:30:19,137 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:19,138 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:19,138 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:19,139 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 3.7, 'Temperature': 25.0, 'T_min': 20.4, 'T_max': 28.6, 'Humidity': 49.6, 'Pressure': 987.25, 'Irradiation': 774, 'Irr_max': 864, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:30:19] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:30:34,148 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:30:34,148 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:34,149 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:34,150 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:34,151 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.65, 'Temperature': 23.9, 'T_min': 21.0, 'T_max': 26.4, 'Humidity': 37.0, 'Pressure': 1010.25, 'Irradiation': 208, 'Irr_max': 266, 'Rain': 1.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:30:34] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:30:34,155 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:30:34,155 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:34,155 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:34,156 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:34,157 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.7, 'Temperature': 22.5, 'T_min': 19.0, 'T_max': 23.2, 'Humidity': 40.2, 'Pressure': 1025.45, 'Irradiation': 404, 'Irr_max': 498, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:30:34] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:30:34,160 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:30:34,160 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:34,160 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:34,161 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:34,162 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.7, 'Temperature': 19.9, 'T_min': 15.1, 'T_max': 22.9, 'Humidity': 35.4, 'Pressure': 1029.55, 'Irradiation': 762, 'Irr_max': 858, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:30:34] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:30:34,164 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:30:34,164 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:34,164 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:34,165 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:30:34,165 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 4.15, 'Temperature': 19.6, 'T_min': 15.8, 'T_max': 20.5, 'Humidity': 61.2, 'Pressure': 1021.0, 'Irradiation': 24, 'Irr_max': 106, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:30:34] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:49:13,127 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:49:13,149 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:13,153 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:13,155 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:13,156 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.95, 'Temperature': 25.8, 'T_min': 25.0, 'T_max': 26.0, 'Humidity': 32.2, 'Pressure': 982.15, 'Irradiation': 528, 'Irr_max': 528, 'Rain': 4.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:49:13] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:49:13,163 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:49:13,163 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:13,163 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:13,165 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:13,166 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.85, 'Temperature': 18.0, 'T_min': 17.6, 'T_max': 22.0, 'Humidity': 41.4, 'Pressure': 1016.15, 'Irradiation': 702, 'Irr_max': 744, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:49:13] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:49:13,172 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:49:13,172 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:13,173 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:13,174 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:13,175 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.7, 'Temperature': 20.9, 'T_min': 17.0, 'T_max': 25.3, 'Humidity': 69.6, 'Pressure': 996.85, 'Irradiation': 754, 'Irr_max': 836, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:49:13] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:49:13,182 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:49:13,182 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:13,182 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:13,183 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:13,184 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 4.0, 'Temperature': 25.6, 'T_min': 24.8, 'T_max': 30.4, 'Humidity': 39.2, 'Pressure': 996.85, 'Irradiation': 204, 'Irr_max': 234, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:49:13] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:49:28,199 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:49:28,199 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:28,200 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:28,202 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:28,203 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 4.15, 'Temperature': 20.3, 'T_min': 18.0, 'T_max': 21.8, 'Humidity': 61.4, 'Pressure': 984.1, 'Irradiation': 396, 'Irr_max': 478, 'Rain': 6.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:49:28] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:49:28,208 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:49:28,208 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:28,209 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:28,210 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:28,211 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.95, 'Temperature': 26.3, 'T_min': 25.0, 'T_max': 29.8, 'Humidity': 35.8, 'Pressure': 981.75, 'Irradiation': 460, 'Irr_max': 538, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:49:28] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:49:28,216 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:49:28,216 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:28,217 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:28,218 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:28,219 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 4.2, 'Temperature': 23.2, 'T_min': 21.9, 'T_max': 27.8, 'Humidity': 55.2, 'Pressure': 992.5, 'Irradiation': 608, 'Irr_max': 618, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:49:28] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:49:28,222 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:49:28,222 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:28,223 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:28,223 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:28,224 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 4.2, 'Temperature': 26.3, 'T_min': 22.7, 'T_max': 29.8, 'Humidity': 36.0, 'Pressure': 988.1, 'Irradiation': 410, 'Irr_max': 412, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:49:28] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:49:43,237 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:49:43,237 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:43,238 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:43,240 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:43,241 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.65, 'Temperature': 29.8, 'T_min': 29.3, 'T_max': 30.2, 'Humidity': 68.2, 'Pressure': 999.4, 'Irradiation': 102, 'Irr_max': 130, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:49:43] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:49:43,246 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:49:43,246 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:43,247 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:43,248 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:43,249 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.85, 'Temperature': 18.7, 'T_min': 15.0, 'T_max': 19.4, 'Humidity': 33.8, 'Pressure': 997.0, 'Irradiation': 372, 'Irr_max': 390, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:49:43] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:49:43,252 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:49:43,253 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:43,253 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:43,255 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:43,256 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 4.15, 'Temperature': 27.7, 'T_min': 25.5, 'T_max': 27.8, 'Humidity': 48.2, 'Pressure': 1025.7, 'Irradiation': 24, 'Irr_max': 68, 'Rain': 7.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:49:43] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:49:43,259 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:49:43,259 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:43,259 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:43,260 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:43,261 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 3.8, 'Temperature': 15.5, 'T_min': 15.4, 'T_max': 19.2, 'Humidity': 77.0, 'Pressure': 1018.1, 'Irradiation': 522, 'Irr_max': 578, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:49:43] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:49:58,271 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:49:58,272 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:58,273 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:58,274 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:58,275 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 4.0, 'Temperature': 22.1, 'T_min': 19.1, 'T_max': 24.2, 'Humidity': 32.8, 'Pressure': 1026.25, 'Irradiation': 756, 'Irr_max': 758, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:49:58] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:49:58,280 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:49:58,280 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:58,281 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:58,282 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:58,283 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 4.0, 'Temperature': 19.8, 'T_min': 18.9, 'T_max': 21.8, 'Humidity': 54.8, 'Pressure': 985.0, 'Irradiation': 6, 'Irr_max': 32, 'Rain': 1.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:49:58] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:49:58,285 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:49:58,286 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:58,286 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:58,287 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:58,287 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 4.2, 'Temperature': 28.0, 'T_min': 24.5, 'T_max': 29.3, 'Humidity': 55.4, 'Pressure': 1005.95, 'Irradiation': 118, 'Irr_max': 148, 'Rain': 6.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:49:58] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:49:58,290 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:49:58,290 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:58,290 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:58,291 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:49:58,292 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 3.6, 'Temperature': 23.7, 'T_min': 23.0, 'T_max': 26.4, 'Humidity': 37.8, 'Pressure': 1013.95, 'Irradiation': 588, 'Irr_max': 648, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:49:58] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:50:13,300 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:50:13,300 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:13,301 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:13,302 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:13,303 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 4.1, 'Temperature': 21.5, 'T_min': 19.5, 'T_max': 25.6, 'Humidity': 30.4, 'Pressure': 989.25, 'Irradiation': 284, 'Irr_max': 286, 'Rain': 1.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:50:13] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:50:13,306 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:50:13,306 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:13,306 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:13,307 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:13,308 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 4.15, 'Temperature': 17.9, 'T_min': 17.9, 'T_max': 19.2, 'Humidity': 55.8, 'Pressure': 1008.6, 'Irradiation': 736, 'Irr_max': 810, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:50:13] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:50:13,310 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:50:13,310 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:13,311 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:13,311 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:13,312 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.95, 'Temperature': 18.9, 'T_min': 15.5, 'T_max': 19.5, 'Humidity': 49.8, 'Pressure': 998.55, 'Irradiation': 114, 'Irr_max': 174, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:50:13] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:50:13,314 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:50:13,314 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:13,315 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:13,315 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:13,316 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 4.0, 'Temperature': 24.2, 'T_min': 22.7, 'T_max': 28.8, 'Humidity': 44.6, 'Pressure': 1020.2, 'Irradiation': 500, 'Irr_max': 542, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:50:13] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:50:28,327 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:50:28,327 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:28,329 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:28,330 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:28,331 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 4.15, 'Temperature': 26.3, 'T_min': 26.2, 'T_max': 27.7, 'Humidity': 56.6, 'Pressure': 1023.6, 'Irradiation': 790, 'Irr_max': 818, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:50:28] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:50:28,335 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:50:28,335 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:28,336 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:28,338 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:28,339 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.85, 'Temperature': 20.1, 'T_min': 15.7, 'T_max': 21.2, 'Humidity': 55.4, 'Pressure': 991.7, 'Irradiation': 490, 'Irr_max': 512, 'Rain': 5.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:50:28] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:50:28,342 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:50:28,343 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:28,343 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:28,344 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:28,345 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.7, 'Temperature': 21.5, 'T_min': 19.4, 'T_max': 25.4, 'Humidity': 75.2, 'Pressure': 980.7, 'Irradiation': 66, 'Irr_max': 104, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:50:28] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:50:28,347 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:50:28,347 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:28,348 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:28,348 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:28,349 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 3.75, 'Temperature': 29.1, 'T_min': 29.0, 'T_max': 30.0, 'Humidity': 32.6, 'Pressure': 1028.45, 'Irradiation': 246, 'Irr_max': 314, 'Rain': 8.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:50:28] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:50:43,361 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:50:43,361 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:43,362 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:43,364 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:43,365 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.95, 'Temperature': 21.6, 'T_min': 17.9, 'T_max': 22.9, 'Humidity': 43.0, 'Pressure': 1012.2, 'Irradiation': 182, 'Irr_max': 234, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:50:43] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:50:43,370 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:50:43,370 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:43,371 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:43,373 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:43,374 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.9, 'Temperature': 17.3, 'T_min': 16.8, 'T_max': 17.9, 'Humidity': 44.2, 'Pressure': 1028.85, 'Irradiation': 0, 'Irr_max': 56, 'Rain': 4.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:50:43] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:50:43,379 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:50:43,379 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:43,380 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:43,381 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:43,382 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.75, 'Temperature': 21.1, 'T_min': 20.7, 'T_max': 24.3, 'Humidity': 46.0, 'Pressure': 1007.1, 'Irradiation': 680, 'Irr_max': 750, 'Rain': 7.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:50:43] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:50:43,385 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:50:43,385 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:43,385 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:43,386 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:43,387 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 3.7, 'Temperature': 29.7, 'T_min': 26.3, 'T_max': 32.6, 'Humidity': 48.2, 'Pressure': 1002.2, 'Irradiation': 778, 'Irr_max': 872, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:50:43] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:50:58,399 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:50:58,400 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:58,401 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:58,403 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:58,404 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.8, 'Temperature': 28.0, 'T_min': 28.0, 'T_max': 30.8, 'Humidity': 70.8, 'Pressure': 998.6, 'Irradiation': 542, 'Irr_max': 594, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:50:58] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:50:58,409 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:50:58,409 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:58,410 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:58,412 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:58,413 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 4.15, 'Temperature': 15.5, 'T_min': 11.0, 'T_max': 19.3, 'Humidity': 55.0, 'Pressure': 1024.05, 'Irradiation': 542, 'Irr_max': 604, 'Rain': 4.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:50:58] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:50:58,417 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:50:58,417 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:58,418 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:58,419 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:58,419 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 4.15, 'Temperature': 27.9, 'T_min': 23.8, 'T_max': 30.5, 'Humidity': 73.8, 'Pressure': 1009.6, 'Irradiation': 264, 'Irr_max': 264, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:50:58] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:50:58,422 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:50:58,422 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:58,422 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:58,423 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:50:58,424 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 4.1, 'Temperature': 21.2, 'T_min': 17.4, 'T_max': 23.6, 'Humidity': 42.0, 'Pressure': 995.25, 'Irradiation': 532, 'Irr_max': 614, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:50:58] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:51:13,435 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:51:13,436 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:13,437 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:13,439 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:13,440 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 4.15, 'Temperature': 16.8, 'T_min': 11.9, 'T_max': 18.3, 'Humidity': 41.6, 'Pressure': 1016.05, 'Irradiation': 394, 'Irr_max': 434, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:51:13] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:51:13,445 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:51:13,445 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:13,446 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:13,447 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:13,448 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.95, 'Temperature': 27.8, 'T_min': 24.9, 'T_max': 29.6, 'Humidity': 34.2, 'Pressure': 990.95, 'Irradiation': 528, 'Irr_max': 530, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:51:13] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:51:13,452 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:51:13,452 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:13,453 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:13,454 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:13,455 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.85, 'Temperature': 18.1, 'T_min': 14.2, 'T_max': 21.7, 'Humidity': 37.0, 'Pressure': 1006.15, 'Irradiation': 440, 'Irr_max': 516, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:51:13] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:51:13,457 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:51:13,457 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:13,458 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:13,459 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:13,459 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 3.95, 'Temperature': 23.3, 'T_min': 22.7, 'T_max': 23.9, 'Humidity': 66.6, 'Pressure': 991.05, 'Irradiation': 710, 'Irr_max': 716, 'Rain': 5.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:51:13] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:51:28,472 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:51:28,472 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:28,474 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:28,475 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:28,477 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.95, 'Temperature': 20.2, 'T_min': 19.7, 'T_max': 21.8, 'Humidity': 45.8, 'Pressure': 996.95, 'Irradiation': 736, 'Irr_max': 782, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:51:28] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:51:28,482 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:51:28,482 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:28,483 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:28,484 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:28,485 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.85, 'Temperature': 27.8, 'T_min': 25.0, 'T_max': 28.0, 'Humidity': 58.8, 'Pressure': 1019.5, 'Irradiation': 536, 'Irr_max': 542, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:51:28] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:51:28,489 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:51:28,489 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:28,489 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:28,490 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:28,491 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 4.0, 'Temperature': 24.7, 'T_min': 24.3, 'T_max': 27.4, 'Humidity': 56.4, 'Pressure': 1004.15, 'Irradiation': 138, 'Irr_max': 224, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:51:28] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:51:28,494 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:51:28,494 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:28,494 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:28,495 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:28,496 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 4.05, 'Temperature': 23.1, 'T_min': 19.6, 'T_max': 27.9, 'Humidity': 30.8, 'Pressure': 1002.3, 'Irradiation': 524, 'Irr_max': 594, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:51:28] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:51:43,508 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:51:43,508 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:43,510 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:43,511 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:43,513 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.85, 'Temperature': 17.6, 'T_min': 15.1, 'T_max': 18.4, 'Humidity': 71.0, 'Pressure': 998.95, 'Irradiation': 8, 'Irr_max': 78, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:51:43] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:51:43,517 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:51:43,517 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:43,518 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:43,519 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:43,520 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 4.2, 'Temperature': 16.4, 'T_min': 14.7, 'T_max': 19.3, 'Humidity': 64.2, 'Pressure': 997.6, 'Irradiation': 172, 'Irr_max': 216, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:51:43] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:51:43,524 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:51:43,524 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:43,525 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:43,526 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:43,527 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 4.15, 'Temperature': 29.6, 'T_min': 28.8, 'T_max': 30.1, 'Humidity': 56.8, 'Pressure': 998.65, 'Irradiation': 686, 'Irr_max': 706, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:51:43] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:51:43,530 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:51:43,530 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:43,531 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:43,531 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:43,532 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 3.8, 'Temperature': 20.3, 'T_min': 17.1, 'T_max': 24.5, 'Humidity': 68.0, 'Pressure': 986.9, 'Irradiation': 354, 'Irr_max': 378, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:51:43] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:51:58,544 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:51:58,545 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:58,546 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:58,548 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:58,549 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.75, 'Temperature': 27.8, 'T_min': 23.5, 'T_max': 32.6, 'Humidity': 37.6, 'Pressure': 1023.3, 'Irradiation': 308, 'Irr_max': 314, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:51:58] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:51:58,555 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:51:58,555 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:58,556 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:58,557 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:58,558 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.65, 'Temperature': 17.7, 'T_min': 17.2, 'T_max': 20.7, 'Humidity': 43.2, 'Pressure': 992.9, 'Irradiation': 320, 'Irr_max': 362, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:51:58] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:51:58,563 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:51:58,563 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:58,564 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:58,565 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:58,566 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.9, 'Temperature': 15.7, 'T_min': 14.6, 'T_max': 20.6, 'Humidity': 60.4, 'Pressure': 1029.8, 'Irradiation': 142, 'Irr_max': 170, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:51:58] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:51:58,569 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:51:58,569 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:58,570 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:58,570 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:51:58,571 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 3.85, 'Temperature': 16.7, 'T_min': 13.0, 'T_max': 18.5, 'Humidity': 50.2, 'Pressure': 1014.8, 'Irradiation': 660, 'Irr_max': 738, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:51:58] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:52:13,583 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:52:13,583 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:13,584 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:13,586 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:13,587 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.6, 'Temperature': 20.9, 'T_min': 18.2, 'T_max': 24.3, 'Humidity': 33.0, 'Pressure': 993.95, 'Irradiation': 608, 'Irr_max': 636, 'Rain': 4.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:52:13] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:52:13,592 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:52:13,592 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:13,592 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:13,593 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:13,594 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.7, 'Temperature': 18.7, 'T_min': 14.6, 'T_max': 21.0, 'Humidity': 62.6, 'Pressure': 1027.25, 'Irradiation': 238, 'Irr_max': 302, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:52:13] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:52:13,598 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:52:13,599 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:13,599 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:13,600 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:13,601 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.95, 'Temperature': 17.2, 'T_min': 15.6, 'T_max': 21.4, 'Humidity': 44.8, 'Pressure': 1018.3, 'Irradiation': 112, 'Irr_max': 134, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:52:13] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:52:13,604 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:52:13,605 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:13,605 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:13,606 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:13,606 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 3.75, 'Temperature': 25.5, 'T_min': 22.6, 'T_max': 30.4, 'Humidity': 52.0, 'Pressure': 1013.95, 'Irradiation': 646, 'Irr_max': 728, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:52:13] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:52:28,618 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:52:28,618 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:28,619 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:28,621 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:28,622 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.6, 'Temperature': 18.4, 'T_min': 17.1, 'T_max': 18.6, 'Humidity': 46.2, 'Pressure': 1016.45, 'Irradiation': 648, 'Irr_max': 704, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:52:28] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:52:28,627 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:52:28,627 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:28,628 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:28,629 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:28,630 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 4.1, 'Temperature': 29.8, 'T_min': 25.7, 'T_max': 30.9, 'Humidity': 66.0, 'Pressure': 1027.2, 'Irradiation': 508, 'Irr_max': 532, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:52:28] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:52:28,634 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:52:28,634 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:28,635 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:28,636 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:28,637 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.85, 'Temperature': 22.2, 'T_min': 17.3, 'T_max': 24.6, 'Humidity': 75.2, 'Pressure': 1022.75, 'Irradiation': 560, 'Irr_max': 596, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:52:28] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:52:28,640 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:52:28,640 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:28,640 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:28,641 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:28,641 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 3.95, 'Temperature': 23.9, 'T_min': 20.0, 'T_max': 28.3, 'Humidity': 74.4, 'Pressure': 997.55, 'Irradiation': 316, 'Irr_max': 350, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:52:28] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:52:43,649 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:52:43,649 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:43,649 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:43,650 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:43,651 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 4.1, 'Temperature': 17.3, 'T_min': 14.5, 'T_max': 22.2, 'Humidity': 39.8, 'Pressure': 1013.55, 'Irradiation': 118, 'Irr_max': 170, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:52:43] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:52:43,654 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:52:43,654 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:43,654 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:43,655 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:43,655 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.95, 'Temperature': 25.6, 'T_min': 25.5, 'T_max': 29.8, 'Humidity': 66.4, 'Pressure': 1014.5, 'Irradiation': 246, 'Irr_max': 332, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:52:43] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:52:43,657 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:52:43,658 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:43,658 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:43,659 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:43,660 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 4.15, 'Temperature': 15.4, 'T_min': 14.0, 'T_max': 20.2, 'Humidity': 37.4, 'Pressure': 1017.25, 'Irradiation': 398, 'Irr_max': 432, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:52:43] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:52:43,662 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:52:43,662 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:43,662 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:43,663 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:43,663 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 4.15, 'Temperature': 18.5, 'T_min': 18.1, 'T_max': 22.8, 'Humidity': 45.8, 'Pressure': 1000.95, 'Irradiation': 592, 'Irr_max': 660, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:52:43] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:52:58,673 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:52:58,673 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:58,674 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:58,676 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:58,677 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.85, 'Temperature': 29.7, 'T_min': 27.3, 'T_max': 30.0, 'Humidity': 45.2, 'Pressure': 1027.4, 'Irradiation': 446, 'Irr_max': 532, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:52:58] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:52:58,682 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:52:58,682 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:58,683 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:58,685 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:58,686 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.8, 'Temperature': 20.0, 'T_min': 15.3, 'T_max': 22.7, 'Humidity': 44.8, 'Pressure': 981.3, 'Irradiation': 424, 'Irr_max': 428, 'Rain': 7.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:52:58] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:52:58,690 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:52:58,690 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:58,690 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:58,691 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:58,692 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.8, 'Temperature': 20.6, 'T_min': 17.3, 'T_max': 21.6, 'Humidity': 64.2, 'Pressure': 984.25, 'Irradiation': 748, 'Irr_max': 788, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:52:58] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:52:58,695 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:52:58,695 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:58,695 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:58,696 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:52:58,697 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 4.0, 'Temperature': 18.2, 'T_min': 16.6, 'T_max': 18.3, 'Humidity': 65.2, 'Pressure': 991.85, 'Irradiation': 58, 'Irr_max': 66, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:52:58] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:53:13,708 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:53:13,708 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:13,709 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:13,711 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:13,712 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.75, 'Temperature': 20.3, 'T_min': 16.4, 'T_max': 25.1, 'Humidity': 50.2, 'Pressure': 995.9, 'Irradiation': 80, 'Irr_max': 160, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:53:13] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:53:13,717 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:53:13,717 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:13,717 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:13,718 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:13,719 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.95, 'Temperature': 29.1, 'T_min': 25.6, 'T_max': 32.1, 'Humidity': 78.6, 'Pressure': 999.15, 'Irradiation': 658, 'Irr_max': 690, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:53:13] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:53:13,723 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:53:13,723 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:13,724 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:13,725 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:13,726 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.65, 'Temperature': 18.8, 'T_min': 16.9, 'T_max': 23.5, 'Humidity': 69.0, 'Pressure': 1021.5, 'Irradiation': 658, 'Irr_max': 698, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:53:13] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:53:13,729 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:53:13,729 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:13,729 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:13,730 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:13,731 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 3.65, 'Temperature': 24.7, 'T_min': 20.6, 'T_max': 26.4, 'Humidity': 65.6, 'Pressure': 1015.9, 'Irradiation': 490, 'Irr_max': 516, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:53:13] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:53:28,743 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:53:28,744 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:28,745 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:28,747 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:28,748 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 4.05, 'Temperature': 26.9, 'T_min': 22.2, 'T_max': 31.7, 'Humidity': 39.4, 'Pressure': 986.1, 'Irradiation': 772, 'Irr_max': 810, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:53:28] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:53:28,752 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:53:28,753 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:28,753 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:28,754 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:28,755 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 4.05, 'Temperature': 20.7, 'T_min': 20.3, 'T_max': 23.3, 'Humidity': 71.6, 'Pressure': 1011.2, 'Irradiation': 172, 'Irr_max': 220, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:53:28] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:53:28,758 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:53:28,758 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:28,759 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:28,760 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:28,762 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.75, 'Temperature': 16.3, 'T_min': 14.6, 'T_max': 18.0, 'Humidity': 42.8, 'Pressure': 1013.6, 'Irradiation': 58, 'Irr_max': 146, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:53:28] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:53:28,765 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:53:28,765 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:28,765 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:28,766 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:28,767 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 3.95, 'Temperature': 26.9, 'T_min': 24.1, 'T_max': 28.7, 'Humidity': 31.4, 'Pressure': 988.1, 'Irradiation': 688, 'Irr_max': 752, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:53:28] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:53:43,778 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:53:43,779 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:43,780 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:43,781 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:43,783 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 4.05, 'Temperature': 22.5, 'T_min': 17.9, 'T_max': 26.1, 'Humidity': 54.0, 'Pressure': 1005.7, 'Irradiation': 208, 'Irr_max': 216, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:53:43] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:53:43,787 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:53:43,787 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:43,787 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:43,788 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:43,790 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.7, 'Temperature': 18.9, 'T_min': 14.4, 'T_max': 21.2, 'Humidity': 39.6, 'Pressure': 1019.15, 'Irradiation': 138, 'Irr_max': 210, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:53:43] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:53:43,793 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:53:43,793 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:43,794 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:43,795 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:43,796 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.65, 'Temperature': 26.5, 'T_min': 25.7, 'T_max': 27.5, 'Humidity': 49.4, 'Pressure': 999.0, 'Irradiation': 582, 'Irr_max': 676, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:53:43] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:53:43,799 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:53:43,799 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:43,799 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:43,800 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:43,801 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 4.05, 'Temperature': 20.2, 'T_min': 20.2, 'T_max': 24.8, 'Humidity': 73.0, 'Pressure': 1010.1, 'Irradiation': 500, 'Irr_max': 534, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:53:43] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:53:58,807 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:53:58,808 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:58,808 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:59,063 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:59,064 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 4.0, 'Temperature': 29.0, 'T_min': 24.8, 'T_max': 29.2, 'Humidity': 40.0, 'Pressure': 986.4, 'Irradiation': 794, 'Irr_max': 856, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:53:59] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:53:59,066 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:53:59,066 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:59,066 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:59,067 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:59,067 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 4.0, 'Temperature': 27.3, 'T_min': 22.6, 'T_max': 30.5, 'Humidity': 31.4, 'Pressure': 1002.15, 'Irradiation': 490, 'Irr_max': 570, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:53:59] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:53:59,069 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:53:59,069 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:59,069 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:59,069 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:59,070 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 4.15, 'Temperature': 26.6, 'T_min': 22.9, 'T_max': 27.1, 'Humidity': 78.6, 'Pressure': 1012.65, 'Irradiation': 714, 'Irr_max': 796, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:53:59] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:53:59,071 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:53:59,071 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:59,072 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:59,072 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:53:59,072 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 4.15, 'Temperature': 19.9, 'T_min': 15.8, 'T_max': 22.4, 'Humidity': 78.2, 'Pressure': 1009.4, 'Irradiation': 774, 'Irr_max': 818, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:53:59] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:54:14,083 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:54:14,083 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:14,085 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:14,086 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:14,088 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.65, 'Temperature': 17.0, 'T_min': 13.1, 'T_max': 19.6, 'Humidity': 32.0, 'Pressure': 992.15, 'Irradiation': 280, 'Irr_max': 334, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:54:14] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:54:14,092 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:54:14,092 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:14,093 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:14,094 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:14,095 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.8, 'Temperature': 20.8, 'T_min': 18.4, 'T_max': 23.8, 'Humidity': 76.6, 'Pressure': 985.2, 'Irradiation': 728, 'Irr_max': 806, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:54:14] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:54:14,099 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:54:14,100 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:14,100 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:14,101 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:14,102 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.9, 'Temperature': 21.2, 'T_min': 17.4, 'T_max': 21.3, 'Humidity': 75.2, 'Pressure': 1005.45, 'Irradiation': 784, 'Irr_max': 810, 'Rain': 10.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:54:14] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:54:14,106 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:54:14,106 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:14,106 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:14,107 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:14,108 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 3.85, 'Temperature': 24.6, 'T_min': 21.3, 'T_max': 27.7, 'Humidity': 36.2, 'Pressure': 993.55, 'Irradiation': 362, 'Irr_max': 394, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:54:14] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:54:29,118 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:54:29,119 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:29,120 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:29,122 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:29,124 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.65, 'Temperature': 26.1, 'T_min': 21.4, 'T_max': 27.4, 'Humidity': 71.2, 'Pressure': 1023.85, 'Irradiation': 488, 'Irr_max': 502, 'Rain': 6.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:54:29] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:54:29,129 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:54:29,129 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:29,129 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:29,130 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:29,132 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.65, 'Temperature': 20.2, 'T_min': 18.9, 'T_max': 24.6, 'Humidity': 75.0, 'Pressure': 1002.7, 'Irradiation': 242, 'Irr_max': 258, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:54:29] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:54:29,136 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:54:29,136 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:29,136 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:29,137 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:29,138 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 4.0, 'Temperature': 21.4, 'T_min': 17.8, 'T_max': 25.2, 'Humidity': 74.0, 'Pressure': 1006.35, 'Irradiation': 156, 'Irr_max': 202, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:54:29] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:54:29,141 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:54:29,141 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:29,141 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:29,142 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:29,143 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 3.95, 'Temperature': 27.3, 'T_min': 23.1, 'T_max': 27.7, 'Humidity': 63.0, 'Pressure': 1001.25, 'Irradiation': 214, 'Irr_max': 282, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:54:29] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:54:44,154 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:54:44,154 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:44,155 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:44,157 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:44,158 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.95, 'Temperature': 19.6, 'T_min': 19.1, 'T_max': 22.1, 'Humidity': 54.4, 'Pressure': 1014.8, 'Irradiation': 56, 'Irr_max': 94, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:54:44] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:54:44,163 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:54:44,163 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:44,163 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:44,164 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:44,165 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 4.1, 'Temperature': 28.0, 'T_min': 24.5, 'T_max': 30.6, 'Humidity': 69.2, 'Pressure': 1007.1, 'Irradiation': 694, 'Irr_max': 782, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:54:44] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:54:44,170 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:54:44,170 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:44,171 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:44,172 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:44,173 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.8, 'Temperature': 29.6, 'T_min': 25.0, 'T_max': 30.2, 'Humidity': 77.0, 'Pressure': 1001.1, 'Irradiation': 364, 'Irr_max': 400, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:54:44] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:54:44,177 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:54:44,177 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:44,177 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:44,178 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:44,179 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 4.15, 'Temperature': 27.5, 'T_min': 25.8, 'T_max': 31.6, 'Humidity': 61.8, 'Pressure': 1003.75, 'Irradiation': 482, 'Irr_max': 572, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:54:44] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:54:59,190 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:54:59,190 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:59,191 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:59,193 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:59,194 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.8, 'Temperature': 29.3, 'T_min': 25.7, 'T_max': 32.3, 'Humidity': 41.2, 'Pressure': 1029.0, 'Irradiation': 322, 'Irr_max': 396, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:54:59] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:54:59,198 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:54:59,199 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:59,199 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:59,200 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:59,201 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 4.1, 'Temperature': 17.6, 'T_min': 17.2, 'T_max': 21.0, 'Humidity': 43.8, 'Pressure': 985.95, 'Irradiation': 138, 'Irr_max': 208, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:54:59] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:54:59,206 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:54:59,206 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:59,206 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:59,207 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:59,208 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.85, 'Temperature': 29.2, 'T_min': 24.8, 'T_max': 29.6, 'Humidity': 73.6, 'Pressure': 997.65, 'Irradiation': 114, 'Irr_max': 162, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:54:59] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:54:59,211 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:54:59,211 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:59,212 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:59,213 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:54:59,213 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 4.0, 'Temperature': 23.1, 'T_min': 22.1, 'T_max': 24.0, 'Humidity': 65.2, 'Pressure': 999.6, 'Irradiation': 456, 'Irr_max': 544, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:54:59] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:55:14,225 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:55:14,225 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:14,227 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:14,228 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:14,229 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.7, 'Temperature': 21.4, 'T_min': 20.4, 'T_max': 23.2, 'Humidity': 47.0, 'Pressure': 1012.95, 'Irradiation': 444, 'Irr_max': 484, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:55:14] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:55:14,234 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:55:14,234 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:14,235 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:14,236 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:14,237 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.75, 'Temperature': 19.9, 'T_min': 14.9, 'T_max': 20.1, 'Humidity': 37.0, 'Pressure': 1009.6, 'Irradiation': 348, 'Irr_max': 378, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:55:14] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:55:14,242 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:55:14,242 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:14,243 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:14,244 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:14,245 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.95, 'Temperature': 21.0, 'T_min': 19.9, 'T_max': 23.4, 'Humidity': 75.2, 'Pressure': 1003.65, 'Irradiation': 6, 'Irr_max': 6, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:55:14] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:55:14,248 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:55:14,248 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:14,249 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:14,250 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:14,250 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 4.05, 'Temperature': 25.0, 'T_min': 20.7, 'T_max': 26.3, 'Humidity': 65.6, 'Pressure': 1015.35, 'Irradiation': 784, 'Irr_max': 818, 'Rain': 6.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:55:14] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:55:29,261 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:55:29,262 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:29,263 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:29,264 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:29,266 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 4.0, 'Temperature': 20.8, 'T_min': 19.2, 'T_max': 22.7, 'Humidity': 49.8, 'Pressure': 1021.35, 'Irradiation': 524, 'Irr_max': 596, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:55:29] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:55:29,270 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:55:29,270 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:29,271 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:29,273 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:29,274 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 4.05, 'Temperature': 20.6, 'T_min': 17.5, 'T_max': 21.4, 'Humidity': 35.4, 'Pressure': 1014.2, 'Irradiation': 328, 'Irr_max': 384, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:55:29] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:55:29,279 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:55:29,279 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:29,280 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:29,281 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:29,281 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 4.15, 'Temperature': 24.7, 'T_min': 21.5, 'T_max': 25.6, 'Humidity': 65.8, 'Pressure': 1005.15, 'Irradiation': 30, 'Irr_max': 100, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:55:29] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:55:29,284 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:55:29,284 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:29,285 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:29,286 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:29,286 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 3.7, 'Temperature': 21.6, 'T_min': 17.1, 'T_max': 25.4, 'Humidity': 36.8, 'Pressure': 986.4, 'Irradiation': 790, 'Irr_max': 798, 'Rain': 8.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:55:29] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:55:44,297 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:55:44,298 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:44,299 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:44,301 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:44,302 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 4.0, 'Temperature': 18.6, 'T_min': 17.6, 'T_max': 20.1, 'Humidity': 31.4, 'Pressure': 990.35, 'Irradiation': 288, 'Irr_max': 356, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:55:44] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:55:44,307 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:55:44,307 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:44,308 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:44,309 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:44,310 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.9, 'Temperature': 16.2, 'T_min': 16.1, 'T_max': 19.6, 'Humidity': 65.6, 'Pressure': 988.2, 'Irradiation': 478, 'Irr_max': 496, 'Rain': 2.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:55:44] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:55:44,315 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:55:44,315 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:44,316 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:44,317 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:44,318 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 4.15, 'Temperature': 29.6, 'T_min': 25.0, 'T_max': 34.0, 'Humidity': 33.2, 'Pressure': 1003.05, 'Irradiation': 172, 'Irr_max': 218, 'Rain': 4.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:55:44] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:55:44,321 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:55:44,321 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:44,321 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:44,322 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:44,323 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 4.0, 'Temperature': 21.1, 'T_min': 20.2, 'T_max': 24.0, 'Humidity': 76.8, 'Pressure': 985.75, 'Irradiation': 764, 'Irr_max': 818, 'Rain': 7.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:55:44] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:55:59,334 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:55:59,334 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:59,335 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:59,337 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:59,338 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.9, 'Temperature': 28.4, 'T_min': 23.5, 'T_max': 33.1, 'Humidity': 44.4, 'Pressure': 1001.55, 'Irradiation': 712, 'Irr_max': 778, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:55:59] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:55:59,344 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:55:59,344 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:59,344 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:59,346 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:59,347 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 4.1, 'Temperature': 28.3, 'T_min': 25.6, 'T_max': 32.5, 'Humidity': 50.4, 'Pressure': 983.5, 'Irradiation': 540, 'Irr_max': 562, 'Rain': 6.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:55:59] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:55:59,352 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:55:59,352 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:59,353 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:59,354 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:59,355 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.8, 'Temperature': 22.4, 'T_min': 21.8, 'T_max': 22.7, 'Humidity': 64.4, 'Pressure': 1016.65, 'Irradiation': 128, 'Irr_max': 202, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:55:59] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:55:59,359 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:55:59,359 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:59,359 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:59,360 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:55:59,361 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 3.85, 'Temperature': 17.6, 'T_min': 14.4, 'T_max': 22.0, 'Humidity': 49.2, 'Pressure': 1021.95, 'Irradiation': 634, 'Irr_max': 650, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:55:59] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:56:14,372 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:56:14,372 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:14,374 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:14,375 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:14,377 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.7, 'Temperature': 26.3, 'T_min': 22.3, 'T_max': 26.9, 'Humidity': 43.2, 'Pressure': 1005.25, 'Irradiation': 4, 'Irr_max': 96, 'Rain': 1.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:56:14] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:56:14,381 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:56:14,381 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:14,382 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:14,383 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:14,384 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 4.2, 'Temperature': 23.7, 'T_min': 21.6, 'T_max': 25.8, 'Humidity': 45.4, 'Pressure': 1006.05, 'Irradiation': 104, 'Irr_max': 122, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:56:14] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:56:14,388 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:56:14,388 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:14,389 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:14,391 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:14,392 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.65, 'Temperature': 26.3, 'T_min': 21.3, 'T_max': 27.1, 'Humidity': 79.8, 'Pressure': 1021.7, 'Irradiation': 656, 'Irr_max': 734, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:56:14] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:56:14,395 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:56:14,395 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:14,396 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:14,397 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:14,397 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 4.15, 'Temperature': 29.5, 'T_min': 27.4, 'T_max': 33.7, 'Humidity': 70.4, 'Pressure': 983.05, 'Irradiation': 788, 'Irr_max': 812, 'Rain': 8.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:56:14] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:56:29,409 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:56:29,409 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:29,410 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:29,412 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:29,414 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.65, 'Temperature': 16.0, 'T_min': 12.6, 'T_max': 19.2, 'Humidity': 57.4, 'Pressure': 1001.4, 'Irradiation': 258, 'Irr_max': 310, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:56:29] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:56:29,419 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:56:29,419 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:29,419 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:29,421 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:29,422 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.9, 'Temperature': 25.3, 'T_min': 25.3, 'T_max': 25.8, 'Humidity': 35.2, 'Pressure': 997.55, 'Irradiation': 468, 'Irr_max': 510, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:56:29] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:56:29,426 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:56:29,426 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:29,426 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:29,427 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:29,428 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 4.15, 'Temperature': 24.1, 'T_min': 21.1, 'T_max': 26.5, 'Humidity': 79.0, 'Pressure': 988.95, 'Irradiation': 104, 'Irr_max': 168, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:56:29] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:56:29,431 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:56:29,431 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:29,432 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:29,432 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:29,433 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 3.95, 'Temperature': 17.9, 'T_min': 15.4, 'T_max': 19.8, 'Humidity': 42.0, 'Pressure': 1029.3, 'Irradiation': 160, 'Irr_max': 214, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:56:29] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:56:44,445 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:56:44,445 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:44,447 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:44,448 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:44,450 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.7, 'Temperature': 25.3, 'T_min': 24.3, 'T_max': 29.1, 'Humidity': 30.8, 'Pressure': 999.25, 'Irradiation': 438, 'Irr_max': 466, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:56:44] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:56:44,454 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:56:44,454 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:44,455 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:44,456 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:44,457 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.65, 'Temperature': 21.2, 'T_min': 19.2, 'T_max': 23.1, 'Humidity': 58.0, 'Pressure': 1019.2, 'Irradiation': 424, 'Irr_max': 458, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:56:44] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:56:44,462 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:56:44,462 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:44,463 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:44,464 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:44,465 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.7, 'Temperature': 18.4, 'T_min': 16.6, 'T_max': 21.7, 'Humidity': 34.0, 'Pressure': 1028.25, 'Irradiation': 758, 'Irr_max': 790, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:56:44] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:56:44,468 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:56:44,468 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:44,469 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:44,470 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:44,470 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 4.05, 'Temperature': 21.7, 'T_min': 17.0, 'T_max': 26.0, 'Humidity': 56.0, 'Pressure': 1014.4, 'Irradiation': 0, 'Irr_max': 78, 'Rain': 9.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:56:44] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:56:59,482 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:56:59,483 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:59,484 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:59,486 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:59,487 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.65, 'Temperature': 22.3, 'T_min': 21.3, 'T_max': 23.2, 'Humidity': 54.2, 'Pressure': 984.3, 'Irradiation': 424, 'Irr_max': 502, 'Rain': 7.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:56:59] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:56:59,491 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:56:59,491 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:59,492 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:59,493 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:59,494 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.9, 'Temperature': 22.6, 'T_min': 17.9, 'T_max': 24.0, 'Humidity': 36.2, 'Pressure': 981.7, 'Irradiation': 544, 'Irr_max': 550, 'Rain': 2.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:56:59] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:56:59,498 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:56:59,498 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:59,499 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:59,500 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:59,501 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 4.2, 'Temperature': 22.3, 'T_min': 20.4, 'T_max': 23.2, 'Humidity': 66.2, 'Pressure': 1020.75, 'Irradiation': 446, 'Irr_max': 520, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:56:59] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:56:59,504 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:56:59,504 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:59,505 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:59,505 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:56:59,506 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 3.85, 'Temperature': 16.4, 'T_min': 14.8, 'T_max': 20.0, 'Humidity': 53.8, 'Pressure': 1004.1, 'Irradiation': 190, 'Irr_max': 206, 'Rain': 8.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:56:59] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:57:14,521 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 09:57:14,533 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:57:14,536 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:57:14,537 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:57:14,537 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 4.0, 'Temperature': 19.4, 'T_min': 14.5, 'T_max': 20.3, 'Humidity': 33.8, 'Pressure': 1004.3, 'Irradiation': 748, 'Irr_max': 804, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:57:14] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:57:14,540 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 09:57:14,540 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:57:14,540 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:57:14,541 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:57:14,541 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.75, 'Temperature': 25.8, 'T_min': 23.9, 'T_max': 29.0, 'Humidity': 38.0, 'Pressure': 985.55, 'Irradiation': 602, 'Irr_max': 668, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:57:14] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:57:14,543 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 09:57:14,543 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:57:14,544 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:57:14,544 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:57:14,545 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.8, 'Temperature': 19.7, 'T_min': 16.8, 'T_max': 20.2, 'Humidity': 71.2, 'Pressure': 1006.8, 'Irradiation': 778, 'Irr_max': 808, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:57:14] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 09:57:14,546 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 09:57:14,547 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:57:14,547 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:57:14,548 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 09:57:14,549 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 4.0, 'Temperature': 20.4, 'T_min': 20.2, 'T_max': 21.5, 'Humidity': 63.2, 'Pressure': 983.7, 'Irradiation': 110, 'Irr_max': 118, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 09:57:14] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 10:04:30,115 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 10:04:30,118 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:04:30,121 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:04:30,122 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:04:30,123 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.6, 'Temperature': 18.6, 'T_min': 18.1, 'T_max': 19.8, 'Humidity': 41.4, 'Pressure': 1026.65, 'Irradiation': 192, 'Irr_max': 256, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 10:04:30] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 10:04:30,129 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 10:04:30,129 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:04:30,130 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:04:30,132 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:04:30,133 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.85, 'Temperature': 28.8, 'T_min': 26.3, 'T_max': 28.9, 'Humidity': 46.8, 'Pressure': 1012.4, 'Irradiation': 146, 'Irr_max': 204, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 10:04:30] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 10:04:30,136 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 10:04:30,136 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:04:30,137 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:04:30,138 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:04:30,139 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.7, 'Temperature': 16.2, 'T_min': 15.5, 'T_max': 18.8, 'Humidity': 65.4, 'Pressure': 993.8, 'Irradiation': 794, 'Irr_max': 834, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 10:04:30] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 10:04:30,142 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 10:04:30,142 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:04:30,142 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:04:30,143 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:04:30,144 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 4.0, 'Temperature': 22.1, 'T_min': 18.0, 'T_max': 24.7, 'Humidity': 36.4, 'Pressure': 1023.95, 'Irradiation': 568, 'Irr_max': 594, 'Rain': 10.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 10:04:30] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 10:04:45,156 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 10:04:45,157 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:04:45,160 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:04:45,161 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:04:45,162 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.7, 'Temperature': 24.9, 'T_min': 21.1, 'T_max': 26.7, 'Humidity': 65.0, 'Pressure': 1019.5, 'Irradiation': 370, 'Irr_max': 404, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 10:04:45] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 10:04:45,167 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 10:04:45,167 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:04:45,168 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:04:45,169 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:04:45,170 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.75, 'Temperature': 29.3, 'T_min': 27.6, 'T_max': 29.8, 'Humidity': 62.0, 'Pressure': 1011.5, 'Irradiation': 706, 'Irr_max': 782, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 10:04:45] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 10:04:45,174 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 10:04:45,174 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:04:45,175 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:04:45,176 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:04:45,177 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.65, 'Temperature': 29.0, 'T_min': 27.5, 'T_max': 30.6, 'Humidity': 42.2, 'Pressure': 1004.6, 'Irradiation': 446, 'Irr_max': 544, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 10:04:45] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 10:04:45,180 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 10:04:45,180 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:04:45,180 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:04:45,181 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:04:45,182 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 4.05, 'Temperature': 20.6, 'T_min': 18.0, 'T_max': 24.4, 'Humidity': 40.6, 'Pressure': 1018.8, 'Irradiation': 416, 'Irr_max': 440, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 10:04:45] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 10:05:00,192 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 10:05:00,194 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:00,196 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:00,198 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:00,199 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 4.1, 'Temperature': 21.1, 'T_min': 16.8, 'T_max': 21.7, 'Humidity': 33.6, 'Pressure': 983.5, 'Irradiation': 584, 'Irr_max': 644, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 10:05:00] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 10:05:00,204 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 10:05:00,205 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:00,206 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:00,207 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:00,208 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.95, 'Temperature': 29.6, 'T_min': 26.8, 'T_max': 30.4, 'Humidity': 74.8, 'Pressure': 996.9, 'Irradiation': 680, 'Irr_max': 750, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 10:05:00] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 10:05:00,211 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 10:05:00,212 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:00,212 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:00,213 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:00,214 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 4.1, 'Temperature': 22.1, 'T_min': 19.1, 'T_max': 23.6, 'Humidity': 56.4, 'Pressure': 981.5, 'Irradiation': 378, 'Irr_max': 478, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 10:05:00] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 10:05:00,216 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 10:05:00,216 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:00,217 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:00,217 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:00,218 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 4.0, 'Temperature': 15.4, 'T_min': 10.9, 'T_max': 20.4, 'Humidity': 63.0, 'Pressure': 985.5, 'Irradiation': 270, 'Irr_max': 342, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 10:05:00] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 10:05:15,229 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 10:05:15,230 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:15,231 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:15,233 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:15,234 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 4.1, 'Temperature': 21.4, 'T_min': 20.9, 'T_max': 25.1, 'Humidity': 59.6, 'Pressure': 1014.25, 'Irradiation': 80, 'Irr_max': 136, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 10:05:15] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 10:05:15,239 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 10:05:15,240 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:15,240 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:15,241 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:15,242 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.9, 'Temperature': 25.9, 'T_min': 22.6, 'T_max': 27.1, 'Humidity': 74.0, 'Pressure': 1016.35, 'Irradiation': 210, 'Irr_max': 218, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 10:05:15] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 10:05:15,246 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 10:05:15,246 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:15,247 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:15,249 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:15,250 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.95, 'Temperature': 17.6, 'T_min': 16.7, 'T_max': 22.0, 'Humidity': 43.6, 'Pressure': 984.1, 'Irradiation': 252, 'Irr_max': 338, 'Rain': 6.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 10:05:15] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 10:05:15,253 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 10:05:15,253 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:15,254 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:15,255 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:15,255 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 4.05, 'Temperature': 16.5, 'T_min': 14.9, 'T_max': 21.2, 'Humidity': 60.4, 'Pressure': 1013.45, 'Irradiation': 476, 'Irr_max': 536, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 10:05:15] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 10:05:30,265 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 10:05:30,266 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:30,267 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:30,268 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:30,269 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 4.15, 'Temperature': 24.5, 'T_min': 22.2, 'T_max': 25.7, 'Humidity': 66.0, 'Pressure': 1015.7, 'Irradiation': 280, 'Irr_max': 314, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 10:05:30] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 10:05:30,273 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 10:05:30,273 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:30,274 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:30,275 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:30,276 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 4.2, 'Temperature': 19.0, 'T_min': 16.8, 'T_max': 19.4, 'Humidity': 50.2, 'Pressure': 1008.7, 'Irradiation': 408, 'Irr_max': 476, 'Rain': 6.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 10:05:30] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 10:05:30,279 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 10:05:30,279 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:30,280 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:30,281 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:30,282 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 4.15, 'Temperature': 16.9, 'T_min': 12.9, 'T_max': 21.6, 'Humidity': 43.0, 'Pressure': 988.35, 'Irradiation': 740, 'Irr_max': 744, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 10:05:30] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 10:05:30,284 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 10:05:30,284 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:30,284 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:30,284 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:30,285 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 4.05, 'Temperature': 17.5, 'T_min': 16.8, 'T_max': 19.2, 'Humidity': 73.0, 'Pressure': 1029.65, 'Irradiation': 118, 'Irr_max': 208, 'Rain': 2.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 10:05:30] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 10:05:45,296 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 10:05:45,297 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:45,299 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:45,300 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:45,301 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.9, 'Temperature': 24.8, 'T_min': 20.1, 'T_max': 29.6, 'Humidity': 55.4, 'Pressure': 1003.95, 'Irradiation': 224, 'Irr_max': 268, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 10:05:45] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 10:05:45,306 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 10:05:45,306 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:45,307 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:45,308 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:45,309 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 4.0, 'Temperature': 29.7, 'T_min': 26.2, 'T_max': 33.7, 'Humidity': 38.8, 'Pressure': 995.35, 'Irradiation': 518, 'Irr_max': 538, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 10:05:45] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 10:05:45,313 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 10:05:45,313 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:45,314 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:45,315 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:45,316 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.65, 'Temperature': 22.0, 'T_min': 17.2, 'T_max': 23.4, 'Humidity': 78.0, 'Pressure': 1015.55, 'Irradiation': 390, 'Irr_max': 398, 'Rain': 5.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 10:05:45] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 10:05:45,320 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 10:05:45,320 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:45,320 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:45,321 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:05:45,322 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 3.8, 'Temperature': 27.4, 'T_min': 24.2, 'T_max': 31.6, 'Humidity': 55.2, 'Pressure': 1027.1, 'Irradiation': 360, 'Irr_max': 450, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 10:05:45] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 10:08:46,018 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 10:08:46,020 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:08:46,023 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:08:46,025 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:08:46,026 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 4.2, 'Temperature': 29.8, 'T_min': 29.4, 'T_max': 30.2, 'Humidity': 58.6, 'Pressure': 985.5, 'Irradiation': 432, 'Irr_max': 520, 'Rain': 7.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 10:08:46] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 10:08:46,031 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 10:08:46,031 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:08:46,032 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:08:46,033 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:08:46,034 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.85, 'Temperature': 16.6, 'T_min': 15.8, 'T_max': 20.7, 'Humidity': 55.0, 'Pressure': 982.6, 'Irradiation': 396, 'Irr_max': 396, 'Rain': 6.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 10:08:46] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 10:08:46,037 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 10:08:46,037 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:08:46,037 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:08:46,038 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:08:46,039 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.7, 'Temperature': 22.1, 'T_min': 19.7, 'T_max': 24.9, 'Humidity': 43.0, 'Pressure': 1020.65, 'Irradiation': 698, 'Irr_max': 762, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 10:08:46] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 10:08:46,041 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 10:08:46,041 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:08:46,042 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:08:46,042 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:08:46,043 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 3.65, 'Temperature': 17.2, 'T_min': 15.5, 'T_max': 18.7, 'Humidity': 42.8, 'Pressure': 1009.35, 'Irradiation': 140, 'Irr_max': 198, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 10:08:46] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 10:09:01,054 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-02-23 10:09:01,055 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:09:01,057 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:09:01,059 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:09:01,060 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.65, 'Temperature': 24.6, 'T_min': 23.6, 'T_max': 29.5, 'Humidity': 34.8, 'Pressure': 997.5, 'Irradiation': 672, 'Irr_max': 738, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 10:09:01] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 10:09:01,065 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-02-23 10:09:01,065 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:09:01,066 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:09:01,067 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:09:01,069 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 4.2, 'Temperature': 18.4, 'T_min': 15.0, 'T_max': 20.2, 'Humidity': 69.2, 'Pressure': 1000.25, 'Irradiation': 266, 'Irr_max': 336, 'Rain': 2.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 10:09:01] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 10:09:01,072 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-02-23 10:09:01,072 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:09:01,072 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:09:01,073 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:09:01,074 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.95, 'Temperature': 19.7, 'T_min': 18.7, 'T_max': 22.4, 'Humidity': 42.0, 'Pressure': 1015.55, 'Irradiation': 772, 'Irr_max': 872, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 10:09:01] "POST /uplink HTTP/1.1" 200 -
+2026-02-23 10:09:01,077 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-02-23 10:09:01,077 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:09:01,077 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:09:01,078 - database - INFO - Nutze SQLite Fallback.
+2026-02-23 10:09:01,079 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 4.15, 'Temperature': 21.9, 'T_min': 19.2, 'T_max': 21.9, 'Humidity': 45.6, 'Pressure': 988.8, 'Irradiation': 336, 'Irr_max': 390, 'Rain': 0.0, 'Rain_min_time': 0.0}
+127.0.0.1 - - [23/Feb/2026 10:09:01] "POST /uplink HTTP/1.1" 200 -

@@ -44,6 +44,16 @@ def home():
         return render_template("index.html", show_login=True)
     return render_template("index.html", show_login=False)
 
+@app.route("/display")
+def display():
+    """
+    Optimierte Ansicht für Raspberry Pi Displays.
+    Wechselt automatisch zwischen den Sensoren.
+    """
+    if 'user_id' not in session:
+        return redirect(url_for('home'))
+    return render_template("display.html")
+
 def init_app_db():
     """Initialisiert die Datenbanktabellen beim Start der App."""
     try:
