@@ -49,7 +49,19 @@ def display():
     """
     Optimierte Ansicht für Raspberry Pi Displays.
     Wechselt automatisch zwischen den Sensoren.
+    Kann mit ?token=<DISPLAY_TOKEN> aufgerufen werden, um den Login zu umgehen.
     """
+    token = request.args.get('token')
+    expected_token = os.getenv("DISPLAY_TOKEN")
+    
+    # Check for bypass token
+    if expected_token and token == expected_token:
+        # Auto-login as Kiosk user (using ID 1 for data access)
+        session['user_id'] = 1
+        session['username'] = 'Kiosk'
+        session['is_admin'] = False
+        logger.info("Auto-login via Display-Token erfolgreich.")
+
     if 'user_id' not in session:
         return redirect(url_for('home'))
     return render_template("display.html")
