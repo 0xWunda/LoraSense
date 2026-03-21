@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoraSense Display</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: #0f172a;
+            color: white;
+            overflow: hidden;
+        }
+
+        .glass {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .fade-enter-active,
+        .fade-leave-active {
+            transition: opacity 0.5s ease;
+        }
+
+        .fade-enter-from,
+        .fade-leave-to {
+            opacity: 0;
+        }
+
+        .value-card {
+            transition: transform 0.2s ease;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+
+<body class="bg-[#0f172a]">
+    <div id="app" v-cloak class="h-screen flex flex-col p-6 lg:p-12">
+        <!-- Header -->
+        <header class="flex justify-between items-center mb-8">
+            <div class="flex items-center gap-4">
+                <div class="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center p-1.5">
+                    <img src="{{ url_for('static', filename='images/LoRaSense_Logo.png') }}" alt="Logo"
+                        class="w-full h-full object-contain">
+                </div>
+                <h1 class="text-2xl font-bold tracking-tight">Lora<span class="text-[#00AEEF]">Sense</span></h1>
+            </div>
+            <div class="flex items-center gap-4 text-gray-400">
+                <div class="flex items-center gap-2">
+                    <div class="w-2 h-2 rounded-full" :class="isConnected ? 'bg-[#00AEEF]' : 'bg-red-500'"></div>
+                    <span class="text-sm font-medium">[[ currentTime ]]</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Content -->
+        <main class="flex-1 flex flex-col justify-center">
+            <transition name="fade" mode="out-in">
+                <div v-if="currentSensor" :key="currentSensor.id" class="space-y-8">
+                    <!-- Sensor Name & Meta -->
+                    <div class="text-center">
+                        <h2
+                            class="text-5xl lg:text-7xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
+                            [[ currentSensor.name ]]
+                        </h2>
+                        <div class="flex justify-center items-center gap-4 text-gray-400 text-lg">
+                            <i data-lucide="clock" class="w-5 h-5"></i>
+                            <span>Zuletzt gesehen: [[ formatTime(currentSensor.last_seen) ]]</span>
+                        </div>
+                    </div>
+
+                    <!-- Grid of values -->
+                    <div class="grid grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Temperature -->
+                        <div v-if="currentSensor.latest_values.Temperature !== undefined"
+                            class="glass p-8 rounded-3xl value-card flex flex-col items-center justify-center text-center">
+                            <i data-lucide="thermometer" class="w-10 h-10 text-[#00AEEF] mb-4"></i>
+                            <div class="text-4xl lg:text-5xl font-bold mb-1">[[ currentSensor.latest_values.Temperature
+                                ]]<span class="text-2xl text-gray-500 ml-1">°C</span></div>
+                            <div class="text-gray-400 font-medium uppercase tracking-wider text-xs">Temperatur</div>
+                        </div>
+
+                        <!-- Humidity -->
+                        <div v-if="currentSensor.latest_values.Humidity !== undefined"
+                            class="glass p-8 rounded-3xl value-card flex flex-col items-center justify-center text-center">
+                            <i data-lucide="droplets" class="w-10 h-10 text-sky-400 mb-4"></i>
+                            <div class="text-4xl lg:text-5xl font-bold mb-1">[[ currentSensor.latest_values.Humidity
+                                ]]<span class="text-2xl text-gray-500 ml-1">%</span></div>
+                            <div class="text-gray-400 font-medium uppercase tracking-wider text-xs">Feuchtigkeit</div>
+                        </div>
+
+                        <!-- Pressure -->
+                        <div v-if="currentSensor.latest_values.Pressure !== undefined"
+                            class="glass p-8 rounded-3xl value-card flex flex-col items-center justify-center text-center">
+                            <i data-lucide="gauge" class="w-10 h-10 text-emerald-400 mb-4"></i>
+                            <div class="text-4xl lg:text-5xl font-bold mb-1">[[ currentSensor.latest_values.Pressure
+                                ]]<span class="text-xl text-gray-500 ml-1">hPa</span></div>
+                            <div class="text-gray-400 font-medium uppercase tracking-wider text-xs">Luftdruck</div>
+                        </div>
+
+                        <!-- Battery -->
+                        <div v-if="currentSensor.latest_values.Battery !== undefined"
+                            class="glass p-8 rounded-3xl value-card flex flex-col items-center justify-center text-center">
+                            <i data-lucide="battery" class="w-10 h-10 text-amber-400 mb-4"></i>
+                            <div class="text-4xl lg:text-5xl font-bold mb-1">[[ currentSensor.latest_values.Battery
+                                ]]<span class="text-2xl text-gray-500 ml-1">V</span></div>
+                            <div class="text-gray-400 font-medium uppercase tracking-wider text-xs">Batterie</div>
+                        </div>
+
+                        <!-- Rain -->
+                        <div v-if="currentSensor.latest_values.Rain !== undefined"
+                            class="glass p-8 rounded-3xl value-card flex flex-col items-center justify-center text-center">
+                            <i data-lucide="cloud-rain" class="w-10 h-10 text-blue-400 mb-4"></i>
+                            <div class="text-4xl lg:text-5xl font-bold mb-1">[[ currentSensor.latest_values.Rain ]]<span
+                                    class="text-2xl text-gray-500 ml-1">mm</span></div>
+                            <div class="text-gray-400 font-medium uppercase tracking-wider text-xs">Regen</div>
+                        </div>
+
+                        <!-- Irradiation -->
+                        <div v-if="currentSensor.latest_values.Irradiation !== undefined"
+                            class="glass p-8 rounded-3xl value-card flex flex-col items-center justify-center text-center">
+                            <i data-lucide="sun" class="w-10 h-10 text-yellow-500 mb-4"></i>
+                            <div class="text-4xl lg:text-5xl font-bold mb-1">[[ currentSensor.latest_values.Irradiation
+                                ]]<span class="text-lg text-gray-500 ml-1">W/m²</span></div>
+                            <div class="text-gray-400 font-medium uppercase tracking-wider text-xs">Einstrahlung</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loading State -->
+                <div v-else class="text-center text-gray-500">
+                    <div
+                        class="animate-spin w-12 h-12 border-4 border-[#00AEEF] border-t-transparent rounded-full mx-auto mb-4">
+                    </div>
+                    <p class="text-xl">Lade Sensordaten...</p>
+                </div>
+            </transition>
+        </main>
+
+        <!-- Footer / Progress Bar -->
+        <footer class="mt-8">
+            <div class="w-full bg-white/5 h-1 rounded-full overflow-hidden">
+                <div class="h-full bg-[#00AEEF] transition-all duration-1000 ease-linear"
+                    :style="{ width: progress + '%' }"></div>
+            </div>
+            <div class="flex justify-between mt-2 text-xs text-gray-500 font-bold uppercase tracking-widest">
+                <span>Auto-Cycle: 30s</span>
+                <span>[[ currentIndex + 1 ]] / [[ sensors.length ]]</span>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const { createApp, ref, onMounted, computed, watch, nextTick } = Vue;
+
+        createApp({
+            delimiters: ['[[', ']]'],
+            setup() {
+                const sensors = ref([]);
+                const currentIndex = ref(0);
+                const isConnected = ref(true);
+                const currentTime = ref('');
+                const progress = ref(0);
+                const CYCLE_TIME = 30000; // 30 seconds
+
+                const currentSensor = computed(() => {
+                    return sensors.value[currentIndex.value] || null;
+                });
+
+                const fetchSensors = async () => {
+                    try {
+                        const res = await fetch('/api/sensors');
+                        if (res.ok) {
+                            const newSensors = await res.json();
+                            sensors.value = newSensors;
+                            isConnected.value = true;
+                        }
+                    } catch (e) {
+                        console.error("Fetch error", e);
+                        isConnected.value = false;
+                    }
+                };
+
+                const updateTime = () => {
+                    const now = new Date();
+                    currentTime.value = now.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
+                };
+
+                const startCycle = () => {
+                    let startTime = Date.now();
+
+                    setInterval(() => {
+                        const elapsed = Date.now() - startTime;
+                        progress.value = Math.min((elapsed / CYCLE_TIME) * 100, 100);
+
+                        if (elapsed >= CYCLE_TIME) {
+                            currentIndex.value = (currentIndex.value + 1) % sensors.value.length;
+                            startTime = Date.now();
+                            progress.value = 0;
+                            // Re-init lucide icons for the new sensor view
+                            nextTick(() => lucide.createIcons());
+                        }
+                    }, 100);
+                };
+
+                const formatTime = (iso) => {
+                    if (!iso || iso === 'N/A') return 'N/A';
+                    return new Date(iso).toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+                };
+
+                onMounted(() => {
+                    fetchSensors();
+                    updateTime();
+                    setInterval(updateTime, 1000);
+                    setInterval(fetchSensors, 10000); // Background update every 10s
+                    startCycle();
+                    lucide.createIcons();
+                });
+
+                watch(currentSensor, () => {
+                    nextTick(() => lucide.createIcons());
+                });
+
+                return {
+                    sensors, currentIndex, currentSensor, isConnected, currentTime, progress, formatTime
+                };
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>
