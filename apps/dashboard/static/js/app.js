@@ -426,8 +426,19 @@ const app = createApp({
                         maintainAspectRatio: false,
                         plugins: { legend: { display: false } },
                         scales: {
-                            x: { grid: { display: false }, ticks: { color: '#94a3b8' } },
-                            y: { grid: { color: '#ffffff10' }, ticks: { color: '#94a3b8' } }
+                            x: { 
+                                grid: { display: false }, 
+                                ticks: { 
+                                    color: '#94a3b8',
+                                    maxTicksLimit: 6,
+                                    maxRotation: 0,
+                                    autoSkip: true
+                                } 
+                            },
+                            y: { 
+                                grid: { color: '#ffffff10' }, 
+                                ticks: { color: '#94a3b8' } 
+                            }
                         }
                     }
                 });

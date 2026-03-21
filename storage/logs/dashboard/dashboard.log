@@ -27,3 +27,11 @@
 2026-03-21 08:25:31,098 - dashboard - INFO - Login erfolgreich: admin
 2026-03-21 08:28:44,609 - dashboard - INFO - Login-Versuch für Benutzer: admin
 2026-03-21 08:28:44,665 - dashboard - INFO - Login erfolgreich: admin
+2026-03-21 08:59:43,054 - dashboard - INFO - Login-Versuch für Benutzer: testuser
+2026-03-21 08:59:43,114 - dashboard - INFO - Login erfolgreich: testuser
+2026-03-21 08:59:52,005 - dashboard - INFO - Login-Versuch für Benutzer: admin
+2026-03-21 08:59:52,063 - dashboard - INFO - Login erfolgreich: admin
+2026-03-21 09:01:35,695 - dashboard - INFO - Login-Versuch für Benutzer: admin
+2026-03-21 09:01:35,752 - dashboard - INFO - Login erfolgreich: admin
+2026-03-21 09:07:12,134 - dashboard - INFO - Login-Versuch für Benutzer: admin
+2026-03-21 09:07:12,194 - dashboard - INFO - Login erfolgreich: admin
