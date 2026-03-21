@@ -66,3 +66,125 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.2);
 }
+
+/* Whitemode & Print Styles */
+.light-mode {
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
+}
+
+.light-mode ::selection {
+    background-color: rgba(0, 174, 239, 0.2) !important;
+}
+
+.light-mode .glass, 
+.light-mode .glass-card, 
+.light-mode .glass-sidebar,
+.light-mode .bg-white\/5 {
+    background: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03) !important;
+}
+
+.light-mode .text-white {
+    color: #0f172a !important;
+}
+
+.light-mode .text-gray-400,
+.light-mode .text-gray-500 {
+    color: #475569 !important;
+}
+
+.light-mode .bg-\[\#0f172a\] {
+    background-color: #f1f5f9 !important;
+}
+
+.light-mode .from-white {
+    background: none !important;
+    -webkit-text-fill-color: unset !important;
+    color: #0f172a !important;
+}
+
+/* Base text overrides for charts and numbers in light mode */
+.light-mode canvas + div, .light-mode .text-lg, .light-mode .text-4xl {
+    color: #0f172a !important;
+}
+
+/* Login Form Overrides */
+.light-mode input.bg-\[\#005696\] {
+    background-color: #f1f5f9 !important;
+    border-color: #cbd5e1 !important;
+    color: #0f172a !important;
+}
+
+.light-mode input.bg-\[\#005696\]::placeholder {
+    color: #94a3b8 !important;
+}
+
+@media print {
+    body, #app, main {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+    }
+    
+    .glass, .glass-card, .bg-white\/5 {
+        background: #ffffff !important;
+        border: 1px solid #cbd5e1 !important;
+        box-shadow: none !important;
+        color: #000000 !important;
+        break-inside: avoid;
+    }
+    
+    .glass-sidebar { 
+        display: none !important; 
+    }
+    
+    button, 
+    header .flex.items-center.gap-4 { 
+        display: none !important; 
+    }
+    
+    main {
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow: visible !important;
+    }
+    
+    #app {
+        display: block !important;
+        height: auto !important;
+        overflow: visible !important;
+    }
+    
+    canvas {
+        min-height: 250px;
+        max-width: 100% !important;
+        page-break-inside: avoid;
+    }
+    
+    .text-white,
+    .text-gray-400,
+    .text-gray-500 {
+        color: #000000 !important;
+    }
+    
+    .from-white {
+        background: none !important;
+        -webkit-text-fill-color: unset !important;
+        color: #000000 !important;
+    }
+    
+    .metric-card {
+        page-break-inside: avoid;
+    }
+    
+    /* Ensure grids layout nicely */
+    .grid {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 1rem !important;
+    }
+    .grid > * {
+        flex: 1 1 calc(50% - 1rem) !important;
+    }
+}

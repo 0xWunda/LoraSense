@@ -93,6 +93,13 @@
                         class="glass px-6 py-2 rounded-xl text-sm font-bold flex items-center gap-2 hover:bg-[#00AEEF] hover:text-white transition-all active:scale-95 shadow-lg shadow-[#00AEEF]/20">
                         <i data-lucide="plus" class="w-4 h-4"></i> Sensor hinzufügen
                     </button>
+                    <!-- Whitemode Toggle -->
+                    <button @click="toggleLightMode" 
+                        class="glass p-2 rounded-xl flex items-center justify-center hover:bg-white/10 transition-all shadow-lg text-gray-400 hover:text-white"
+                        title="Druck-Ansicht (Whitemode) umschalten">
+                        <i :data-lucide="isLightMode ? 'moon' : 'sun'" class="w-5 h-5"></i>
+                    </button>
+                    <!-- User Profile -->
                     <div class="glass px-4 py-2 rounded-xl flex items-center gap-3">
                         <div
                             class="w-8 h-8 rounded-full bg-gradient-to-br from-[#005696] to-[#00AEEF] flex items-center justify-center text-xs font-bold">

@@ -9,3 +9,21 @@
 2026-02-23 08:08:03,793 - dashboard - INFO - Login erfolgreich: admin
 2026-02-23 09:10:17,875 - dashboard - INFO - Login-Versuch für Benutzer: admin
 2026-02-23 09:10:17,958 - dashboard - INFO - Login erfolgreich: admin
+2026-03-21 08:19:06,847 - dashboard - INFO - Login-Versuch für Benutzer: admin
+2026-03-21 08:19:06,914 - dashboard - INFO - Login erfolgreich: admin
+2026-03-21 08:23:47,209 - dashboard - INFO - Login-Versuch für Benutzer: admin
+2026-03-21 08:23:47,279 - dashboard - INFO - Login erfolgreich: admin
+2026-03-21 08:23:49,961 - dashboard - INFO - Login-Versuch für Benutzer: admin
+2026-03-21 08:23:50,030 - dashboard - INFO - Login erfolgreich: admin
+2026-03-21 08:23:52,377 - dashboard - INFO - Login-Versuch für Benutzer: admin
+2026-03-21 08:23:52,450 - dashboard - INFO - Login erfolgreich: admin
+2026-03-21 08:23:58,896 - dashboard - INFO - Login-Versuch für Benutzer: 
+2026-03-21 08:23:58,899 - dashboard - WARNING - Login fehlgeschlagen: Benutzer  nicht gefunden
+2026-03-21 08:23:59,675 - dashboard - INFO - Login-Versuch für Benutzer: 
+2026-03-21 08:23:59,677 - dashboard - WARNING - Login fehlgeschlagen: Benutzer  nicht gefunden
+2026-03-21 08:24:02,185 - dashboard - INFO - Login-Versuch für Benutzer: admin
+2026-03-21 08:24:02,248 - dashboard - INFO - Login erfolgreich: admin
+2026-03-21 08:25:31,033 - dashboard - INFO - Login-Versuch für Benutzer: admin
+2026-03-21 08:25:31,098 - dashboard - INFO - Login erfolgreich: admin
+2026-03-21 08:28:44,609 - dashboard - INFO - Login-Versuch für Benutzer: admin
+2026-03-21 08:28:44,665 - dashboard - INFO - Login erfolgreich: admin

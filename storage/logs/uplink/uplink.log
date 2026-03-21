@@ -299,3 +299,33 @@
 2026-02-23 09:08:30,992 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 4.2, 'Temperature': 18.4, 'T_min': 13.7, 'T_max': 23.1, 'Humidity': 63.2, 'Pressure': 992.45, 'Irradiation': 716, 'Irr_max': 778, 'Rain': 8.0, 'Rain_min_time': 0.0}
 2026-02-23 09:08:30,998 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
 2026-02-23 09:08:31,002 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 4.2, 'Temperature': 21.4, 'T_min': 16.5, 'T_max': 23.1, 'Humidity': 77.8, 'Pressure': 1017.65, 'Irradiation': 534, 'Irr_max': 550, 'Rain': 0.0, 'Rain_min_time': 0.0}
+2026-03-21 08:21:55,706 - uplink - INFO - Verarbeite Uplink für Gerät: AABBCC01020307
+2026-03-21 08:21:55,714 - uplink - INFO - Daten erfolgreich in DB gespeichert für AABBCC01020307: {'Type': 1, 'Battery': 3.75, 'Temperature': 26.7, 'T_min': 24.9, 'T_max': 27.0, 'Humidity': 76.4, 'Pressure': 989.7, 'Irradiation': 132, 'Irr_max': 168, 'Rain': 0.0, 'Rain_min_time': 0.0}
+2026-03-21 08:22:25,740 - uplink - INFO - Verarbeite Uplink für Gerät: AABBCC01020307
+2026-03-21 08:22:25,750 - uplink - INFO - Daten erfolgreich in DB gespeichert für AABBCC01020307: {'Type': 1, 'Battery': 3.95, 'Temperature': 27.0, 'T_min': 25.8, 'T_max': 30.6, 'Humidity': 57.8, 'Pressure': 1026.7, 'Irradiation': 196, 'Irr_max': 234, 'Rain': 0.0, 'Rain_min_time': 0.0}
+2026-03-21 08:22:55,767 - uplink - INFO - Verarbeite Uplink für Gerät: AABBCC01020307
+2026-03-21 08:22:55,774 - uplink - INFO - Daten erfolgreich in DB gespeichert für AABBCC01020307: {'Type': 1, 'Battery': 3.8, 'Temperature': 16.7, 'T_min': 14.5, 'T_max': 20.3, 'Humidity': 52.0, 'Pressure': 1019.2, 'Irradiation': 734, 'Irr_max': 736, 'Rain': 0.0, 'Rain_min_time': 0.0}
+2026-03-21 08:23:25,793 - uplink - INFO - Verarbeite Uplink für Gerät: AABBCC01020307
+2026-03-21 08:23:25,804 - uplink - INFO - Daten erfolgreich in DB gespeichert für AABBCC01020307: {'Type': 1, 'Battery': 3.7, 'Temperature': 21.9, 'T_min': 18.5, 'T_max': 25.3, 'Humidity': 79.6, 'Pressure': 980.35, 'Irradiation': 362, 'Irr_max': 408, 'Rain': 0.0, 'Rain_min_time': 0.0}
+2026-03-21 08:23:55,831 - uplink - INFO - Verarbeite Uplink für Gerät: AABBCC01020307
+2026-03-21 08:23:55,838 - uplink - INFO - Daten erfolgreich in DB gespeichert für AABBCC01020307: {'Type': 1, 'Battery': 4.15, 'Temperature': 27.6, 'T_min': 24.2, 'T_max': 32.1, 'Humidity': 62.0, 'Pressure': 1002.3, 'Irradiation': 590, 'Irr_max': 648, 'Rain': 0.0, 'Rain_min_time': 0.0}
+2026-03-21 08:24:25,866 - uplink - INFO - Verarbeite Uplink für Gerät: AABBCC01020307
+2026-03-21 08:24:25,875 - uplink - INFO - Daten erfolgreich in DB gespeichert für AABBCC01020307: {'Type': 1, 'Battery': 3.9, 'Temperature': 18.8, 'T_min': 15.3, 'T_max': 23.5, 'Humidity': 39.6, 'Pressure': 1008.25, 'Irradiation': 750, 'Irr_max': 762, 'Rain': 0.0, 'Rain_min_time': 0.0}
+2026-03-21 08:24:55,900 - uplink - INFO - Verarbeite Uplink für Gerät: AABBCC01020307
+2026-03-21 08:24:55,909 - uplink - INFO - Daten erfolgreich in DB gespeichert für AABBCC01020307: {'Type': 1, 'Battery': 3.65, 'Temperature': 27.3, 'T_min': 23.6, 'T_max': 28.4, 'Humidity': 35.4, 'Pressure': 1009.05, 'Irradiation': 538, 'Irr_max': 638, 'Rain': 0.0, 'Rain_min_time': 0.0}
+2026-03-21 08:25:25,932 - uplink - INFO - Verarbeite Uplink für Gerät: AABBCC01020307
+2026-03-21 08:25:25,942 - uplink - INFO - Daten erfolgreich in DB gespeichert für AABBCC01020307: {'Type': 1, 'Battery': 3.9, 'Temperature': 26.1, 'T_min': 25.4, 'T_max': 30.6, 'Humidity': 61.0, 'Pressure': 1003.25, 'Irradiation': 572, 'Irr_max': 600, 'Rain': 1.0, 'Rain_min_time': 0.0}
+2026-03-21 08:25:55,947 - uplink - INFO - Verarbeite Uplink für Gerät: AABBCC01020307
+2026-03-21 08:25:55,954 - uplink - INFO - Daten erfolgreich in DB gespeichert für AABBCC01020307: {'Type': 1, 'Battery': 3.9, 'Temperature': 25.7, 'T_min': 25.3, 'T_max': 28.4, 'Humidity': 55.4, 'Pressure': 1029.75, 'Irradiation': 362, 'Irr_max': 394, 'Rain': 9.0, 'Rain_min_time': 0.0}
+2026-03-21 08:26:25,958 - uplink - INFO - Verarbeite Uplink für Gerät: AABBCC01020307
+2026-03-21 08:26:25,966 - uplink - INFO - Daten erfolgreich in DB gespeichert für AABBCC01020307: {'Type': 1, 'Battery': 3.95, 'Temperature': 27.6, 'T_min': 26.5, 'T_max': 30.2, 'Humidity': 72.2, 'Pressure': 988.25, 'Irradiation': 634, 'Irr_max': 652, 'Rain': 0.0, 'Rain_min_time': 0.0}
+2026-03-21 08:26:55,993 - uplink - INFO - Verarbeite Uplink für Gerät: AABBCC01020307
+2026-03-21 08:26:56,003 - uplink - INFO - Daten erfolgreich in DB gespeichert für AABBCC01020307: {'Type': 1, 'Battery': 3.8, 'Temperature': 23.7, 'T_min': 20.1, 'T_max': 24.5, 'Humidity': 73.2, 'Pressure': 1023.15, 'Irradiation': 328, 'Irr_max': 348, 'Rain': 0.0, 'Rain_min_time': 0.0}
+2026-03-21 08:27:26,018 - uplink - INFO - Verarbeite Uplink für Gerät: AABBCC01020307
+2026-03-21 08:27:26,026 - uplink - INFO - Daten erfolgreich in DB gespeichert für AABBCC01020307: {'Type': 1, 'Battery': 4.1, 'Temperature': 20.0, 'T_min': 18.7, 'T_max': 24.5, 'Humidity': 79.2, 'Pressure': 996.25, 'Irradiation': 490, 'Irr_max': 564, 'Rain': 7.0, 'Rain_min_time': 0.0}
+2026-03-21 08:27:56,040 - uplink - INFO - Verarbeite Uplink für Gerät: AABBCC01020307
+2026-03-21 08:27:56,048 - uplink - INFO - Daten erfolgreich in DB gespeichert für AABBCC01020307: {'Type': 1, 'Battery': 3.75, 'Temperature': 29.4, 'T_min': 25.7, 'T_max': 33.9, 'Humidity': 72.0, 'Pressure': 1013.4, 'Irradiation': 68, 'Irr_max': 86, 'Rain': 0.0, 'Rain_min_time': 0.0}
+2026-03-21 08:28:26,053 - uplink - INFO - Verarbeite Uplink für Gerät: AABBCC01020307
+2026-03-21 08:28:26,064 - uplink - INFO - Daten erfolgreich in DB gespeichert für AABBCC01020307: {'Type': 1, 'Battery': 3.6, 'Temperature': 26.4, 'T_min': 21.4, 'T_max': 29.1, 'Humidity': 39.4, 'Pressure': 1009.2, 'Irradiation': 410, 'Irr_max': 444, 'Rain': 0.0, 'Rain_min_time': 0.0}
+2026-03-21 08:28:56,078 - uplink - INFO - Verarbeite Uplink für Gerät: AABBCC01020307
+2026-03-21 08:28:56,086 - uplink - INFO - Daten erfolgreich in DB gespeichert für AABBCC01020307: {'Type': 1, 'Battery': 4.05, 'Temperature': 17.4, 'T_min': 12.8, 'T_max': 19.4, 'Humidity': 65.4, 'Pressure': 1013.9, 'Irradiation': 104, 'Irr_max': 130, 'Rain': 0.0, 'Rain_min_time': 0.0}

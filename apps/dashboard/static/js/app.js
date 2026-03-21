@@ -21,6 +21,9 @@ const app = createApp({
         /** @type {import('vue').Ref<string>} Aktive Ansicht (dashboard, detail, history, admin) */
         const currentView = ref('dashboard');
 
+        /** @type {import('vue').Ref<boolean>} Gibt an, ob der Whitemode aktiv ist */
+        const isLightMode = ref(localStorage.getItem('lorasense_lightmode') === 'true');
+
         /** @type {import('vue').Ref<Array>} Liste der verfügbaren Sensoren */
         const sensors = ref([]);
 
@@ -122,6 +125,18 @@ const app = createApp({
             isLoggedIn.value = false;
             currentView.value = 'dashboard';
             selectedSensor.value = null;
+        };
+
+        /** Toggelt den Whitemode und wendet die CSS-Klasse manuell an */
+        const toggleLightMode = () => {
+            isLightMode.value = !isLightMode.value;
+            localStorage.setItem('lorasense_lightmode', isLightMode.value ? 'true' : 'false');
+            if (isLightMode.value) {
+                document.body.classList.add('light-mode');
+            } else {
+                document.body.classList.remove('light-mode');
+            }
+            nextTick(() => lucide.createIcons());
         };
 
         /** 
@@ -487,6 +502,7 @@ const app = createApp({
 
         // --- LIFECYCLE HOOKS ---
         onMounted(() => {
+            if (isLightMode.value) document.body.classList.add('light-mode');
             // Lucide Icons initialisieren
             lucide.createIcons();
             // Auth-Status prüfen
@@ -501,6 +517,7 @@ const app = createApp({
         });
 
         return {
+            isLightMode, toggleLightMode,
             isLoggedIn, username, isAdmin, currentView, sensors, selectedSensor, sensorData,
             isConnected, loginForm, loginError, login, logout, selectSensor, deleteSensor,
             viewTitle, viewSubtitle, avgTemp, allData, formatDateTime,
