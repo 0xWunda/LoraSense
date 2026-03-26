@@ -5,7 +5,6 @@ Die Daten werden dekodiert, validiert und in der Datenbank gespeichert.
 """
 
 from flask import Flask, request, jsonify
-import os
 import json
 import base64
 from datetime import datetime

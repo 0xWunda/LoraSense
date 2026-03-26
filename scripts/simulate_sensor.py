@@ -3,8 +3,6 @@ import time
 import random
 import base64
 import argparse
-import sys
-import json
 from datetime import datetime, timedelta
 
 # URL of the Uplink Service (locally)

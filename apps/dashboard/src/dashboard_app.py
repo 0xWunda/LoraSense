@@ -4,7 +4,6 @@ Verwaltet API-Endpunkte, Benutzer-Sessions und die Bereitstellung des Frontends.
 """
 
 from flask import Flask, render_template, jsonify, Response, request, session, redirect, url_for
-import json
 import io
 import csv
 from datetime import datetime
@@ -240,21 +239,6 @@ def api_sensor_data(sensor_id):
     # Die letzten 100 Datenpunkte abrufen
     data = database.get_latest_data(limit=100, sensor_id=sensor_id)
     return jsonify(data)
-
-    # Check access
-    has_access = False
-    if sensor_id in allowed_ids:
-        has_access = True
-    elif is_admin:
-        # Admin can access all sensors by default if they exist in DB
-        # Note: database.get_allowed_sensors(admin) already returns all sensors with data
-        has_access = True
-        
-    if not has_access:
-        return jsonify([]), 403
-
-    history = database.get_latest_data(limit=100, sensor_id=sensor_id)
-    return jsonify(history)
 
 @app.route("/api/admin/users", methods=["GET"])
 def get_all_users():

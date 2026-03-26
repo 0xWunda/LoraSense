@@ -1,37 +1,24 @@
-2026-02-05 19:55:23,671 - dashboard - INFO - Login successful for admin
-2026-02-17 07:34:34,743 - dashboard - INFO - Login attempt for user: log_test
-2026-02-17 07:34:34,745 - dashboard - WARNING - Login failed: User log_test not found
-2026-02-17 07:36:28,859 - dashboard - INFO - Login attempt for user: admin
-2026-02-17 07:36:28,948 - dashboard - WARNING - Login failed: Invalid password for user admin
-2026-02-17 07:36:30,634 - dashboard - INFO - Login attempt for user: admin
-2026-02-17 07:36:30,718 - dashboard - INFO - Login successful for user: admin
-2026-02-23 08:08:03,703 - dashboard - INFO - Login-Versuch für Benutzer: admin
-2026-02-23 08:08:03,793 - dashboard - INFO - Login erfolgreich: admin
-2026-02-23 09:10:17,875 - dashboard - INFO - Login-Versuch für Benutzer: admin
-2026-02-23 09:10:17,958 - dashboard - INFO - Login erfolgreich: admin
-2026-03-21 08:19:06,847 - dashboard - INFO - Login-Versuch für Benutzer: admin
-2026-03-21 08:19:06,914 - dashboard - INFO - Login erfolgreich: admin
-2026-03-21 08:23:47,209 - dashboard - INFO - Login-Versuch für Benutzer: admin
-2026-03-21 08:23:47,279 - dashboard - INFO - Login erfolgreich: admin
-2026-03-21 08:23:49,961 - dashboard - INFO - Login-Versuch für Benutzer: admin
-2026-03-21 08:23:50,030 - dashboard - INFO - Login erfolgreich: admin
-2026-03-21 08:23:52,377 - dashboard - INFO - Login-Versuch für Benutzer: admin
-2026-03-21 08:23:52,450 - dashboard - INFO - Login erfolgreich: admin
-2026-03-21 08:23:58,896 - dashboard - INFO - Login-Versuch für Benutzer: 
-2026-03-21 08:23:58,899 - dashboard - WARNING - Login fehlgeschlagen: Benutzer  nicht gefunden
-2026-03-21 08:23:59,675 - dashboard - INFO - Login-Versuch für Benutzer: 
-2026-03-21 08:23:59,677 - dashboard - WARNING - Login fehlgeschlagen: Benutzer  nicht gefunden
-2026-03-21 08:24:02,185 - dashboard - INFO - Login-Versuch für Benutzer: admin
-2026-03-21 08:24:02,248 - dashboard - INFO - Login erfolgreich: admin
-2026-03-21 08:25:31,033 - dashboard - INFO - Login-Versuch für Benutzer: admin
-2026-03-21 08:25:31,098 - dashboard - INFO - Login erfolgreich: admin
-2026-03-21 08:28:44,609 - dashboard - INFO - Login-Versuch für Benutzer: admin
-2026-03-21 08:28:44,665 - dashboard - INFO - Login erfolgreich: admin
-2026-03-21 08:59:43,054 - dashboard - INFO - Login-Versuch für Benutzer: testuser
-2026-03-21 08:59:43,114 - dashboard - INFO - Login erfolgreich: testuser
-2026-03-21 08:59:52,005 - dashboard - INFO - Login-Versuch für Benutzer: admin
-2026-03-21 08:59:52,063 - dashboard - INFO - Login erfolgreich: admin
-2026-03-21 09:01:35,695 - dashboard - INFO - Login-Versuch für Benutzer: admin
-2026-03-21 09:01:35,752 - dashboard - INFO - Login erfolgreich: admin
-2026-03-21 09:07:12,134 - dashboard - INFO - Login-Versuch für Benutzer: admin
-2026-03-21 09:07:12,194 - dashboard - INFO - Login erfolgreich: admin
+2026-03-26 15:27:14,427 - dashboard - INFO - Login-Versuch für Benutzer: admin
+2026-03-26 15:27:14,489 - dashboard - INFO - Login erfolgreich: admin
+2026-03-26 16:35:33,585 - dashboard - INFO - Login-Versuch für Benutzer: admin
+2026-03-26 16:35:33,647 - dashboard - INFO - Login erfolgreich: admin
+2026-03-26 16:35:50,794 - dashboard - INFO - Login-Versuch für Benutzer: testuser
+2026-03-26 16:35:50,859 - dashboard - WARNING - Login fehlgeschlagen: Ungültiges Passwort für testuser
+2026-03-26 16:35:57,944 - dashboard - INFO - Login-Versuch für Benutzer: user
+2026-03-26 16:35:57,947 - dashboard - WARNING - Login fehlgeschlagen: Benutzer user nicht gefunden
+2026-03-26 16:35:59,908 - dashboard - INFO - Login-Versuch für Benutzer: user
+2026-03-26 16:35:59,911 - dashboard - WARNING - Login fehlgeschlagen: Benutzer user nicht gefunden
+2026-03-26 16:36:02,525 - dashboard - INFO - Login-Versuch für Benutzer: testuser
+2026-03-26 16:36:02,587 - dashboard - WARNING - Login fehlgeschlagen: Ungültiges Passwort für testuser
+2026-03-26 16:36:03,072 - dashboard - INFO - Login-Versuch für Benutzer: testuser
+2026-03-26 16:36:03,121 - dashboard - WARNING - Login fehlgeschlagen: Ungültiges Passwort für testuser
+2026-03-26 16:36:03,230 - dashboard - INFO - Login-Versuch für Benutzer: testuser
+2026-03-26 16:36:03,279 - dashboard - WARNING - Login fehlgeschlagen: Ungültiges Passwort für testuser
+2026-03-26 16:36:09,838 - dashboard - INFO - Login-Versuch für Benutzer: admin
+2026-03-26 16:36:09,903 - dashboard - INFO - Login erfolgreich: admin
+2026-03-26 16:36:30,145 - dashboard - INFO - Login-Versuch für Benutzer: testuser
+2026-03-26 16:36:30,207 - dashboard - INFO - Login erfolgreich: testuser
+2026-03-26 16:36:34,747 - dashboard - INFO - Login-Versuch für Benutzer: testuser
+2026-03-26 16:36:34,810 - dashboard - INFO - Login erfolgreich: testuser
+2026-03-26 16:36:40,021 - dashboard - INFO - Login-Versuch für Benutzer: admin
+2026-03-26 16:36:40,082 - dashboard - INFO - Login erfolgreich: admin
