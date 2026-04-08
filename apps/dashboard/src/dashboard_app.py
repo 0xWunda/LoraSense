@@ -137,7 +137,8 @@ def get_devices_api():
         return jsonify([]), 401
     
     # In dieser Version nutzen wir eine globale Geräteliste (Tenant ID 1)
-    return jsonify(rows)
+    devices = database.get_devices(tenant_id=1)
+    return jsonify(devices)
 
 @app.route("/api/devices", methods=["POST"])
 def create_device_api():
@@ -241,21 +242,6 @@ def api_sensor_data(sensor_id):
     data = database.get_latest_data(limit=100, sensor_id=sensor_id)
     return jsonify(data)
 
-    # Check access
-    has_access = False
-    if sensor_id in allowed_ids:
-        has_access = True
-    elif is_admin:
-        # Admin can access all sensors by default if they exist in DB
-        # Note: database.get_allowed_sensors(admin) already returns all sensors with data
-        has_access = True
-        
-    if not has_access:
-        return jsonify([]), 403
-
-    history = database.get_latest_data(limit=100, sensor_id=sensor_id)
-    return jsonify(history)
-
 @app.route("/api/admin/users", methods=["GET"])
 def get_all_users():
     """
@@ -323,7 +309,11 @@ def create_user_api():
     if success:
         return jsonify({"success": True})
     else:
-        return jsonify({"success": False, "message": "Benutzer konnte nicht erstellt werden (existiert evtl. bereits)"}), 500
+        # Hier könnten wir noch prüfen, ob der User schon existiert für eine bessere Meldung
+        user_exists = database.get_user_by_username(username)
+        if user_exists:
+            return jsonify({"success": False, "message": f"Benutzer '{username}' existiert bereits"}), 409
+        return jsonify({"success": False, "message": "Benutzer konnte nicht erstellt werden (Datenbankfehler)"}), 500
 
 @app.route("/api/admin/users/<int:user_id>", methods=["DELETE"])
 def delete_user_api(user_id):

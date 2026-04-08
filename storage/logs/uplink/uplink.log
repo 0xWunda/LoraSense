@@ -299,3 +299,35 @@
 2026-02-23 09:08:30,992 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 4.2, 'Temperature': 18.4, 'T_min': 13.7, 'T_max': 23.1, 'Humidity': 63.2, 'Pressure': 992.45, 'Irradiation': 716, 'Irr_max': 778, 'Rain': 8.0, 'Rain_min_time': 0.0}
 2026-02-23 09:08:30,998 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
 2026-02-23 09:08:31,002 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 4.2, 'Temperature': 21.4, 'T_min': 16.5, 'T_max': 23.1, 'Humidity': 77.8, 'Pressure': 1017.65, 'Irradiation': 534, 'Irr_max': 550, 'Rain': 0.0, 'Rain_min_time': 0.0}
+2026-03-05 09:25:30,890 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-03-05 09:25:35,911 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-03-05 09:25:40,928 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-03-05 09:25:42,961 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.65, 'Temperature': 29.6, 'T_min': 24.8, 'T_max': 30.3, 'Humidity': 60.6, 'Pressure': 1023.05, 'Irradiation': 422, 'Irr_max': 508, 'Rain': 0.0, 'Rain_min_time': 0.0}
+2026-03-05 09:25:45,955 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-03-05 09:25:47,982 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.6, 'Temperature': 28.2, 'T_min': 23.8, 'T_max': 29.4, 'Humidity': 65.0, 'Pressure': 1019.1, 'Irradiation': 70, 'Irr_max': 88, 'Rain': 7.0, 'Rain_min_time': 0.0}
+2026-03-05 09:25:52,999 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.85, 'Temperature': 20.9, 'T_min': 18.0, 'T_max': 24.1, 'Humidity': 56.2, 'Pressure': 1027.15, 'Irradiation': 410, 'Irr_max': 430, 'Rain': 3.0, 'Rain_min_time': 0.0}
+2026-03-05 09:25:58,026 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 4.05, 'Temperature': 23.6, 'T_min': 20.6, 'T_max': 25.5, 'Humidity': 63.0, 'Pressure': 1013.3, 'Irradiation': 212, 'Irr_max': 230, 'Rain': 0.0, 'Rain_min_time': 0.0}
+2026-03-05 09:30:23,859 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-03-05 09:30:28,880 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-03-05 09:30:33,898 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-03-05 09:30:35,944 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 3.7, 'Temperature': 19.4, 'T_min': 15.7, 'T_max': 23.8, 'Humidity': 55.4, 'Pressure': 996.65, 'Irradiation': 234, 'Irr_max': 306, 'Rain': 0.0, 'Rain_min_time': 0.0}
+2026-03-05 09:30:38,905 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-03-05 09:30:40,946 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.75, 'Temperature': 21.0, 'T_min': 18.3, 'T_max': 21.6, 'Humidity': 73.8, 'Pressure': 992.6, 'Irradiation': 142, 'Irr_max': 190, 'Rain': 1.0, 'Rain_min_time': 0.0}
+2026-03-05 09:30:45,964 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 4.2, 'Temperature': 25.2, 'T_min': 21.4, 'T_max': 29.9, 'Humidity': 53.2, 'Pressure': 1029.25, 'Irradiation': 368, 'Irr_max': 382, 'Rain': 0.0, 'Rain_min_time': 0.0}
+2026-03-05 09:30:50,973 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 3.6, 'Temperature': 20.5, 'T_min': 16.0, 'T_max': 24.4, 'Humidity': 31.8, 'Pressure': 997.0, 'Irradiation': 464, 'Irr_max': 478, 'Rain': 0.0, 'Rain_min_time': 0.0}
+2026-03-05 14:41:24,134 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-03-05 14:41:24,148 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 4.15, 'Temperature': 17.1, 'T_min': 15.2, 'T_max': 19.1, 'Humidity': 53.2, 'Pressure': 1015.1, 'Irradiation': 712, 'Irr_max': 782, 'Rain': 0.0, 'Rain_min_time': 0.0}
+2026-03-05 14:41:24,170 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-03-05 14:41:24,186 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 3.65, 'Temperature': 22.1, 'T_min': 18.4, 'T_max': 23.2, 'Humidity': 30.2, 'Pressure': 982.8, 'Irradiation': 794, 'Irr_max': 806, 'Rain': 0.0, 'Rain_min_time': 0.0}
+2026-03-05 14:41:24,215 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-03-05 14:41:24,232 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 3.8, 'Temperature': 17.9, 'T_min': 14.6, 'T_max': 22.8, 'Humidity': 41.0, 'Pressure': 1001.5, 'Irradiation': 200, 'Irr_max': 252, 'Rain': 0.0, 'Rain_min_time': 0.0}
+2026-03-05 14:41:24,241 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-03-05 14:41:24,256 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 3.75, 'Temperature': 17.2, 'T_min': 15.3, 'T_max': 22.0, 'Humidity': 64.6, 'Pressure': 1022.75, 'Irradiation': 690, 'Irr_max': 728, 'Rain': 0.0, 'Rain_min_time': 0.0}
+2026-03-05 14:42:26,724 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Alpha-01
+2026-03-05 14:42:26,740 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Alpha-01: {'Type': 1, 'Battery': 4.0, 'Temperature': 25.8, 'T_min': 23.2, 'T_max': 30.4, 'Humidity': 51.2, 'Pressure': 1016.1, 'Irradiation': 18, 'Irr_max': 98, 'Rain': 0.0, 'Rain_min_time': 0.0}
+2026-03-05 14:42:26,750 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Beta-02
+2026-03-05 14:42:26,765 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Beta-02: {'Type': 1, 'Battery': 4.15, 'Temperature': 21.6, 'T_min': 20.5, 'T_max': 22.9, 'Humidity': 41.6, 'Pressure': 1009.7, 'Irradiation': 788, 'Irr_max': 838, 'Rain': 7.0, 'Rain_min_time': 0.0}
+2026-03-05 14:42:26,793 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Gamma-03
+2026-03-05 14:42:26,821 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Gamma-03: {'Type': 1, 'Battery': 4.2, 'Temperature': 24.6, 'T_min': 24.3, 'T_max': 27.5, 'Humidity': 67.6, 'Pressure': 1018.0, 'Irradiation': 484, 'Irr_max': 582, 'Rain': 4.0, 'Rain_min_time': 0.0}
+2026-03-05 14:42:26,830 - uplink - INFO - Verarbeite Uplink für Gerät: LoraSense-Delta-04
+2026-03-05 14:42:26,846 - uplink - INFO - Daten erfolgreich in DB gespeichert für LoraSense-Delta-04: {'Type': 1, 'Battery': 3.65, 'Temperature': 18.6, 'T_min': 15.9, 'T_max': 21.7, 'Humidity': 78.0, 'Pressure': 1028.55, 'Irradiation': 152, 'Irr_max': 158, 'Rain': 8.0, 'Rain_min_time': 0.0}

@@ -1,3 +1,107 @@
 2026-02-05 19:55:17,259 - database - WARNING - Waiting for database... (10 retries left). Error: 2003 (HY000): Can't connect to MySQL server on 'db:3306' (111)
 2026-02-17 07:42:27,354 - database - WARNING - Waiting for MariaDB... (2 retries left). Error: 2003 (HY000): Can't connect to MySQL server on 'db:3306' (111)
 2026-02-23 09:09:28,306 - database - WARNING - Warten auf MariaDB... (2 Versuche übrig). Fehler: 2003 (HY000): Can't connect to MySQL server on 'db:3306' (111)
+2026-03-05 09:06:58,380 - database - WARNING - Warten auf MariaDB... (2 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:07:00,383 - database - WARNING - Warten auf MariaDB... (1 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:07:02,388 - database - WARNING - Warten auf MariaDB... (0 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:07:02,389 - database - WARNING - MariaDB nicht verfügbar. Nutze SQLite Fallback.
+2026-03-05 09:25:30,893 - database - WARNING - Warten auf MariaDB... (2 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:32,896 - database - WARNING - Warten auf MariaDB... (1 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:34,899 - database - WARNING - Warten auf MariaDB... (0 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:34,900 - database - WARNING - MariaDB nicht verfügbar. Nutze SQLite Fallback.
+2026-03-05 09:25:34,908 - database - WARNING - Warten auf MariaDB... (2 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:35,913 - database - WARNING - Warten auf MariaDB... (2 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:36,911 - database - WARNING - Warten auf MariaDB... (1 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:37,916 - database - WARNING - Warten auf MariaDB... (1 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:38,914 - database - WARNING - Warten auf MariaDB... (0 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:38,915 - database - WARNING - MariaDB nicht verfügbar. Nutze SQLite Fallback.
+2026-03-05 09:25:38,934 - database - WARNING - Warten auf MariaDB... (2 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:39,920 - database - WARNING - Warten auf MariaDB... (0 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:39,921 - database - WARNING - MariaDB nicht verfügbar. Nutze SQLite Fallback.
+2026-03-05 09:25:39,931 - database - WARNING - Warten auf MariaDB... (2 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:40,931 - database - WARNING - Warten auf MariaDB... (2 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:40,937 - database - WARNING - Warten auf MariaDB... (1 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:41,935 - database - WARNING - Warten auf MariaDB... (1 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:42,935 - database - WARNING - Warten auf MariaDB... (1 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:42,941 - database - WARNING - Warten auf MariaDB... (0 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:42,942 - database - WARNING - MariaDB nicht verfügbar. Nutze SQLite Fallback.
+2026-03-05 09:25:43,938 - database - WARNING - Warten auf MariaDB... (0 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:43,939 - database - WARNING - MariaDB nicht verfügbar. Nutze SQLite Fallback.
+2026-03-05 09:25:43,957 - database - WARNING - Warten auf MariaDB... (2 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:44,936 - database - WARNING - Warten auf MariaDB... (0 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:44,937 - database - WARNING - MariaDB nicht verfügbar. Nutze SQLite Fallback.
+2026-03-05 09:25:44,947 - database - WARNING - Warten auf MariaDB... (2 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:45,957 - database - WARNING - Warten auf MariaDB... (1 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:45,958 - database - WARNING - Warten auf MariaDB... (2 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:46,950 - database - WARNING - Warten auf MariaDB... (1 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:47,960 - database - WARNING - Warten auf MariaDB... (0 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:47,961 - database - WARNING - Warten auf MariaDB... (1 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:47,962 - database - WARNING - MariaDB nicht verfügbar. Nutze SQLite Fallback.
+2026-03-05 09:25:48,954 - database - WARNING - Warten auf MariaDB... (0 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:48,955 - database - WARNING - MariaDB nicht verfügbar. Nutze SQLite Fallback.
+2026-03-05 09:25:48,972 - database - WARNING - Warten auf MariaDB... (2 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:49,964 - database - WARNING - Warten auf MariaDB... (0 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:49,965 - database - WARNING - MariaDB nicht verfügbar. Nutze SQLite Fallback.
+2026-03-05 09:25:49,973 - database - WARNING - Warten auf MariaDB... (2 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:50,974 - database - WARNING - Warten auf MariaDB... (1 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:51,977 - database - WARNING - Warten auf MariaDB... (1 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:52,977 - database - WARNING - Warten auf MariaDB... (0 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:52,979 - database - WARNING - MariaDB nicht verfügbar. Nutze SQLite Fallback.
+2026-03-05 09:25:53,980 - database - WARNING - Warten auf MariaDB... (0 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:53,982 - database - WARNING - MariaDB nicht verfügbar. Nutze SQLite Fallback.
+2026-03-05 09:25:54,000 - database - WARNING - Warten auf MariaDB... (2 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:56,003 - database - WARNING - Warten auf MariaDB... (1 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:58,005 - database - WARNING - Warten auf MariaDB... (0 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:25:58,007 - database - WARNING - MariaDB nicht verfügbar. Nutze SQLite Fallback.
+2026-03-05 09:30:23,862 - database - WARNING - Warten auf MariaDB... (2 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:25,864 - database - WARNING - Warten auf MariaDB... (1 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:27,866 - database - WARNING - Warten auf MariaDB... (0 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:27,868 - database - WARNING - MariaDB nicht verfügbar. Nutze SQLite Fallback.
+2026-03-05 09:30:27,876 - database - WARNING - Warten auf MariaDB... (2 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:28,883 - database - WARNING - Warten auf MariaDB... (2 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:29,880 - database - WARNING - Warten auf MariaDB... (1 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:30,886 - database - WARNING - Warten auf MariaDB... (1 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:31,883 - database - WARNING - Warten auf MariaDB... (0 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:31,884 - database - WARNING - MariaDB nicht verfügbar. Nutze SQLite Fallback.
+2026-03-05 09:30:31,904 - database - WARNING - Warten auf MariaDB... (2 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:32,890 - database - WARNING - Warten auf MariaDB... (0 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:32,891 - database - WARNING - MariaDB nicht verfügbar. Nutze SQLite Fallback.
+2026-03-05 09:30:32,898 - database - WARNING - Warten auf MariaDB... (2 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:33,901 - database - WARNING - Warten auf MariaDB... (2 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:33,907 - database - WARNING - Warten auf MariaDB... (1 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:34,901 - database - WARNING - Warten auf MariaDB... (1 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:35,905 - database - WARNING - Warten auf MariaDB... (1 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:35,910 - database - WARNING - Warten auf MariaDB... (0 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:35,911 - database - WARNING - MariaDB nicht verfügbar. Nutze SQLite Fallback.
+2026-03-05 09:30:36,904 - database - WARNING - Warten auf MariaDB... (0 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:36,905 - database - WARNING - MariaDB nicht verfügbar. Nutze SQLite Fallback.
+2026-03-05 09:30:36,922 - database - WARNING - Warten auf MariaDB... (2 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:37,908 - database - WARNING - Warten auf MariaDB... (0 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:37,909 - database - WARNING - MariaDB nicht verfügbar. Nutze SQLite Fallback.
+2026-03-05 09:30:37,916 - database - WARNING - Warten auf MariaDB... (2 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:38,907 - database - WARNING - Warten auf MariaDB... (2 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:38,925 - database - WARNING - Warten auf MariaDB... (1 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:39,919 - database - WARNING - Warten auf MariaDB... (1 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:40,910 - database - WARNING - Warten auf MariaDB... (1 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:40,927 - database - WARNING - Warten auf MariaDB... (0 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:40,929 - database - WARNING - MariaDB nicht verfügbar. Nutze SQLite Fallback.
+2026-03-05 09:30:41,922 - database - WARNING - Warten auf MariaDB... (0 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:41,923 - database - WARNING - MariaDB nicht verfügbar. Nutze SQLite Fallback.
+2026-03-05 09:30:41,941 - database - WARNING - Warten auf MariaDB... (2 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:42,912 - database - WARNING - Warten auf MariaDB... (0 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:42,913 - database - WARNING - MariaDB nicht verfügbar. Nutze SQLite Fallback.
+2026-03-05 09:30:42,924 - database - WARNING - Warten auf MariaDB... (2 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:43,944 - database - WARNING - Warten auf MariaDB... (1 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:44,924 - database - WARNING - Warten auf MariaDB... (1 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:45,946 - database - WARNING - Warten auf MariaDB... (0 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:45,947 - database - WARNING - MariaDB nicht verfügbar. Nutze SQLite Fallback.
+2026-03-05 09:30:46,926 - database - WARNING - Warten auf MariaDB... (0 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:46,927 - database - WARNING - MariaDB nicht verfügbar. Nutze SQLite Fallback.
+2026-03-05 09:30:46,947 - database - WARNING - Warten auf MariaDB... (2 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:48,949 - database - WARNING - Warten auf MariaDB... (1 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:50,952 - database - WARNING - Warten auf MariaDB... (0 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 09:30:50,953 - database - WARNING - MariaDB nicht verfügbar. Nutze SQLite Fallback.
+2026-03-05 14:34:59,564 - database - WARNING - Warten auf MariaDB... (2 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 14:35:00,568 - database - WARNING - Warten auf MariaDB... (1 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 14:35:01,572 - database - WARNING - Warten auf MariaDB... (0 Versuche übrig). Fehler: 1045 (28000): Access denied for user 'root'@'172.18.0.4' (using password: NO)
+2026-03-05 14:35:01,573 - database - WARNING - MariaDB nicht verfügbar nach 3 Versuchen. Aktiviere Circuit Breaker für 60s.

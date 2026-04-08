@@ -9,3 +9,51 @@
 2026-02-23 08:08:03,793 - dashboard - INFO - Login erfolgreich: admin
 2026-02-23 09:10:17,875 - dashboard - INFO - Login-Versuch für Benutzer: admin
 2026-02-23 09:10:17,958 - dashboard - INFO - Login erfolgreich: admin
+2026-03-05 09:06:58,357 - dashboard - WARNING - FLASK_SECRET nicht gesetzt. Nutze zufälligen Schlüssel (Sessions gehen bei Neustart verloren).
+2026-03-05 09:07:02,745 - dashboard - WARNING - FLASK_SECRET nicht gesetzt. Nutze zufälligen Schlüssel (Sessions gehen bei Neustart verloren).
+2026-03-05 09:07:25,948 - dashboard - INFO - Login-Versuch für Benutzer: admin
+2026-03-05 09:07:28,931 - dashboard - INFO - Login-Versuch für Benutzer: admin
+2026-03-05 09:07:30,052 - dashboard - INFO - Login erfolgreich: admin
+2026-03-05 09:07:33,044 - dashboard - INFO - Login erfolgreich: admin
+2026-03-05 09:09:59,881 - dashboard - INFO - Login-Versuch für Benutzer: user
+2026-03-05 09:10:02,027 - dashboard - INFO - Login-Versuch für Benutzer: user
+2026-03-05 09:10:03,979 - dashboard - INFO - Login erfolgreich: user
+2026-03-05 09:10:06,139 - dashboard - INFO - Login erfolgreich: user
+2026-03-05 09:10:12,629 - dashboard - INFO - Login-Versuch für Benutzer: admin
+2026-03-05 09:10:16,726 - dashboard - INFO - Login erfolgreich: admin
+2026-03-05 09:12:27,669 - dashboard - INFO - Login-Versuch für Benutzer: admin
+2026-03-05 09:12:31,781 - dashboard - INFO - Login erfolgreich: admin
+2026-03-05 09:15:16,547 - dashboard - WARNING - FLASK_SECRET nicht gesetzt. Nutze zufälligen Schlüssel (Sessions gehen bei Neustart verloren).
+2026-03-05 09:15:22,935 - dashboard - WARNING - FLASK_SECRET nicht gesetzt. Nutze zufälligen Schlüssel (Sessions gehen bei Neustart verloren).
+2026-03-05 09:15:56,982 - dashboard - WARNING - FLASK_SECRET nicht gesetzt. Nutze zufälligen Schlüssel (Sessions gehen bei Neustart verloren).
+2026-03-05 09:16:03,380 - dashboard - WARNING - FLASK_SECRET nicht gesetzt. Nutze zufälligen Schlüssel (Sessions gehen bei Neustart verloren).
+2026-03-05 09:16:12,808 - dashboard - WARNING - FLASK_SECRET nicht gesetzt. Nutze zufälligen Schlüssel (Sessions gehen bei Neustart verloren).
+2026-03-05 09:22:10,541 - dashboard - INFO - Login-Versuch für Benutzer: admin
+2026-03-05 09:22:14,675 - dashboard - INFO - Login erfolgreich: admin
+2026-03-05 09:27:59,271 - dashboard - WARNING - FLASK_SECRET nicht gesetzt. Nutze zufälligen Schlüssel (Sessions gehen bei Neustart verloren).
+2026-03-05 09:28:29,174 - dashboard - WARNING - FLASK_SECRET nicht gesetzt. Nutze zufälligen Schlüssel (Sessions gehen bei Neustart verloren).
+2026-03-05 09:29:39,713 - dashboard - INFO - Login-Versuch für Benutzer: admin
+2026-03-05 09:29:43,813 - dashboard - INFO - Login erfolgreich: admin
+2026-03-05 09:32:12,612 - dashboard - WARNING - FLASK_SECRET nicht gesetzt. Nutze zufälligen Schlüssel (Sessions gehen bei Neustart verloren).
+2026-03-05 09:32:16,624 - dashboard - ERROR - Datenbank-Initialisierung fehlgeschlagen: name 'current_time' is not defined
+2026-03-05 09:33:42,962 - dashboard - WARNING - FLASK_SECRET nicht gesetzt. Nutze zufälligen Schlüssel (Sessions gehen bei Neustart verloren).
+2026-03-05 09:34:52,174 - dashboard - INFO - Login-Versuch für Benutzer: admin
+2026-03-05 09:34:54,282 - dashboard - INFO - Login erfolgreich: admin
+2026-03-05 14:34:59,556 - dashboard - WARNING - FLASK_SECRET nicht gesetzt. Nutze zufälligen Schlüssel (Sessions gehen bei Neustart verloren).
+2026-03-05 14:35:01,996 - dashboard - WARNING - FLASK_SECRET nicht gesetzt. Nutze zufälligen Schlüssel (Sessions gehen bei Neustart verloren).
+2026-03-05 14:35:18,718 - dashboard - INFO - Login-Versuch für Benutzer: admin
+2026-03-05 14:35:18,865 - dashboard - INFO - Login erfolgreich: admin
+2026-03-05 14:42:31,964 - dashboard - INFO - Login-Versuch für Benutzer: admin
+2026-03-05 14:42:31,971 - dashboard - WARNING - Login fehlgeschlagen: Ungültiges Passwort für admin
+2026-03-05 14:42:32,850 - dashboard - INFO - Login-Versuch für Benutzer: admin
+2026-03-05 14:42:32,856 - dashboard - WARNING - Login fehlgeschlagen: Ungültiges Passwort für admin
+2026-03-05 14:42:36,379 - dashboard - INFO - Login-Versuch für Benutzer: admin
+2026-03-05 14:42:36,383 - dashboard - WARNING - Login fehlgeschlagen: Ungültiges Passwort für admin
+2026-03-05 14:42:37,856 - dashboard - INFO - Login-Versuch für Benutzer: admin
+2026-03-05 14:42:37,861 - dashboard - WARNING - Login fehlgeschlagen: Ungültiges Passwort für admin
+2026-03-05 14:42:38,034 - dashboard - INFO - Login-Versuch für Benutzer: admin
+2026-03-05 14:42:38,040 - dashboard - WARNING - Login fehlgeschlagen: Ungültiges Passwort für admin
+2026-03-05 14:42:42,357 - dashboard - INFO - Login-Versuch für Benutzer: admin
+2026-03-05 14:42:42,361 - dashboard - WARNING - Login fehlgeschlagen: Ungültiges Passwort für admin
+2026-03-05 14:45:23,243 - dashboard - INFO - Login-Versuch für Benutzer: admin
+2026-03-05 14:45:23,354 - dashboard - INFO - Login erfolgreich: admin
