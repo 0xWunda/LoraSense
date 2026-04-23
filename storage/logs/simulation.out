@@ -1,0 +1,693 @@
+/Users/wunda/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Starting simulation for 4 devices: LoraSense-Alpha-01, LoraSense-Beta-02, LoraSense-Gamma-03, LoraSense-Delta-04
+Target: http://localhost:5001/uplink
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Beta-02
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Gamma-03
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Delta-04
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+Waiting 15s...
+DEBUG: Sending data for device_id: LoraSense-Alpha-01
+
+Connection Error: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+   (Ensure Docker is running: docker-compose up)
+DEBUG: Sending data for device_id: LoraSense-Beta-02

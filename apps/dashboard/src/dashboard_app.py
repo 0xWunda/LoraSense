@@ -10,6 +10,8 @@ import csv
 from datetime import datetime
 from flask_cors import CORS
 import os
+import sys
+import subprocess
 from common import database
 from werkzeug.security import generate_password_hash, check_password_hash
 from common.logging_config import setup_logging
@@ -33,6 +35,9 @@ if not app.secret_key:
 
 # CORS erlauben (hilfreich für lokale Entwicklung)
 CORS(app)
+
+# Globaler Status für Hintergrund-Simulation
+simulation_process = None
 
 @app.route("/")
 def home():
@@ -64,6 +69,31 @@ def display():
 
     if 'user_id' not in session:
         return redirect(url_for('home'))
+    return render_template("display.html")
+
+@app.route("/kiosk")
+def kiosk():
+    """
+    Public Kiosk View für Raspberry Pi.
+    Erfordert keinen Login und startet automatisch die Hintergrund-Simulation.
+    """
+    global simulation_process
+    
+    # Auto-login als Kiosk-User (ID 1 für Datenzugriff)
+    session['user_id'] = 1
+    session['username'] = 'Kiosk'
+    session['is_admin'] = False
+    
+    # Simulation starten, falls sie noch nicht läuft
+    if simulation_process is None or simulation_process.poll() is not None:
+        script_path = os.path.join(os.getcwd(), "scripts", "simulate_sensor.py")
+        # Startet die Simulation im Loop-Modus mit 15 Sekunden Intervall
+        try:
+            simulation_process = subprocess.Popen([sys.executable, script_path, "--mocks", "--loop", "--interval", "15"])
+            logger.info("Hintergrund-Simulation via /kiosk Route erfolgreich gestartet.")
+        except Exception as e:
+            logger.error(f"Fehler beim Starten der Simulation: {e}")
+            
     return render_template("display.html")
 
 def init_app_db():

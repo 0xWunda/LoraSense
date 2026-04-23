@@ -10,7 +10,7 @@ sys.path.append(os.getcwd())
 from common import database
 from common.decoder import decode_payload
 
-FILE_PATH = r"c:\Users\Wieserling\Downloads\Barani_Payload_LoRa.xlsx"
+FILE_PATH = r"c:\Users\Jakob\Downloads\Barani_Payload_LoRa.xlsx"
 DEVICE_EUI = "Barani_Import_Device"
 DEVICE_NAME = "Barani MeteoHelix (Imported)"
 SENSOR_TYPE_NAME = "Barani MeteoHelix" # Must match DB
