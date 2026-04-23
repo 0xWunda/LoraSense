@@ -754,6 +754,37 @@ def create_user(username, password, is_admin=False):
         if cursor: cursor.close()
         if conn: conn.close()
 
+def delete_user(user_id):
+    """
+    Löscht einen Benutzer aus der Datenbank.
+    Zugehörige Rechte in user_sensors werden durch ON DELETE CASCADE automatisch entfernt,
+    wir löschen sie hier aber zur Sicherheit explizit.
+    """
+    conn = get_db_connection()
+    if not conn:
+        return False
+    cursor = None
+    try:
+        cursor = conn.cursor()
+        db_type = conn.db_type
+        
+        # Rechte löschen
+        sql_acl = "DELETE FROM user_sensors WHERE user_id = %s"
+        cursor.execute(normalize_query(sql_acl, db_type), (user_id,))
+        
+        # Benutzer löschen
+        sql_user = "DELETE FROM users WHERE id = %s"
+        cursor.execute(normalize_query(sql_user, db_type), (user_id,))
+        
+        conn.commit()
+        return True
+    except Exception as err:
+        logger.error(f"Fehler beim Löschen des Benutzers {user_id}: {err}")
+        return False
+    finally:
+        if cursor: cursor.close()
+        if conn: conn.close()
+
 # --- Gerätemanagement Funktionen ---
 
 def create_device(dev_eui, name, sensor_type_id, tenant_id=1, join_eui=None, app_key=None, nwk_key=None):

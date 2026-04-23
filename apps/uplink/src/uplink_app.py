@@ -49,6 +49,16 @@ def uplink():
             logger.warning("Keine Device ID im JSON gefunden. Nutze 'Unknown_Device' als Fallback.")
             device_id = "Unknown_Device"
         
+        # Optionaler Zeitstempel (für historische Simulationen)
+        timestamp_str = data.get("timestamp")
+        timestamp_obj = None
+        if timestamp_str:
+            try:
+                # Python 3.11+ kann "Z" in isoformat() lesen, ansonsten ersetzen
+                timestamp_obj = datetime.fromisoformat(timestamp_str.replace('Z', '+00:00'))
+            except Exception as e:
+                logger.warning(f"Fehler beim Parsen des Timestamps {timestamp_str}: {e}")
+                
         logger.info(f"Verarbeite Uplink für Gerät: {device_id}")
         
         if not payload_b64:
@@ -73,7 +83,7 @@ def uplink():
         )
 
         # 4. Dekodierte Messwerte in der sensor_data Tabelle speichern
-        success = database.save_sensor_data(payload_b64, decoded, device_id)
+        success = database.save_sensor_data(payload_b64, decoded, device_id, timestamp=timestamp_obj)
         
         if success:
             logger.info(f"Daten erfolgreich in DB gespeichert für {device_id}: {decoded}")
