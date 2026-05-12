@@ -9,6 +9,8 @@ import csv
 from datetime import datetime
 from flask_cors import CORS
 import os
+import sys
+import subprocess
 from common import database
 from werkzeug.security import generate_password_hash, check_password_hash
 from common.logging_config import setup_logging
@@ -32,6 +34,9 @@ if not app.secret_key:
 
 # CORS erlauben (hilfreich für lokale Entwicklung)
 CORS(app)
+
+# Globaler Status für Hintergrund-Simulation
+simulation_process = None
 
 @app.route("/")
 def home():
@@ -63,6 +68,31 @@ def display():
 
     if 'user_id' not in session:
         return redirect(url_for('home'))
+    return render_template("display.html")
+
+@app.route("/kiosk")
+def kiosk():
+    """
+    Public Kiosk View für Raspberry Pi.
+    Erfordert keinen Login und startet automatisch die Hintergrund-Simulation.
+    """
+    global simulation_process
+    
+    # Auto-login als Kiosk-User (ID 1 für Datenzugriff)
+    session['user_id'] = 1
+    session['username'] = 'Kiosk'
+    session['is_admin'] = False
+    
+    # Simulation starten, falls sie noch nicht läuft
+    if simulation_process is None or simulation_process.poll() is not None:
+        script_path = os.path.join(os.getcwd(), "scripts", "simulate_sensor.py")
+        # Startet die Simulation im Loop-Modus mit 15 Sekunden Intervall
+        try:
+            simulation_process = subprocess.Popen([sys.executable, script_path, "--mocks", "--loop", "--interval", "15"])
+            logger.info("Hintergrund-Simulation via /kiosk Route erfolgreich gestartet.")
+        except Exception as e:
+            logger.error(f"Fehler beim Starten der Simulation: {e}")
+            
     return render_template("display.html")
 
 def init_app_db():
@@ -136,7 +166,8 @@ def get_devices_api():
         return jsonify([]), 401
     
     # In dieser Version nutzen wir eine globale Geräteliste (Tenant ID 1)
-    return jsonify(rows)
+    devices = database.get_devices(tenant_id=1)
+    return jsonify(devices)
 
 @app.route("/api/devices", methods=["POST"])
 def create_device_api():
@@ -307,7 +338,11 @@ def create_user_api():
     if success:
         return jsonify({"success": True})
     else:
-        return jsonify({"success": False, "message": "Benutzer konnte nicht erstellt werden (existiert evtl. bereits)"}), 500
+        # Hier könnten wir noch prüfen, ob der User schon existiert für eine bessere Meldung
+        user_exists = database.get_user_by_username(username)
+        if user_exists:
+            return jsonify({"success": False, "message": f"Benutzer '{username}' existiert bereits"}), 409
+        return jsonify({"success": False, "message": "Benutzer konnte nicht erstellt werden (Datenbankfehler)"}), 500
 
 @app.route("/api/admin/users/<int:user_id>", methods=["DELETE"])
 def delete_user_api(user_id):

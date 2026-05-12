@@ -1,9 +1,16 @@
 import requests
+import os
 import time
 import random
 import base64
 import argparse
 from datetime import datetime, timedelta
+
+try:
+    import openpyxl
+except ImportError:
+    openpyxl = None
+
 
 # URL of the Uplink Service (locally)
 UPLINK_URL = "http://localhost:5001/uplink"
@@ -115,6 +122,60 @@ class SensorState:
         
         return enc.get_bytes()
 
+def process_excel(file_path, device_id):
+    """Reads hex payloads and timestamps from an Excel file and sends them to the uplink."""
+    if not openpyxl:
+        print("❌ Error: 'openpyxl' is not installed. Run 'pip install openpyxl' to use this feature.")
+        return
+
+    if not os.path.exists(file_path):
+        print(f"❌ Error: File not found: {file_path}")
+        return
+
+    print(f"Reading data from {file_path} for device {device_id}...")
+    try:
+        wb = openpyxl.load_workbook(file_path, read_only=True, data_only=True)
+        sheet = wb.active
+        
+        count = 0
+        # Assuming header Row 1: ['Timestamp(ISO)', 'Payload']
+        rows = sheet.iter_rows(min_row=2, values_only=True)
+        
+        for row in rows:
+            if not row or len(row) < 2:
+                continue
+                
+            ts_val, payload_hex = row[0], row[1]
+            if not ts_val or not payload_hex:
+                continue
+
+            try:
+                # Handle timestamp
+                if isinstance(ts_val, str):
+                    ts_str = ts_val.replace("Z", "+00:00")
+                    timestamp = datetime.fromisoformat(ts_str)
+                elif isinstance(ts_val, datetime):
+                    timestamp = ts_val
+                else:
+                    print(f"⚠️ Warning: Unsupported timestamp format: {type(ts_val)}")
+                    continue
+                
+                # Payload Hex to Bytes
+                payload_bytes = bytes.fromhex(payload_hex)
+                
+                if send_uplink(device_id, payload_bytes, timestamp=timestamp):
+                    count += 1
+                    if count % 10 == 0:
+                        print(f"   Sent {count} records...", end='\r')
+                
+            except Exception as e:
+                print(f"Error processing row: {e}")
+
+        print(f"\n[SUCCESS] Imported {count} records from Excel!")
+        
+    except Exception as e:
+        print(f"Error reading Excel: {e}")
+
 def send_uplink(device_id, payload_bytes, timestamp=None):
     payload_b64 = base64.b64encode(payload_bytes).decode('utf-8')
     data = {
@@ -143,6 +204,8 @@ def main():
     parser.add_argument("--interval", type=int, default=10, help="Interval in seconds for loop mode")
     parser.add_argument("--history", type=int, default=0, help="Hours of historical data to simulate instantly")
     parser.add_argument("--history-interval", type=int, default=10, help="Interval in minutes between historical data points")
+    parser.add_argument("--import-excel", help="Path to an Excel file with 'Timestamp(ISO)' and 'Payload' columns")
+
     
     args = parser.parse_args()
     
@@ -160,6 +223,15 @@ def main():
     
     # Initialize state for each device
     states = {dev: SensorState(dev) for dev in devices}
+
+    # 0. Import from Excel
+    if args.import_excel:
+        if not args.device_id:
+            print("⚠️ Please specify a --device-id for the imported data.")
+            return
+        import os # Ensure os is available
+        process_excel(args.import_excel, args.device_id)
+        return
 
     # 1. Simulate History (Fast-forward)
     if args.history > 0:

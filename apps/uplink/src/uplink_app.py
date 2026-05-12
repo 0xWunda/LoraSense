@@ -42,7 +42,11 @@ def uplink():
         
         payload_b64 = data.get("data")
         # Identifikation des Sensors (DevEUI)
-        device_id = data.get("dev_eui") or data.get("device_id") or data.get("sensor_id") or "Hardware_Sensor_01"
+        device_id = data.get("dev_eui") or data.get("device_id") or data.get("sensor_id")
+        
+        if not device_id:
+            logger.warning("Keine Device ID im JSON gefunden. Nutze 'Unknown_Device' als Fallback.")
+            device_id = "Unknown_Device"
         
         # Optionaler Zeitstempel (für historische Simulationen)
         timestamp_str = data.get("timestamp")
@@ -57,7 +61,8 @@ def uplink():
         logger.info(f"Verarbeite Uplink für Gerät: {device_id}")
         
         if not payload_b64:
-            raise ValueError("Feld 'data' fehlt im JSON oder ist leer.")
+            logger.error(f"Feld 'data' fehlt im JSON für {device_id}.")
+            return jsonify({"status": "error", "message": "Payload 'data' is missing"}), 400
 
         # 1. Gerät in der Datenbank suchen (um den richtigen Decoder zu finden)
         device = database.get_device_by_eui(device_id)

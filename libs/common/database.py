@@ -3,7 +3,11 @@ Dieses Modul verwaltet alle Datenbankinteraktionen für das LoraSense-Projekt.
 Es unterstützt sowohl MariaDB (Produktion) als auch SQLite (Fallback/Lokale Entwicklung).
 """
 
-import mysql.connector
+try:
+    import mysql.connector
+    MYSQL_AVAILABLE = True
+except ImportError:
+    MYSQL_AVAILABLE = False
 import sqlite3
 import os
 import time
@@ -16,18 +20,35 @@ from .logging_config import setup_logging
 # Da database.py von mehreren Services genutzt wird, verwenden wir einen "database" Logger
 logger = setup_logging("database")
 
-# .env manuell laden, falls vorhanden (für lokale Entwicklungskompatibilität)
-env_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env')
-if os.path.exists(env_path):
-    with open(env_path, 'r') as f:
-        for line in f:
-            if '=' in line:
-                key, value = line.strip().split('=', 1)
-                if key and not os.getenv(key):
-                     os.environ[key] = value
+# .env laden (sucht in libs/ und im Projekt-Root)
+# Wir prüfen mehrere Orte, da die App in Docker und lokal unterschiedlich laufen kann.
+env_locations = [
+    os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env'),
+    os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), '.env'),
+    os.path.join(os.getcwd(), '.env')
+]
+
+for env_path in env_locations:
+    if os.path.exists(env_path):
+        with open(env_path, 'r') as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith('#') and '=' in line:
+                    key, value = line.split('=', 1)
+                    # Entferne Anführungszeichen falls vorhanden
+                    value = value.strip('"').strip("'")
+                    if key and not os.getenv(key):
+                         os.environ[key] = value
+        logger.info(f".env Datei geladen von: {env_path}")
+        break
 
 # Pfad zur SQLite-Fallback-Datenbank im neuen storage-System
 SQLITE_DB_PATH = "/storage/data/lorasense_fallback.db"
+
+# Statische Variablen für den MariaDB-Circuit-Breaker
+_mariadb_last_fail = 0
+_mariadb_fallback_active = False
+MARIADB_CIRCUIT_TIMEOUT = 60 # Sekunden, die auf MariaDB verzichtet wird nach einem Fehler
 
 class DBConnection:
     """
@@ -58,7 +79,12 @@ class DBConnection:
             return self.conn.cursor(dictionary=dictionary)
         else:
             if dictionary:
-                self.conn.row_factory = sqlite3.Row
+                def dict_factory(cursor, row):
+                    d = {}
+                    for idx, col in enumerate(cursor.description):
+                        d[col[0]] = row[idx]
+                    return d
+                self.conn.row_factory = dict_factory
             else:
                 self.conn.row_factory = None
             return self.conn.cursor()
@@ -94,12 +120,23 @@ def get_db_connection():
     """
     Baut eine Verbindung zur MariaDB auf. Falls diese fehlschlägt (nach Retries),
     wird automatisch auf SQLite ausgewichen.
-    
-    Returns:
-        DBConnection: Ein Wrapper-Objekt der Verbindung oder None bei fatalem Fehler.
     """
-    max_retries = 3 # Reduziert für schnelleres Fallback in der Produktion
-    retry_delay = 2
+    global _mariadb_last_fail, _mariadb_fallback_active
+    
+    current_time = time.time()
+    
+    # Circuit Breaker Prüfung
+    if _mariadb_fallback_active:
+        if current_time - _mariadb_last_fail < MARIADB_CIRCUIT_TIMEOUT:
+            # Schneller Fallback auf SQLite
+            return _connect_sqlite()
+        else:
+            # Timeout abgelaufen, MariaDB erneut versuchen
+            _mariadb_fallback_active = False
+            logger.info("Circuit Breaker Timeout abgelaufen. Versuche MariaDB erneut.")
+
+    max_retries = 3 
+    retry_delay = 1 # Reduziert für schnellere Reaktion
     
     # Anmeldedaten aus Umgebungsvariablen laden
     db_host = os.getenv("MYSQL_HOST", "db")
@@ -110,12 +147,15 @@ def get_db_connection():
     # Zuerst MariaDB versuchen
     for attempt in range(max_retries):
         try:
+            if not MYSQL_AVAILABLE:
+                logger.warning("mysql-connector-python nicht installiert. MariaDB-Verbindung nicht möglich.")
+                break
             conn = mysql.connector.connect(
                 host=db_host,
                 user=db_user,
                 password=db_pass,
                 database=db_name,
-                connect_timeout=5
+                connect_timeout=3 # Kürzere Timeouts für schnellere Fehlererkennung
             )
             return DBConnection(conn, 'mysql')
         except mysql.connector.Error as err:
@@ -123,8 +163,16 @@ def get_db_connection():
             if attempt < max_retries - 1:
                 time.sleep(retry_delay)
     
-    # Fallback auf SQLite, falls MariaDB nicht erreichbar ist
-    logger.warning("MariaDB nicht verfügbar. Nutze SQLite Fallback.")
+    # MariaDB ist nicht erreichbar -> Fallback aktivieren
+    logger.warning(f"MariaDB nicht verfügbar nach {max_retries} Versuchen. Aktiviere Circuit Breaker für {MARIADB_CIRCUIT_TIMEOUT}s.")
+    _mariadb_last_fail = current_time
+    _mariadb_fallback_active = True
+    
+    return _connect_sqlite()
+
+def _connect_sqlite():
+    """Hilfsfunktion für die SQLite-Verbindung."""
+    logger.debug("Nutze SQLite Fallback.")
     try:
         # Sicherstellen, dass das Datenverzeichnis existiert
         dir_name = os.path.dirname(SQLITE_DB_PATH)
@@ -444,7 +492,7 @@ def save_sensor_data(raw_payload, decoded, device_id="Unknown", timestamp=None):
         conn.commit()
         return True
     except Exception as err:
-        print(f"Fehler beim Speichern der Sensordaten: {err}")
+        logger.error(f"Fehler beim Speichern der Sensordaten: {err}")
         return False
     finally:
         if cursor: cursor.close()
@@ -500,8 +548,8 @@ def get_latest_data(limit=100, sensor_id=None):
             })
         return history
     except Exception as err:
-        print(f"Fehler beim Abrufen der Sensordaten: {err}")
-        return []
+        logger.error(f"Fehler beim Abrufen der Sensordaten: {err}")
+        return False
     finally:
         if cursor: cursor.close()
         if conn: conn.close()
@@ -693,12 +741,14 @@ def create_user(username, password, is_admin=False):
         pw_hash = generate_password_hash(password)
         cursor = conn.cursor()
         db_type = conn.db_type
+        # Explicitly cast is_admin to int for compatibility
+        admin_flag = 1 if is_admin else 0
         sql = "INSERT INTO users (username, password_hash, is_admin) VALUES (%s, %s, %s)"
-        cursor.execute(normalize_query(sql, db_type), (username, pw_hash, is_admin))
+        cursor.execute(normalize_query(sql, db_type), (username, pw_hash, admin_flag))
         conn.commit()
         return True
     except Exception as err:
-        print(f"Fehler beim Erstellen des Benutzers: {err}")
+        logger.error(f"Fehler beim Erstellen des Benutzers: {err}")
         return False
     finally:
         if cursor: cursor.close()
@@ -828,6 +878,25 @@ def update_device_status(dev_eui, status):
         return True
     except Exception as err:
         print(f"Fehler beim Status-Update: {err}")
+        return False
+    finally:
+        if cursor: cursor.close()
+        if conn: conn.close()
+
+def delete_user(user_id):
+    """Löscht einen Benutzer aus der Datenbank."""
+    conn = get_db_connection()
+    if not conn: return False
+    cursor = None
+    try:
+        cursor = conn.cursor()
+        db_type = conn.db_type
+        sql = "DELETE FROM users WHERE id = %s"
+        cursor.execute(normalize_query(sql, db_type), (user_id,))
+        conn.commit()
+        return True
+    except Exception as err:
+        print(f"Fehler beim Löschen des Benutzers: {err}")
         return False
     finally:
         if cursor: cursor.close()
